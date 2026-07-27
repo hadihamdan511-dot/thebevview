@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Bevview — A Mountain Breeze</title>
+<meta name="description" content="The Bevview: a high-altitude lounge and restaurant above Baskinta, Lebanon. Lebanese and international dining, curated bar, and shisha lounge with panoramic sunset views." />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts: Cormorant Garamond (display serif) + Jost (clean sans) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          charcoal: '#121212',
+          charcoal2: '#181614',
+          gold: '#D4AF37',
+          champagne: '#E9D9AE',
+          bronze: '#8B6F3E',
+          ember: '#C97B4A',
+        },
+        fontFamily: {
+          serif: ['Cormorant Garamond', 'serif'],
+          sans: ['Jost', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  :root { scroll-behavior: smooth; }
+  body { background-color: #121212; }
+
+  /* ---- Signature: sunburst-over-ridge motif ---- */
+  .ridge-divider {
+    display: block;
+    width: 100%;
+    height: 60px;
+  }
+
+  /* Glassmorphism card */
+  .glass {
+    background: rgba(24, 22, 20, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+  }
+
+  .glass-strong {
+    background: rgba(18, 18, 18, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+
+  /* Gold gradient text */
+  .gold-text {
+    background: linear-gradient(120deg, #B8892F 0%, #E9D9AE 35%, #D4AF37 55%, #B8892F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
+  }
+
+  .letter-space { letter-spacing: 0.18em; }
+
+  /* Nav link underline grow */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0%; height: 1px;
+    background: #D4AF37;
+    transition: width 0.35s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Fade-up reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Menu tab underline */
+  .tab-btn { position: relative; }
+  .tab-btn[data-active="true"] { color: #E9D9AE; }
+  .tab-btn[data-active="true"]::after {
+    content: '';
+    position: absolute;
+    left: 8%; right: 8%; bottom: -8px; height: 2px;
+    background: linear-gradient(90deg, #B8892F, #D4AF37, #E9D9AE);
+  }
+
+  /* Scrollbar for pill nav on mobile */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Mountain silhouette background layers */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%),
+      linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%),
+      url('images/hero-mountain-sunset.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-blend-mode: overlay, normal, normal;
+  }
+
+  .about-img {
+    background-size: cover;
+    background-position: center;
+  }
+
+  input:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 3px;
+  }
+
+  .menu-card {
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .menu-card:hover {
+    border-color: rgba(212,175,55,0.55);
+  }
+
+  .price-dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(212,175,55,0.35);
+    margin: 0 0.6rem;
+    transform: translateY(-4px);
+  }
+</style>
+</head>
+
+<body class="text-champagne font-sans antialiased">
+
+  <!-- ================= NAVIGATION ================= -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="glass-strong">
+      <nav class="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-4">
+        <a href="#home" class="flex items-center gap-3 group">
+          <svg width="30" height="30" viewBox="0 0 100 100" class="text-gold">
+            <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+              <line x1="50" y1="4" x2="50" y2="28" />
+              <line x1="26" y1="14" x2="38" y2="32" />
+              <line x1="74" y1="14" x2="62" y2="32" />
+              <line x1="12" y1="30" x2="30" y2="40" />
+              <line x1="88" y1="30" x2="70" y2="40" />
+              <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+              <line x1="4" y1="62" x2="96" y2="62" stroke-width="1.5" />
+            </g>
+          </svg>
+          <span class="font-serif text-xl md:text-2xl tracking-wide gold-text">THE BEVVIEW</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-10 font-sans text-sm letter-space uppercase text-champagne/85">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#experience" class="nav-link">Experience</a>
+        </div>
+
+        <a href="#contact" class="hidden md:inline-block border border-gold/70 text-gold px-5 py-2 text-xs letter-space uppercase hover:bg-gold hover:text-charcoal transition-all duration-300">
+          Book a Table
+        </a>
+
+        <button id="menuToggle" aria-label="Open menu" aria-expanded="false" class="md:hidden text-gold">
+          <svg id="iconBurger" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile menu panel -->
+    <div id="mobilePanel" class="md:hidden glass-strong max-h-0 overflow-hidden transition-all duration-500">
+      <div class="flex flex-col px-6 py-2 font-sans text-sm letter-space uppercase text-champagne/90">
+        <a href="#home" class="py-3 border-b border-gold/10 mobile-link">Home</a>
+        <a href="#about" class="py-3 border-b border-gold/10 mobile-link">About</a>
+        <a href="#menu" class="py-3 border-b border-gold/10 mobile-link">Menu</a>
+        <a href="#experience" class="py-3 border-b border-gold/10 mobile-link">Experience</a>
+        <a href="#contact" class="py-4 text-gold mobile-link">Book a Table →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6">
+    <div class="absolute inset-0 bg-charcoal/40"></div>
+
+    <div class="relative z-10 max-w-3xl text-center mt-16">
+      <p class="letter-space uppercase text-gold/90 text-xs md:text-sm mb-5">Baskinta · Qanat Bakish · Lebanon</p>
+      <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.05] gold-text mb-6">
+        A Mountain<br class="hidden sm:block"> Breeze
+      </h1>
+      <p class="text-champagne/80 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light">
+        High above the valley, where the air thins and the sky turns amber, The Bevview
+        is a refuge of quiet luxury — long dinners, slow sunsets, and a bar built for
+        lingering.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#menu" class="w-56 sm:w-auto text-center bg-gold text-charcoal px-8 py-3 text-xs letter-space uppercase hover:bg-champagne transition-all duration-300">
+          View Menu
+        </a>
+        <a href="#contact" class="w-56 sm:w-auto text-center border border-champagne/50 text-champagne px-8 py-3 text-xs letter-space uppercase hover:border-gold hover:text-gold transition-all duration-300">
+          Reserve a Table
+        </a>
+      </div>
+    </div>
+
+    <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gold/70 animate-bounce" aria-label="Scroll to About">
+      <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="1" y="1" width="18" height="28" rx="9"/>
+        <line x1="10" y1="7" x2="10" y2="14"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ================= ABOUT / THE VIBE ================= -->
+  <section id="about" class="bg-charcoal py-24 md:py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="letter-space uppercase text-gold/80 text-xs mb-3">The Vibe</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-champagne">Altitude changes everything</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-20">
+        <div class="reveal">
+          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-valley-view.jpg');"></div>
+        </div>
+        <div class="reveal">
+          <h3 class="font-serif text-3xl text-gold mb-5">Perched above Qanat Bakish</h3>
+          <p class="text-champagne/75 leading-relaxed mb-5 font-light">
+            Set in the pine-covered hills of Baskinta, The Bevview looks out over a
+            valley that catches the last light of day like nowhere else in Lebanon.
+            Terraced seating steps down the mountainside toward the view, so every
+            table gets its share of the horizon.
+          </p>
+          <p class="text-champagne/75 leading-relaxed font-light">
+            Come for the sunset, stay for the night — cozy bungalows dot the property
+            for those who'd rather not rush the mountain air, and the lounge stays
+            unhurried well past dark.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="reveal md:order-2">
+          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-terrace-sunset.jpg');"></div>
+        </div>
+        <div class="reveal md:order-1">
+          <h3 class="font-serif text-3xl text-gold mb-5">Panoramic sunsets, unhurried evenings</h3>
+          <p class="text-champagne/75 leading-relaxed mb-5 font-light">
+            The golden hour is treated like a scheduled event here — low lighting,
+            warm textiles, and a menu built to move slowly from mezza to embers to
+            dessert. Nothing about the evening feels rushed.
+          </p>
+          <p class="text-champagne/75 leading-relaxed font-light">
+            Whether it's a family Sunday lunch on the Lebanese formula or a late-night
+            shisha session with the full bar list, the mountain sets the pace.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENU ================= -->
+  <section id="menu" class="bg-charcoal2 py-24 md:py-32 px-4 md:px-6 relative">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="letter-space uppercase text-gold/80 text-xs mb-3">Taste the Mountain</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-champagne">The Menu</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+      </div>
+
+      <!-- Main category tabs -->
+      <div id="mainTabs" class="flex overflow-x-auto no-scrollbar gap-3 md:gap-6 justify-start md:justify-center mb-10 pb-2 reveal">
+        <button data-cat="lebanese" data-active="true" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Lebanese Formula</button>
+        <button data-cat="western" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Western / International</button>
+        <button data-cat="bar" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Bar &amp; Drinks</button>
+        <button data-cat="cafe" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Cafe &amp; Shisha</button>
+      </div>
+
+      <!-- Sub tabs per category -->
+      <div id="subTabsWrap" class="mb-10"></div>
+
+      <!-- Panels -->
+      <div id="menuPanels"></div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE / GALLERY ================= -->
+  <section id="experience" class="bg-charcoal py-24 md:py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="letter-space uppercase text-gold/80 text-xs mb-3">The Experience</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-champagne">Gallery</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[220px]">
+        <div class="reveal row-span-2 rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-outdoor-seating.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-mezza-platter.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-cocktail-bar.jpg');"></div>
+        <div class="reveal row-span-2 rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-sunset-view.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-shisha-lounge.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-burger.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-salad-plate.jpg');"></div>
+        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-dessert.jpg');"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / RESERVE STRIP ================= -->
+  <section id="contact" class="relative py-24 px-6 hero-bg">
+    <div class="absolute inset-0 bg-charcoal/70"></div>
+    <div class="relative z-10 max-w-2xl mx-auto text-center reveal">
+      <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Reserve Your Evening</h2>
+      <p class="text-champagne/75 mb-8 font-light">
+        Tables are limited at sunset. Call ahead or send a message and our host will
+        confirm your spot on the mountain.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="tel:+96176348489" class="w-56 sm:w-auto text-center bg-gold text-charcoal px-8 py-3 text-xs letter-space uppercase hover:bg-champagne transition-all duration-300">
+          Call to Reserve
+        </a>
+        <a href="mailto:thebevview@gmail.com" class="w-56 sm:w-auto text-center border border-champagne/50 text-champagne px-8 py-3 text-xs letter-space uppercase hover:border-gold hover:text-gold transition-all duration-300">
+          Email Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-black/90 border-t border-gold/15 pt-16 pb-8 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <svg width="22" height="22" viewBox="0 0 100 100" class="text-gold">
+            <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round">
+              <line x1="50" y1="4" x2="50" y2="28" />
+              <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+            </g>
+          </svg>
+          <span class="font-serif text-lg gold-text">THE BEVVIEW</span>
+        </div>
+        <p class="text-champagne/60 text-sm font-light leading-relaxed">A Mountain Breeze — Lebanese and international dining, curated bar and shisha lounge above Baskinta.</p>
+      </div>
+
+      <div>
+        <h4 class="text-gold letter-space uppercase text-xs mb-4">Location</h4>
+        <p class="text-champagne/60 text-sm font-light leading-relaxed">Qanat Bakish Road<br>Baskinta, Metn District<br>Lebanon</p>
+      </div>
+
+      <div>
+        <h4 class="text-gold letter-space uppercase text-xs mb-4">Hours</h4>
+        <ul class="text-champagne/60 text-sm font-light space-y-1">
+          <li>Daily: 11am – 1am</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-gold letter-space uppercase text-xs mb-4">Follow</h4>
+        <div class="flex gap-4 text-champagne/60">
+          <a href="https://instagram.com/the.bevview" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gold transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" class="hover:text-gold transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/96176348489" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-gold transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 11.5 12 12l1-9"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hairline max-w-6xl mx-auto mb-6"></div>
+    <p class="text-center text-champagne/40 text-xs font-light">© 2026 The Bevview. All rights reserved.</p>
+  </footer>
+
+<script>
+/* ============ MENU DATA ============ */
+const MENU_DATA = {
+  lebanese: {
+    label: "Lebanese Formula",
+    groups: [
+      { title: "Salads", items: [
+        { name: "Fattouch", price: "$12" }, { name: "Tabbouleh", price: "$12" }, { name: "Rocca Beetroot", price: "$12" },
+      ]},
+      { title: "Cold Mezza", items: [
+        { name: "Hommos" }, { name: "Mtabal" }, { name: "Labne Mtawame" }, { name: "Wara2 3enab" }, { name: "Labnet Me3ze" }, { name: "Jebne Baladiye" },
+      ]},
+      { title: "Hot Mezza", items: [
+        { name: "Soujouk" }, { name: "Makanek" }, { name: "Batata 7arra" }, { name: "Fries" }, { name: "Shrimps Provencial" },
+      ]},
+      { title: "Mix Mou3ajanet", items: [
+        { name: "Rakakt Jebne" }, { name: "Sambousik" }, { name: "Kebeh Kras" },
+      ]},
+      { title: "Mix Grill", items: [
+        { name: "Tawouk" }, { name: "Lahmeh" }, { name: "Kafta" },
+      ]},
+      { title: "Desserts", items: [
+        { name: "Mix Fruits" }, { name: "Ariche w 3asal" },
+      ]},
+      { title: "Open Bar Packages", items: [
+        { name: "Open Arak", price: "$30" }, { name: "Open Regular Bar", price: "$35" }, { name: "Open Premium Bar", price: "$40" },
+      ]},
+    ]
+  },
+  western: {
+    label: "Western / International",
+    groups: [
+      { title: "Salads", items: [
+        { name: "Halloumi Salad", price: "$13" }, { name: "Chicken Caesar Salad", price: "$16" }, { name: "Bevview Salad", price: "$17" }, { name: "Fattouch", price: "$12" },
+      ]},
+      { title: "Appetizers", items: [
+        { name: "Nuts", price: "$4" }, { name: "Edamame", price: "$8" }, { name: "Nachos", price: "$12" }, { name: "S. BBQ Potato", price: "$11" }, { name: "Bevview Fries", price: "$8" }, { name: "Mozarella Sticks", price: "$10" }, { name: "Chicken Strips", price: "$12" }, { name: "Smoked Wings", price: "$12" }, { name: "Grilled Halloum", price: "$11" },
+      ]},
+      { title: "Platters", items: [
+        { name: "Taouk Platter", price: "$17" }, { name: "Smoked Ribs", price: "$24" }, { name: "Grilled Chicken", price: "$21" }, { name: "Mushroom Steak", price: "$24" }, { name: "Brisket", price: "$24" }, { name: "Confit de Canard", price: "$25" }, { name: "Magret de Canard", price: "$25" }, { name: "Steak", price: "$24" }, { name: "Grilled Smoked Salmon", price: "$32" },
+      ]},
+      { title: "Burgers", note: "Served with french fries", items: [
+        { name: "Classic Burger", price: "$11" }, { name: "Chicken Burger", price: "$11" }, { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" },
+      ]},
+      { title: "Sandwiches", note: "Served with french fries", items: [
+        { name: "Philadelphia", price: "$18" }, { name: "BBQ Beef", price: "$17" }, { name: "Chicken Sub", price: "$16" }, { name: "Chicken Mexican", price: "$16" }, { name: "Boneless Chicken", price: "$16" }, { name: "Fajita", price: "$17" },
+      ]},
+      { title: "Pizza", items: [
+        { name: "Margarita", price: "$14" }, { name: "Pepperoni", price: "$18" }, { name: "Vegetarian", price: "$16" }, { name: "Add Chicken", price: "$4", muted: true },
+      ]},
+      { title: "Saj", items: [
+        { name: "Zaatar", price: "$4" }, { name: "Cheese", price: "$6" }, { name: "Keshek", price: "$5" }, { name: "Add Ham or Turkey", price: "$2", muted: true },
+      ]},
+      { title: "Pasta", items: [
+        { name: "Pesto Penne", price: "$12" }, { name: "Fettuccine Chicken", price: "$18" }, { name: "Spaghetti Bolognese", price: "$16" },
+      ]},
+    ]
+  },
+  bar: {
+    label: "Bar & Drinks",
+    groups: [
+      { title: "Wine", sub: "Glass / Bottle", items: [
+        { name: "Reserve (Ksara)", price: "$8 / $40" }, { name: "Breteche (Kefraya)", price: "$8 / $40" }, { name: "Chateau Ksara", price: "$8 / $40" }, { name: "Chateau Kefraya", price: "$8 / $40" }, { name: "Blanc (Ksara)", price: "$8 / $40" }, { name: "Blanc (Kefraya)", price: "$8 / $40" }, { name: "Sunset (Ksara)", price: "$8 / $40" }, { name: "Imported Wine", price: "$30" }, { name: "Imported Wine Rose", price: "$30" },
+      ]},
+      { title: "Vodka", sub: "Shot / Bottle", items: [
+        { name: "Absolut", price: "$10 / $70" }, { name: "Smirnoff Red", price: "$10 / $80" }, { name: "Stolichnaya", price: "$10 / $80" }, { name: "Belvedere", price: "$20 / $170" }, { name: "Grey Goose", price: "$20 / $150" },
+      ]},
+      { title: "Whisky", sub: "Shot / Bottle", items: [
+        { name: "Red Label", price: "$8 / $70" }, { name: "Dewars", price: "$8 / $70" }, { name: "J&B", price: "$8 / $70" }, { name: "Black Label", price: "$11 / $120" }, { name: "Chivas 12", price: "$12 / $120" }, { name: "Golden Reserve", price: "$20 / $220" },
+      ]},
+      { title: "Martini", items: [
+        { name: "Bianco", price: "$12" }, { name: "Rosso", price: "$12" }, { name: "Rosatto", price: "$12" },
+      ]},
+      { title: "Cognac", items: [
+        { name: "Hennessy", price: "$240" },
+      ]},
+      { title: "Gin", sub: "Shot / Bottle", items: [
+        { name: "Gordon's", price: "$8 / $70" }, { name: "Bombay", price: "$10 / $100" }, { name: "Hendricks", price: "$15 / $120" },
+      ]},
+      { title: "Champagne & Others", items: [
+        { name: "Moet & Chandon", price: "$280" }, { name: "Vin Mousseux", price: "$40" }, { name: "Prosecco", price: "$60" }, { name: "Arak Bottle", price: "$35" },
+      ]},
+      { title: "Alcoholic Cocktails", items: [
+        { name: "Pina Colada", price: "$11" }, { name: "Strawberry Colada", price: "$11" }, { name: "Blue Hawaii", price: "$11" }, { name: "Gin Basil", price: "$11" }, { name: "Bevview Signature", price: "$11" }, { name: "Long Island", price: "$11" }, { name: "Margarita", price: "$11" }, { name: "Blue Lagoon", price: "$11" }, { name: "Take Me Home", price: "$11" }, { name: "Mojito", price: "$11" }, { name: "Jamaica", price: "$11" }, { name: "Perfect Sunset", price: "$12" },
+      ]},
+      { title: "Non-Alcoholic & Beers", items: [
+        { name: "Jamaica (Non-Alcoholic)", price: "$10" }, { name: "Mojito (Non-Alcoholic)", price: "$10" }, { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" }, { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" }, { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" },
+      ]},
+    ]
+  },
+  cafe: {
+    label: "Cafe & Shisha",
+    groups: [
+      { title: "Hot Drinks", items: [
+        { name: "Lipton Tea", price: "$2" }, { name: "Tea Box", price: "$3.5" }, { name: "Nescafe", price: "$4" }, { name: "Cappuccino", price: "$5.5" }, { name: "Espresso", price: "$4" }, { name: "Hot Chocolate", price: "$4.5" }, { name: "Turkish Coffee", price: "$3" },
+      ]},
+      { title: "Cold Drinks", items: [
+        { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" }, { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" }, { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" },
+      ]},
+      { title: "Milkshakes", items: [
+        { name: "Chocolate", price: "$8" }, { name: "Strawberry", price: "$8" }, { name: "Vanilla", price: "$8" }, { name: "Oreo", price: "$8" }, { name: "The Bevview Shake", price: "$9" },
+      ]},
+      { title: "Desserts", items: [
+        { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" }, { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" },
+      ]},
+      { title: "Hookah / Shisha", items: [
+        { name: "Regular", price: "$12" }, { name: "Deluxe", price: "$18" }, { name: "Super Deluxe", price: "$24" },
+      ]},
+    ]
+  }
+};
+
+/* ============ RENDER MENU ============ */
+const subTabsWrap = document.getElementById('subTabsWrap');
+const menuPanels = document.getElementById('menuPanels');
+const mainTabs = document.querySelectorAll('#mainTabs .tab-btn');
+
+function renderCategory(catKey) {
+  const cat = MENU_DATA[catKey];
+
+  // Sub tabs (group titles act as filter chips)
+  subTabsWrap.innerHTML = `
+    <div class="flex overflow-x-auto no-scrollbar gap-2 justify-start md:justify-center reveal visible">
+      <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold transition-colors">All</button>
+      ${cat.groups.map(g => `<button data-sub="${g.title}" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold transition-colors">${g.title}</button>`).join('')}
+    </div>
+  `;
+
+  // Panels: one block per group
+  menuPanels.innerHTML = `
+    <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
+      ${cat.groups.map(g => `
+        <div class="group-block menu-card glass rounded-sm p-6 reveal visible" data-group="${g.title}">
+          <div class="flex items-baseline justify-between mb-1">
+            <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
+            ${g.sub ? `<span class="text-[10px] uppercase letter-space text-champagne/40">${g.sub}</span>` : ''}
+          </div>
+          ${g.note ? `<p class="text-xs text-champagne/45 italic mb-3">${g.note}</p>` : '<div class="mb-3"></div>'}
+          <ul class="space-y-2">
+            ${g.items.map(it => `
+              <li class="flex items-baseline text-sm ${it.muted ? 'text-champagne/50 italic' : 'text-champagne/85'}">
+                <span>${it.name}</span>
+                ${it.price ? `<span class="price-dots"></span><span class="text-gold/90 whitespace-nowrap">${it.price}</span>` : ''}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // sub-tab filter behavior
+  const subBtns = subTabsWrap.querySelectorAll('.sub-btn');
+  subBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      subBtns.forEach(b => { b.dataset.active = 'false'; b.classList.remove('bg-gold','text-charcoal','border-gold'); });
+      btn.dataset.active = 'true';
+      btn.classList.add('bg-gold','text-charcoal','border-gold');
+
+      const target = btn.dataset.sub;
+      document.querySelectorAll('.group-block').forEach(block => {
+        block.style.display = (target === 'all' || block.dataset.group === target) ? '' : 'none';
+      });
+    });
+  });
+  // set initial "All" styling
+  subTabsWrap.querySelector('.sub-btn[data-sub="all"]').classList.add('bg-gold','text-charcoal','border-gold');
+}
+
+mainTabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    mainTabs.forEach(b => b.dataset.active = 'false');
+    btn.dataset.active = 'true';
+    renderCategory(btn.dataset.cat);
+  });
+});
+
+// initial render
+renderCategory('lebanese');
+
+/* ============ MOBILE NAV ============ */
+const menuToggle = document.getElementById('menuToggle');
+const mobilePanel = document.getElementById('mobilePanel');
+let mobileOpen = false;
+
+menuToggle.addEventListener('click', () => {
+  mobileOpen = !mobileOpen;
+  menuToggle.setAttribute('aria-expanded', String(mobileOpen));
+  mobilePanel.style.maxHeight = mobileOpen ? mobilePanel.scrollHeight + 'px' : '0px';
+});
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileOpen = false;
+    mobilePanel.style.maxHeight = '0px';
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ============ NAVBAR BACKGROUND ON SCROLL ============ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    navbar.classList.add('shadow-lg');
+  } else {
+    navbar.classList.remove('shadow-lg');
+  }
+});
+
+/* ============ SCROLL REVEAL ============ */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
