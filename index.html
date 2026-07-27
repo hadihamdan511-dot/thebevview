@@ -19,12 +19,14 @@
     theme: {
       extend: {
         colors: {
-          charcoal: '#121212',
-          charcoal2: '#181614',
+          charcoal: '#15130F',
+          charcoal2: '#1C1812',
+          stone: '#2B2419',
           gold: '#D4AF37',
-          champagne: '#E9D9AE',
+          champagne: '#EAD9AE',
           bronze: '#8B6F3E',
           ember: '#C97B4A',
+          pine: '#3E4B3A',
         },
         fontFamily: {
           serif: ['Cormorant Garamond', 'serif'],
@@ -37,60 +39,58 @@
 
 <style>
   :root { scroll-behavior: smooth; }
-  body { background-color: #121212; }
-
-  /* ---- Signature: sunburst-over-ridge motif ---- */
-  .ridge-divider {
-    display: block;
-    width: 100%;
-    height: 60px;
-  }
+  body { background-color: #15130F; }
 
   /* Glassmorphism card with image background */
   .glass {
-    background: rgba(24, 22, 20, 0.55);
+    background: rgba(28, 24, 18, 0.55);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(212, 175, 55, 0.18);
   }
 
   .glass-strong {
-    background: rgba(18, 18, 18, 0.72);
+    background: rgba(21, 19, 15, 0.75);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid rgba(212, 175, 55, 0.25);
   }
 
+  /* ---- Menu group cards: no repeated photo, quiet icon + gold hairline instead ---- */
   .menu-card {
     position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    min-height: 200px;
+    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
   }
-  
   .menu-card:hover {
     border-color: rgba(212,175,55,0.55);
     transform: translateY(-4px);
+    background: rgba(212,175,55,0.05);
+  }
+  .group-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    color: #D4AF37;
+    opacity: 0.9;
   }
 
-  .menu-card-bg {
+  /* ---- Category banner: each real photo shown exactly once, "from the outside" ---- */
+  .cat-banner {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+  .cat-banner-img {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0.08;
-    transition: opacity 0.5s ease, transform 0.7s ease;
-    transform: scale(1);
   }
-  
-  .menu-card:hover .menu-card-bg {
-    opacity: 0.18;
-    transform: scale(1.05);
-  }
-
-  .menu-card-content {
-    position: relative;
-    z-index: 2;
+  .cat-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(21,19,15,0.15) 0%, rgba(21,19,15,0.55) 60%, rgba(21,19,15,0.92) 100%),
+                linear-gradient(90deg, rgba(21,19,15,0.55) 0%, transparent 35%);
   }
 
   /* Gold gradient text */
@@ -176,10 +176,10 @@
     margin: 0 0.6rem;
     transform: translateY(-4px);
   }
-  
+
   .sub-btn[data-active="true"] {
     background: #D4AF37;
-    color: #121212;
+    color: #15130F;
     border-color: #D4AF37;
   }
 </style>
@@ -238,7 +238,7 @@
   </header>
 
   <!-- ================= HERO ================= -->
-  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%), linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
+  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(201,123,74,0.20), transparent 60%), linear-gradient(180deg, #0d0c09 0%, #17140f 45%, #15130f 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/40"></div>
 
     <div class="relative z-10 max-w-3xl text-center mt-16">
@@ -247,8 +247,8 @@
         A Mountain<br class="hidden sm:block"> Breeze
       </h1>
       <p class="text-champagne/80 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light">
-        High above the valley, where the air thins and the sky turns amber, The Bevview
-        is a refuge of quiet luxury — long dinners, slow sunsets, and a bar built for
+        High above the valley, where the pines thin and the sky turns amber, The Bevview
+        is a mountain refuge for long dinners, slow sunsets, and a bar built for
         lingering.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -318,7 +318,7 @@
     </div>
   </section>
 
-  <!-- ================= MENU WITH IMAGE BACKGROUNDS ================= -->
+  <!-- ================= MENU ================= -->
   <section id="menu" class="bg-charcoal2 py-24 md:py-32 px-4 md:px-6 relative">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
@@ -334,6 +334,9 @@
         <button data-cat="bar" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Bar &amp; Drinks</button>
         <button data-cat="cafe" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Cafe &amp; Shisha</button>
       </div>
+
+      <!-- Category banner: the one photo moment for this category -->
+      <div id="catBanner" class="mb-10"></div>
 
       <!-- Sub tabs per category -->
       <div id="subTabsWrap" class="mb-10"></div>
@@ -355,7 +358,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <!-- Visual Menu Item 1 -->
         <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                style="background-image:url('images/gallery-mezza-platter.jpg.jpeg');">
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
@@ -372,7 +375,7 @@
 
         <!-- Visual Menu Item 2 -->
         <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                style="background-image:url('images/gallery-burger.jpg.jpeg');">
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
@@ -389,7 +392,7 @@
 
         <!-- Visual Menu Item 3 -->
         <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                style="background-image:url('images/gallery-cocktail-bar.jpg.jpeg');">
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
@@ -408,7 +411,7 @@
   </section>
 
   <!-- ================= CONTACT / RESERVE STRIP ================= -->
-  <section id="contact" class="relative py-24 px-6 hero-bg" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%), linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
+  <section id="contact" class="relative py-24 px-6 hero-bg" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(201,123,74,0.20), transparent 60%), linear-gradient(180deg, #0d0c09 0%, #17140f 45%, #15130f 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/70"></div>
     <div class="relative z-10 max-w-2xl mx-auto text-center reveal">
       <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Reserve Your Evening</h2>
@@ -480,25 +483,25 @@ const MENU_DATA = {
   lebanese: {
     label: "Lebanese Formula",
     groups: [
-      { title: "Salads", items: [
+      { title: "Salads", icon: "leaf", items: [
         { name: "Fattouch", price: "$12" }, { name: "Tabbouleh", price: "$12" }, { name: "Rocca Beetroot", price: "$12" },
       ]},
-      { title: "Cold Mezza", items: [
+      { title: "Cold Mezza", icon: "plate", items: [
         { name: "Hommos" }, { name: "Mtabal" }, { name: "Labne Mtawame" }, { name: "Wara2 3enab" }, { name: "Labnet Me3ze" }, { name: "Jebne Baladiye" },
       ]},
-      { title: "Hot Mezza", items: [
+      { title: "Hot Mezza", icon: "flame", items: [
         { name: "Soujouk" }, { name: "Makanek" }, { name: "Batata 7arra" }, { name: "Fries" }, { name: "Shrimps Provencial" },
       ]},
-      { title: "Mix Mou3ajanet", items: [
+      { title: "Mix Mou3ajanet", icon: "dough", items: [
         { name: "Rakakt Jebne" }, { name: "Sambousik" }, { name: "Kebeh Kras" },
       ]},
-      { title: "Mix Grill", items: [
+      { title: "Mix Grill", icon: "flame", items: [
         { name: "Tawouk" }, { name: "Lahmeh" }, { name: "Kafta" },
       ]},
-      { title: "Desserts", items: [
+      { title: "Desserts", icon: "star", items: [
         { name: "Mix Fruits" }, { name: "Ariche w 3asal" },
       ]},
-      { title: "Open Bar Packages", items: [
+      { title: "Open Bar Packages", icon: "glass", items: [
         { name: "Open Arak", price: "$30" }, { name: "Open Regular Bar", price: "$35" }, { name: "Open Premium Bar", price: "$40" },
       ]},
     ]
@@ -506,28 +509,28 @@ const MENU_DATA = {
   western: {
     label: "Western / International",
     groups: [
-      { title: "Salads", items: [
+      { title: "Salads", icon: "leaf", items: [
         { name: "Halloumi Salad", price: "$13" }, { name: "Chicken Caesar Salad", price: "$16" }, { name: "Bevview Salad", price: "$17" }, { name: "Fattouch", price: "$12" },
       ]},
-      { title: "Appetizers", items: [
+      { title: "Appetizers", icon: "plate", items: [
         { name: "Nuts", price: "$4" }, { name: "Edamame", price: "$8" }, { name: "Nachos", price: "$12" }, { name: "S. BBQ Potato", price: "$11" }, { name: "Bevview Fries", price: "$8" }, { name: "Mozarella Sticks", price: "$10" }, { name: "Chicken Strips", price: "$12" }, { name: "Smoked Wings", price: "$12" }, { name: "Grilled Halloum", price: "$11" },
       ]},
-      { title: "Platters", items: [
+      { title: "Platters", icon: "flame", items: [
         { name: "Taouk Platter", price: "$17" }, { name: "Smoked Ribs", price: "$24" }, { name: "Grilled Chicken", price: "$21" }, { name: "Mushroom Steak", price: "$24" }, { name: "Brisket", price: "$24" }, { name: "Confit de Canard", price: "$25" }, { name: "Magret de Canard", price: "$25" }, { name: "Steak", price: "$24" }, { name: "Grilled Smoked Salmon", price: "$32" },
       ]},
-      { title: "Burgers", note: "Served with french fries", items: [
+      { title: "Burgers", icon: "flame", note: "Served with french fries", items: [
         { name: "Classic Burger", price: "$11" }, { name: "Chicken Burger", price: "$11" }, { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" },
       ]},
-      { title: "Sandwiches", note: "Served with french fries", items: [
+      { title: "Sandwiches", icon: "flame", note: "Served with french fries", items: [
         { name: "Philadelphia", price: "$18" }, { name: "BBQ Beef", price: "$17" }, { name: "Chicken Sub", price: "$16" }, { name: "Chicken Mexican", price: "$16" }, { name: "Boneless Chicken", price: "$16" }, { name: "Fajita", price: "$17" },
       ]},
-      { title: "Pizza", items: [
+      { title: "Pizza", icon: "dough", items: [
         { name: "Margarita", price: "$14" }, { name: "Pepperoni", price: "$18" }, { name: "Vegetarian", price: "$16" }, { name: "Add Chicken", price: "$4", muted: true },
       ]},
-      { title: "Saj", items: [
+      { title: "Saj", icon: "dough", items: [
         { name: "Zaatar", price: "$4" }, { name: "Cheese", price: "$6" }, { name: "Keshek", price: "$5" }, { name: "Add Ham or Turkey", price: "$2", muted: true },
       ]},
-      { title: "Pasta", items: [
+      { title: "Pasta", icon: "dough", items: [
         { name: "Pesto Penne", price: "$12" }, { name: "Fettuccine Chicken", price: "$18" }, { name: "Spaghetti Bolognese", price: "$16" },
       ]},
     ]
@@ -535,31 +538,31 @@ const MENU_DATA = {
   bar: {
     label: "Bar & Drinks",
     groups: [
-      { title: "Wine", sub: "Glass / Bottle", items: [
+      { title: "Wine", icon: "glass", sub: "Glass / Bottle", items: [
         { name: "Reserve (Ksara)", price: "$8 / $40" }, { name: "Breteche (Kefraya)", price: "$8 / $40" }, { name: "Chateau Ksara", price: "$8 / $40" }, { name: "Chateau Kefraya", price: "$8 / $40" }, { name: "Blanc (Ksara)", price: "$8 / $40" }, { name: "Blanc (Kefraya)", price: "$8 / $40" }, { name: "Sunset (Ksara)", price: "$8 / $40" }, { name: "Imported Wine", price: "$30" }, { name: "Imported Wine Rose", price: "$30" },
       ]},
-      { title: "Vodka", sub: "Shot / Bottle", items: [
+      { title: "Vodka", icon: "glass", sub: "Shot / Bottle", items: [
         { name: "Absolut", price: "$10 / $70" }, { name: "Smirnoff Red", price: "$10 / $80" }, { name: "Stolichnaya", price: "$10 / $80" }, { name: "Belvedere", price: "$20 / $170" }, { name: "Grey Goose", price: "$20 / $150" },
       ]},
-      { title: "Whisky", sub: "Shot / Bottle", items: [
+      { title: "Whisky", icon: "glass", sub: "Shot / Bottle", items: [
         { name: "Red Label", price: "$8 / $70" }, { name: "Dewars", price: "$8 / $70" }, { name: "J&B", price: "$8 / $70" }, { name: "Black Label", price: "$11 / $120" }, { name: "Chivas 12", price: "$12 / $120" }, { name: "Golden Reserve", price: "$20 / $220" },
       ]},
-      { title: "Martini", items: [
+      { title: "Martini", icon: "glass", items: [
         { name: "Bianco", price: "$12" }, { name: "Rosso", price: "$12" }, { name: "Rosatto", price: "$12" },
       ]},
-      { title: "Cognac", items: [
+      { title: "Cognac", icon: "glass", items: [
         { name: "Hennessy", price: "$240" },
       ]},
-      { title: "Gin", sub: "Shot / Bottle", items: [
+      { title: "Gin", icon: "glass", sub: "Shot / Bottle", items: [
         { name: "Gordon's", price: "$8 / $70" }, { name: "Bombay", price: "$10 / $100" }, { name: "Hendricks", price: "$15 / $120" },
       ]},
-      { title: "Champagne & Others", items: [
+      { title: "Champagne & Others", icon: "glass", items: [
         { name: "Moet & Chandon", price: "$280" }, { name: "Vin Mousseux", price: "$40" }, { name: "Prosecco", price: "$60" }, { name: "Arak Bottle", price: "$35" },
       ]},
-      { title: "Alcoholic Cocktails", items: [
+      { title: "Alcoholic Cocktails", icon: "glass", items: [
         { name: "Pina Colada", price: "$11" }, { name: "Strawberry Colada", price: "$11" }, { name: "Blue Hawaii", price: "$11" }, { name: "Gin Basil", price: "$11" }, { name: "Bevview Signature", price: "$11" }, { name: "Long Island", price: "$11" }, { name: "Margarita", price: "$11" }, { name: "Blue Lagoon", price: "$11" }, { name: "Take Me Home", price: "$11" }, { name: "Mojito", price: "$11" }, { name: "Jamaica", price: "$11" }, { name: "Perfect Sunset", price: "$12" },
       ]},
-      { title: "Non-Alcoholic & Beers", items: [
+      { title: "Non-Alcoholic & Beers", icon: "drop", items: [
         { name: "Jamaica (Non-Alcoholic)", price: "$10" }, { name: "Mojito (Non-Alcoholic)", price: "$10" }, { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" }, { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" }, { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" },
       ]},
     ]
@@ -567,71 +570,89 @@ const MENU_DATA = {
   cafe: {
     label: "Cafe & Shisha",
     groups: [
-      { title: "Hot Drinks", items: [
+      { title: "Hot Drinks", icon: "cup", items: [
         { name: "Lipton Tea", price: "$2" }, { name: "Tea Box", price: "$3.5" }, { name: "Nescafe", price: "$4" }, { name: "Cappuccino", price: "$5.5" }, { name: "Espresso", price: "$4" }, { name: "Hot Chocolate", price: "$4.5" }, { name: "Turkish Coffee", price: "$3" },
       ]},
-      { title: "Cold Drinks", items: [
+      { title: "Cold Drinks", icon: "drop", items: [
         { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" }, { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" }, { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" },
       ]},
-      { title: "Milkshakes", items: [
+      { title: "Milkshakes", icon: "cup", items: [
         { name: "Chocolate", price: "$8" }, { name: "Strawberry", price: "$8" }, { name: "Vanilla", price: "$8" }, { name: "Oreo", price: "$8" }, { name: "The Bevview Shake", price: "$9" },
       ]},
-      { title: "Desserts", items: [
+      { title: "Desserts", icon: "star", items: [
         { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" }, { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" },
       ]},
-      { title: "Hookah / Shisha", items: [
+      { title: "Hookah / Shisha", icon: "smoke", items: [
         { name: "Regular", price: "$12" }, { name: "Deluxe", price: "$18" }, { name: "Super Deluxe", price: "$24" },
       ]},
     ]
   }
 };
 
-/* ============ IMAGE MAPPING FOR MENU SECTIONS ============ */
-const MENU_IMAGES = {
-  // Lebanese
-  "Salads": "images/gallery-salad-plate.jpg.jpeg",
-  "Cold Mezza": "images/gallery-mezza-platter.jpg.jpeg",
-  "Hot Mezza": "images/gallery-mezza-platter.jpg.jpeg",
-  "Mix Mou3ajanet": "images/gallery-mezza-platter.jpg.jpeg",
-  "Mix Grill": "images/gallery-burger.jpg.jpeg",
-  "Desserts": "images/gallery-dessert.jpg.jpeg",
-  "Open Bar Packages": "images/gallery-cocktail-bar.jpg.jpeg",
-  
-  // Western
-  "Appetizers": "images/gallery-salad-plate.jpg.jpeg",
-  "Platters": "images/gallery-burger.jpg.jpeg",
-  "Burgers": "images/gallery-burger.jpg.jpeg",
-  "Sandwiches": "images/gallery-burger.jpg.jpeg",
-  "Pizza": "images/gallery-burger.jpg.jpeg",
-  "Saj": "images/gallery-salad-plate.jpg.jpeg",
-  "Pasta": "images/gallery-salad-plate.jpg.jpeg",
-  
-  // Bar
-  "Wine": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Vodka": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Whisky": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Martini": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Cognac": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Gin": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Champagne & Others": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Alcoholic Cocktails": "images/gallery-cocktail-bar.jpg.jpeg",
-  "Non-Alcoholic & Beers": "images/gallery-cocktail-bar.jpg.jpeg",
-  
-  // Cafe
-  "Hot Drinks": "images/gallery-dessert.jpg.jpeg",
-  "Cold Drinks": "images/gallery-dessert.jpg.jpeg",
-  "Milkshakes": "images/gallery-dessert.jpg.jpeg",
-  "Desserts": "images/gallery-dessert.jpg.jpeg",
-  "Hookah / Shisha": "images/gallery-shisha-lounge.jpg.jpeg"
+/* ============ ONE PHOTO PER CATEGORY (shown once, "from the outside") ============ */
+/* Every existing filename is reused exactly as-is — none renamed. */
+const CATEGORY_BANNERS = {
+  lebanese: { type: "single", images: ["images/gallery-mezza-platter.jpg.jpeg"], caption: "Mezza, slow-cooked & shared" },
+  western:  { type: "split",  images: ["images/gallery-salad-plate.jpg.jpeg", "images/gallery-burger.jpg.jpeg"], caption: "From garden to grill" },
+  bar:      { type: "single", images: ["images/gallery-cocktail-bar.jpg.jpeg"], caption: "Curated pours, mountain-side" },
+  cafe:     { type: "split",  images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"], caption: "Sweet endings, slow smoke" },
 };
 
+/* ============ SMALL LINE ICONS (gold, quiet — replace the repeated photo backgrounds) ============ */
+const ICON_SVGS = {
+  leaf:  '<path d="M4 20c0-9 6-15 16-16-1 10-7 16-16 16Z"/><path d="M6 18C10 13 13 10 19 5"/>',
+  plate: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/>',
+  flame: '<path d="M12 3c1 3-3 4-3 8a3 3 0 0 0 6 0c0-1.5-1-2-1-3.5 2 1 3 3.5 3 5.5a5 5 0 0 1-10 0c0-4 3-6 5-10Z"/>',
+  dough: '<circle cx="12" cy="12" r="8.5"/><path d="M7.5 9.5c1 1 2 1 2.5 0M14 9.5c1 1 2 1 2.5 0M8 14.5c1.5 1.5 6.5 1.5 8 0"/>',
+  star:  '<path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l4 4M14 14l4 4M18 6l-4 4M10 14l-4 4"/>',
+  glass: '<path d="M6 4h12l-5 8v6h3M13 18H8M8.5 12 6 4"/>',
+  drop:  '<path d="M12 3c4 5 6.5 8.5 6.5 12A6.5 6.5 0 0 1 5.5 15C5.5 11.5 8 8 12 3Z"/>',
+  cup:   '<path d="M5 6h11v7a5.5 5.5 0 0 1-11 0Z"/><path d="M16 8h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3.5v2M12 3.5v2"/>',
+  smoke: '<path d="M7 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/><path d="M12 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/><path d="M17 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/>',
+};
+
+function iconSvg(key) {
+  const path = ICON_SVGS[key] || ICON_SVGS.plate;
+  return `<svg class="group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
 /* ============ RENDER MENU ============ */
+const catBanner = document.getElementById('catBanner');
 const subTabsWrap = document.getElementById('subTabsWrap');
 const menuPanels = document.getElementById('menuPanels');
 const mainTabs = document.querySelectorAll('#mainTabs .tab-btn');
 
+function renderBanner(catKey) {
+  const b = CATEGORY_BANNERS[catKey];
+  if (b.type === "single") {
+    catBanner.innerHTML = `
+      <div class="cat-banner rounded-sm h-56 md:h-72 reveal visible">
+        <div class="cat-banner-img" style="background-image:url('${b.images[0]}');"></div>
+        <div class="cat-banner-overlay"></div>
+        <div class="absolute bottom-5 left-6 md:bottom-7 md:left-8">
+          <p class="text-champagne/80 text-xs md:text-sm letter-space uppercase font-light">${b.caption}</p>
+        </div>
+      </div>`;
+  } else {
+    catBanner.innerHTML = `
+      <div class="grid grid-cols-2 gap-3 md:gap-4 reveal visible">
+        <div class="cat-banner rounded-sm h-40 md:h-56">
+          <div class="cat-banner-img" style="background-image:url('${b.images[0]}');"></div>
+          <div class="cat-banner-overlay"></div>
+        </div>
+        <div class="cat-banner rounded-sm h-40 md:h-56">
+          <div class="cat-banner-img" style="background-image:url('${b.images[1]}');"></div>
+          <div class="cat-banner-overlay"></div>
+        </div>
+      </div>
+      <p class="text-center text-champagne/60 text-xs md:text-sm letter-space uppercase font-light mt-4">${b.caption}</p>`;
+  }
+}
+
 function renderCategory(catKey) {
   const cat = MENU_DATA[catKey];
+
+  renderBanner(catKey);
 
   subTabsWrap.innerHTML = `
     <div class="flex overflow-x-auto no-scrollbar gap-2 justify-start md:justify-center reveal visible">
@@ -642,29 +663,28 @@ function renderCategory(catKey) {
 
   menuPanels.innerHTML = `
     <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
-      ${cat.groups.map(g => {
-        const bgImage = MENU_IMAGES[g.title] || 'images/gallery-salad-plate.jpg.jpeg';
-        return `
-          <div class="group-block menu-card glass rounded-sm p-6 reveal visible" data-group="${g.title}">
-            <div class="menu-card-bg" style="background-image:url('${bgImage}');"></div>
-            <div class="menu-card-content">
-              <div class="flex items-baseline justify-between mb-1">
+      ${cat.groups.map(g => `
+        <div class="group-block menu-card glass rounded-sm p-6 reveal visible" data-group="${g.title}">
+          <div class="flex items-start gap-4 mb-1">
+            ${iconSvg(g.icon)}
+            <div class="flex-1">
+              <div class="flex items-baseline justify-between">
                 <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
                 ${g.sub ? `<span class="text-[10px] uppercase letter-space text-champagne/40">${g.sub}</span>` : ''}
               </div>
-              ${g.note ? `<p class="text-xs text-champagne/45 italic mb-3">${g.note}</p>` : '<div class="mb-3"></div>'}
-              <ul class="space-y-2">
-                ${g.items.map(it => `
-                  <li class="flex items-baseline text-sm ${it.muted ? 'text-champagne/50 italic' : 'text-champagne/85'}">
-                    <span>${it.name}</span>
-                    ${it.price ? `<span class="price-dots"></span><span class="text-gold/90 whitespace-nowrap">${it.price}</span>` : ''}
-                  </li>
-                `).join('')}
-              </ul>
+              ${g.note ? `<p class="text-xs text-champagne/45 italic mt-1">${g.note}</p>` : ''}
             </div>
           </div>
-        `;
-      }).join('')}
+          <ul class="space-y-2 mt-4">
+            ${g.items.map(it => `
+              <li class="flex items-baseline text-sm ${it.muted ? 'text-champagne/50 italic' : 'text-champagne/85'}">
+                <span>${it.name}</span>
+                ${it.price ? `<span class="price-dots"></span><span class="text-gold/90 whitespace-nowrap">${it.price}</span>` : ''}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('')}
     </div>
   `;
 
