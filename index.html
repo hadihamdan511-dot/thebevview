@@ -150,6 +150,34 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
+  /* ---- Realistic layered clouds: shaded puff-clusters, depth-based parallax ---- */
+  .cloud-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cloud {
+    position: absolute;
+    left: -55%;
+    mix-blend-mode: screen;
+    will-change: transform;
+    animation-name: cloudDrift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes cloudDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    22%  { transform: translate(35vw, -14px) scale(1.015); }
+    48%  { transform: translate(78vw, 8px) scale(1.03); }
+    74%  { transform: translate(122vw, -8px) scale(1.01); }
+    100% { transform: translate(170vw, 0) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cloud { animation: none; }
+  }
+
   /* ---- Category tabs: grid on mobile (all 4 visible), row on larger screens ---- */
   .cat-btn {
     border: 1px solid rgba(212,175,55,0.25);
@@ -275,6 +303,7 @@
   <!-- ================= HERO ================= -->
   <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6 overflow-hidden" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(201,123,74,0.20), transparent 60%), linear-gradient(180deg, #0d0c09 0%, #17140f 45%, #15130f 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/40 z-0"></div>
+    <div class="cloud-field" data-tone="warm" data-count="5"></div>
     <canvas id="emberCanvas" class="absolute inset-0 z-[1] pointer-events-none"></canvas>
 
     <div class="relative z-10 max-w-3xl text-center mt-16">
@@ -306,8 +335,9 @@
   </section>
 
   <!-- ================= GOLDEN HOUR (signature interactive) ================= -->
-  <section id="goldenhour" class="bg-charcoal py-20 md:py-28 px-6 border-t border-b border-gold/10">
-    <div class="max-w-4xl mx-auto text-center reveal">
+  <section id="goldenhour" class="relative overflow-hidden bg-charcoal py-20 md:py-28 px-6 border-t border-b border-gold/10">
+    <div class="cloud-field" data-tone="warm" data-count="4"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center reveal">
       <p class="letter-space uppercase text-gold/80 text-xs mb-3">Interactive</p>
       <h2 class="font-serif text-4xl md:text-5xl text-champagne mb-4">Chase the Golden Hour</h2>
       <p class="text-champagne/60 font-light mb-10 max-w-xl mx-auto">Drag the sun across the Baskinta sky and watch the terrace light change, hour by hour.</p>
@@ -334,8 +364,9 @@
   </section>
 
   <!-- ================= ABOUT / THE VIBE ================= -->
-  <section id="about" class="bg-charcoal py-24 md:py-32 px-6">
-    <div class="max-w-6xl mx-auto">
+  <section id="about" class="relative overflow-hidden bg-charcoal py-24 md:py-32 px-6">
+    <div class="cloud-field" data-tone="cool" data-count="5"></div>
+    <div class="relative z-10 max-w-6xl mx-auto">
       <div class="text-center mb-16 reveal">
         <p class="letter-space uppercase text-gold/80 text-xs mb-3">The Vibe</p>
         <h2 class="font-serif text-4xl md:text-5xl text-champagne">Altitude changes everything</h2>
@@ -383,8 +414,9 @@
   </section>
 
   <!-- ================= MENU ================= -->
-  <section id="menu" class="bg-charcoal2 py-24 md:py-32 px-4 md:px-6 relative">
-    <div class="max-w-6xl mx-auto">
+  <section id="menu" class="relative overflow-hidden bg-charcoal2 py-24 md:py-32 px-4 md:px-6">
+    <div class="cloud-field" data-tone="cool" data-count="5"></div>
+    <div class="relative z-10 max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
         <p class="letter-space uppercase text-gold/80 text-xs mb-3">Taste the Mountain</p>
         <h2 class="font-serif text-4xl md:text-5xl text-champagne">The Menu</h2>
@@ -409,8 +441,9 @@
   </section>
 
   <!-- ================= FEATURED DISHES (Visual Gallery) ================= -->
-  <section id="experience" class="bg-charcoal py-24 md:py-32 px-6">
-    <div class="max-w-6xl mx-auto">
+  <section id="experience" class="relative overflow-hidden bg-charcoal py-24 md:py-32 px-6">
+    <div class="cloud-field" data-tone="cool" data-count="4"></div>
+    <div class="relative z-10 max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
         <p class="letter-space uppercase text-gold/80 text-xs mb-3">Featured Dishes</p>
         <h2 class="font-serif text-4xl md:text-5xl text-champagne">From Our Kitchen</h2>
@@ -471,8 +504,9 @@
   </section>
 
   <!-- ================= CONTACT / RESERVE STRIP ================= -->
-  <section id="contact" class="relative py-24 px-6 hero-bg" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(201,123,74,0.20), transparent 60%), linear-gradient(180deg, #0d0c09 0%, #17140f 45%, #15130f 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
+  <section id="contact" class="relative overflow-hidden py-24 px-6 hero-bg" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(201,123,74,0.20), transparent 60%), linear-gradient(180deg, #0d0c09 0%, #17140f 45%, #15130f 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/70"></div>
+    <div class="cloud-field" data-tone="warm" data-count="4"></div>
     <div class="relative z-10 max-w-2xl mx-auto text-center reveal">
       <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Reserve Your Evening</h2>
       <p class="text-champagne/75 mb-8 font-light">
@@ -491,59 +525,130 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-black/90 border-t border-gold/15 pt-16 pb-8 px-6">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 mb-12">
-      <div>
-        <div class="flex items-center gap-2 mb-4">
-          <svg width="22" height="22" viewBox="0 0 100 100" class="text-gold">
-            <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round">
-              <line x1="50" y1="4" x2="50" y2="28" />
-              <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
-            </g>
-          </svg>
-          <span class="font-serif text-lg gold-text">THE BEVVIEW</span>
+  <footer class="relative overflow-hidden bg-black/90 border-t border-gold/15 pt-16 pb-8 px-6">
+    <div class="cloud-field" data-tone="cool" data-count="4"></div>
+    <div class="relative z-10">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <svg width="22" height="22" viewBox="0 0 100 100" class="text-gold">
+              <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round">
+                <line x1="50" y1="4" x2="50" y2="28" />
+                <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+              </g>
+            </svg>
+            <span class="font-serif text-lg gold-text">THE BEVVIEW</span>
+          </div>
+          <p class="text-champagne/60 text-sm font-light leading-relaxed">A Mountain Breeze — Lebanese and international dining, curated bar and shisha lounge above Baskinta.</p>
         </div>
-        <p class="text-champagne/60 text-sm font-light leading-relaxed">A Mountain Breeze — Lebanese and international dining, curated bar and shisha lounge above Baskinta.</p>
-      </div>
 
-      <div>
-        <h4 class="text-gold letter-space uppercase text-xs mb-4">Location</h4>
-        <p class="text-champagne/60 text-sm font-light leading-relaxed">Qanat Bakish Road<br>Baskinta, Metn District<br>Lebanon</p>
-      </div>
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Location</h4>
+          <p class="text-champagne/60 text-sm font-light leading-relaxed">Qanat Bakish Road<br>Baskinta, Metn District<br>Lebanon</p>
+        </div>
 
-      <div>
-        <h4 class="text-gold letter-space uppercase text-xs mb-4">Hours</h4>
-        <ul class="text-champagne/60 text-sm font-light space-y-1">
-          <li>Daily: 11am – 1am</li>
-        </ul>
-      </div>
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Hours</h4>
+          <ul class="text-champagne/60 text-sm font-light space-y-1">
+            <li>Daily: 11am – 1am</li>
+          </ul>
+        </div>
 
-      <div>
-        <h4 class="text-gold letter-space uppercase text-xs mb-4">Follow</h4>
-        <div class="flex gap-4 text-champagne/60">
-          <a href="https://instagram.com/the.bevview" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gold transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          </a>
-          <a href="https://www.facebook.com/thebevview/" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-gold transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://wa.me/96176348489" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-gold transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 11.5 12 12l1-9"/></svg>
-          </a>
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Follow</h4>
+          <div class="flex gap-4 text-champagne/60">
+            <a href="https://instagram.com/the.bevview" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gold transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/thebevview/" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-gold transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/96176348489" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-gold transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 11.5 12 12l1-9"/></svg>
+            </a>
+          </div>
         </div>
       </div>
+      <div class="hairline max-w-6xl mx-auto mb-6"></div>
+      <p class="text-center text-champagne/40 text-xs font-light">
+        © 2026 The Bevview. All rights reserved. · Website by
+        <a href="https://wa.me/96178914570" target="_blank" rel="noopener" class="text-gold/70 hover:text-gold transition-colors">Hamdan.co</a>
+      </p>
     </div>
-    <div class="hairline max-w-6xl mx-auto mb-6"></div>
-    <p class="text-center text-champagne/40 text-xs font-light">
-      © 2026 The Bevview. All rights reserved. · Website by
-      <a href="https://wa.me/96178914570" target="_blank" rel="noopener" class="text-gold/70 hover:text-gold transition-colors">Hamdan.co</a>
-    </p>
   </footer>
 
 <script>
 /* ============ SHARED CAPABILITY FLAGS ============ */
 const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ REALISTIC LAYERED CLOUDS ============ */
+/* A cloud is a cluster of shaded "puffs" (radial gradients) laid out like a
+   real cumulus silhouette: flat-ish underside, rounder brighter top where
+   light hits it. Depth (far/mid/near) controls scale, speed, blur and
+   opacity so the sky reads with real parallax instead of one flat layer. */
+
+const CLOUD_TEMPLATE = [
+  { x: 16, y: 62, rx: 24, ry: 28, light: 0.5 },
+  { x: 32, y: 40, rx: 32, ry: 36, light: 0.8 },
+  { x: 52, y: 24, rx: 38, ry: 40, light: 1.0 },
+  { x: 71, y: 34, rx: 32, ry: 34, light: 0.82 },
+  { x: 86, y: 58, rx: 24, ry: 26, light: 0.45 },
+  { x: 50, y: 70, rx: 64, ry: 32, light: 0.32 }
+];
+
+const CLOUD_TONES = {
+  warm: '255,238,210',
+  cool: '206,215,221'
+};
+
+function cloudBackground(rgb, baseAlpha) {
+  return CLOUD_TEMPLATE.map(p => {
+    const a = (baseAlpha * p.light).toFixed(3);
+    return `radial-gradient(ellipse ${p.rx}% ${p.ry}% at ${p.x}% ${p.y}%, rgba(${rgb},${a}), transparent 70%)`;
+  }).join(',');
+}
+
+const CLOUD_DEPTHS = {
+  far:  { scaleMin: 0.5,  scaleMax: 0.78, opMin: 0.16, opMax: 0.26, durMin: 105, durMax: 175, blur: 15, topMin: 2,  topMax: 28 },
+  mid:  { scaleMin: 0.8,  scaleMax: 1.15, opMin: 0.26, opMax: 0.36, durMin: 68,  durMax: 108, blur: 10, topMin: 14, topMax: 48 },
+  near: { scaleMin: 1.15, scaleMax: 1.65, opMin: 0.34, opMax: 0.46, durMin: 40,  durMax: 66,  blur: 6,  topMin: 28, topMax: 72 }
+};
+const DEPTH_KEYS = ['far', 'mid', 'near'];
+
+function buildCloudField(field) {
+  const toneRgb = CLOUD_TONES[field.dataset.tone] || CLOUD_TONES.cool;
+  const count = parseInt(field.dataset.count || '4', 10);
+
+  for (let i = 0; i < count; i++) {
+    const depthKey = DEPTH_KEYS[Math.floor(Math.random() * DEPTH_KEYS.length)];
+    const d = CLOUD_DEPTHS[depthKey];
+
+    const scale = d.scaleMin + Math.random() * (d.scaleMax - d.scaleMin);
+    const w = 620 * scale;
+    const h = w * 0.42;
+    const top = d.topMin + Math.random() * (d.topMax - d.topMin);
+    const opacity = d.opMin + Math.random() * (d.opMax - d.opMin);
+    const duration = d.durMin + Math.random() * (d.durMax - d.durMin);
+    const delay = -Math.random() * duration;
+
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+    cloud.style.width = w + 'px';
+    cloud.style.height = h + 'px';
+    cloud.style.top = top + '%';
+    cloud.style.opacity = opacity;
+    cloud.style.filter = `blur(${d.blur}px)`;
+    cloud.style.background = cloudBackground(toneRgb, 0.95);
+    cloud.style.animationDuration = duration + 's';
+    cloud.style.animationDelay = delay + 's';
+    if (reduceMotion) cloud.style.animation = 'none';
+
+    field.appendChild(cloud);
+  }
+}
+
+document.querySelectorAll('.cloud-field').forEach(buildCloudField);
 
 /* ============ SCROLL PROGRESS BAR ============ */
 const scrollProgress = document.getElementById('scrollProgress');
