@@ -46,7 +46,7 @@
     height: 60px;
   }
 
-  /* Glassmorphism card */
+  /* Glassmorphism card with image background */
   .glass {
     background: rgba(24, 22, 20, 0.55);
     backdrop-filter: blur(14px);
@@ -59,6 +59,38 @@
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+
+  .menu-card {
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    min-height: 200px;
+  }
+  
+  .menu-card:hover {
+    border-color: rgba(212,175,55,0.55);
+    transform: translateY(-4px);
+  }
+
+  .menu-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    transition: opacity 0.5s ease, transform 0.7s ease;
+    transform: scale(1);
+  }
+  
+  .menu-card:hover .menu-card-bg {
+    opacity: 0.18;
+    transform: scale(1.05);
+  }
+
+  .menu-card-content {
+    position: relative;
+    z-index: 2;
   }
 
   /* Gold gradient text */
@@ -76,6 +108,8 @@
 
   .letter-space { letter-spacing: 0.18em; }
 
+  a, button { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+
   /* Nav link underline grow */
   .nav-link { position: relative; }
   .nav-link::after {
@@ -84,17 +118,29 @@
     left: 0; bottom: -6px;
     width: 0%; height: 1px;
     background: #D4AF37;
-    transition: width 0.35s ease;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .nav-link:hover::after { width: 100%; }
 
   /* Fade-up reveal */
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+    transform: translateY(28px);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Slow cinematic zoom on the hero background */
+  .hero-bg {
+    animation: heroZoom 24s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { background-size: 100% auto, cover, cover; }
+    to   { background-size: 100% auto, cover, 112%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg { animation: none; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -114,17 +160,6 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  /* Mountain silhouette background layers */
-  .hero-bg {
-    background:
-      radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%),
-      linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%),
-      url('images/hero-mountain-sunset.jpg');
-    background-size: cover;
-    background-position: center 30%;
-    background-blend-mode: overlay, normal, normal;
-  }
-
   .about-img {
     background-size: cover;
     background-position: center;
@@ -135,18 +170,17 @@
     outline-offset: 3px;
   }
 
-  .menu-card {
-    transition: border-color 0.3s ease, transform 0.3s ease;
-  }
-  .menu-card:hover {
-    border-color: rgba(212,175,55,0.55);
-  }
-
   .price-dots {
     flex: 1;
     border-bottom: 1px dotted rgba(212,175,55,0.35);
     margin: 0 0.6rem;
     transform: translateY(-4px);
+  }
+  
+  .sub-btn[data-active="true"] {
+    background: #D4AF37;
+    color: #121212;
+    border-color: #D4AF37;
   }
 </style>
 </head>
@@ -192,7 +226,7 @@
     </div>
 
     <!-- Mobile menu panel -->
-    <div id="mobilePanel" class="md:hidden glass-strong max-h-0 overflow-hidden transition-all duration-500">
+    <div id="mobilePanel" class="md:hidden glass-strong max-h-0 overflow-hidden transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
       <div class="flex flex-col px-6 py-2 font-sans text-sm letter-space uppercase text-champagne/90">
         <a href="#home" class="py-3 border-b border-gold/10 mobile-link">Home</a>
         <a href="#about" class="py-3 border-b border-gold/10 mobile-link">About</a>
@@ -204,7 +238,7 @@
   </header>
 
   <!-- ================= HERO ================= -->
-  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6">
+  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%), linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/40"></div>
 
     <div class="relative z-10 max-w-3xl text-center mt-16">
@@ -246,7 +280,7 @@
 
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-20">
         <div class="reveal">
-          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-valley-view.jpg');"></div>
+          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-valley-view.jpg.jpeg');"></div>
         </div>
         <div class="reveal">
           <h3 class="font-serif text-3xl text-gold mb-5">Perched above Qanat Bakish</h3>
@@ -266,7 +300,7 @@
 
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div class="reveal md:order-2">
-          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-terrace-sunset.jpg');"></div>
+          <div class="about-img rounded-sm h-72 md:h-[26rem] border border-gold/15" style="background-image:url('images/about-terrace-sunset.jpg.jpeg');"></div>
         </div>
         <div class="reveal md:order-1">
           <h3 class="font-serif text-3xl text-gold mb-5">Panoramic sunsets, unhurried evenings</h3>
@@ -284,7 +318,7 @@
     </div>
   </section>
 
-  <!-- ================= MENU ================= -->
+  <!-- ================= MENU WITH IMAGE BACKGROUNDS ================= -->
   <section id="menu" class="bg-charcoal2 py-24 md:py-32 px-4 md:px-6 relative">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
@@ -309,30 +343,72 @@
     </div>
   </section>
 
-  <!-- ================= EXPERIENCE / GALLERY ================= -->
+  <!-- ================= FEATURED DISHES (Visual Gallery) ================= -->
   <section id="experience" class="bg-charcoal py-24 md:py-32 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
-        <p class="letter-space uppercase text-gold/80 text-xs mb-3">The Experience</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-champagne">Gallery</h2>
+        <p class="letter-space uppercase text-gold/80 text-xs mb-3">Featured Dishes</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-champagne">From Our Kitchen</h2>
         <div class="hairline w-24 mx-auto mt-6"></div>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[220px]">
-        <div class="reveal row-span-2 rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-outdoor-seating.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-mezza-platter.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-cocktail-bar.jpg');"></div>
-        <div class="reveal row-span-2 rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-sunset-view.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-shisha-lounge.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-burger.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-salad-plate.jpg');"></div>
-        <div class="reveal rounded-sm about-img border border-gold/15" style="background-image:url('images/gallery-dessert.jpg');"></div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Visual Menu Item 1 -->
+        <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+               style="background-image:url('images/gallery-mezza-platter.jpg.jpeg');">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <span class="inline-block text-[10px] letter-space uppercase text-gold/80 bg-charcoal/70 px-3 py-1 mb-2">Signature</span>
+            <h3 class="font-serif text-2xl text-champagne">Lebanese Mezza</h3>
+            <p class="text-champagne/70 text-sm font-light">Traditional selection of cold and hot mezza with freshly baked bread</p>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-gold font-serif text-xl">$12</span>
+              <span class="text-xs text-champagne/50 letter-space uppercase">View in Menu →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Menu Item 2 -->
+        <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+               style="background-image:url('images/gallery-burger.jpg.jpeg');">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <span class="inline-block text-[10px] letter-space uppercase text-gold/80 bg-charcoal/70 px-3 py-1 mb-2">Popular</span>
+            <h3 class="font-serif text-2xl text-champagne">Bevview Burger</h3>
+            <p class="text-champagne/70 text-sm font-light">Double beef patty with caramelized onions and house sauce</p>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-gold font-serif text-xl">$19</span>
+              <span class="text-xs text-champagne/50 letter-space uppercase">View in Menu →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Menu Item 3 -->
+        <div class="group relative rounded-sm overflow-hidden border border-gold/15 h-80 md:h-96 reveal">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+               style="background-image:url('images/gallery-cocktail-bar.jpg.jpeg');">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <span class="inline-block text-[10px] letter-space uppercase text-gold/80 bg-charcoal/70 px-3 py-1 mb-2">Cocktail</span>
+            <h3 class="font-serif text-2xl text-champagne">Bevview Signature</h3>
+            <p class="text-champagne/70 text-sm font-light">Gin-based cocktail with herbs and citrus notes</p>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-gold font-serif text-xl">$11</span>
+              <span class="text-xs text-champagne/50 letter-space uppercase">View in Menu →</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ================= CONTACT / RESERVE STRIP ================= -->
-  <section id="contact" class="relative py-24 px-6 hero-bg">
+  <section id="contact" class="relative py-24 px-6 hero-bg" style="background: radial-gradient(ellipse 90% 60% at 50% 15%, rgba(212,175,55,0.14), transparent 60%), linear-gradient(180deg, #0c0b0a 0%, #16130f 45%, #121212 100%), url('images/hero-mountain-sunset.jpg.jpeg'); background-position: center 30%; background-blend-mode: overlay, normal, normal;">
     <div class="absolute inset-0 bg-charcoal/70"></div>
     <div class="relative z-10 max-w-2xl mx-auto text-center reveal">
       <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Reserve Your Evening</h2>
@@ -385,7 +461,7 @@
           <a href="https://instagram.com/the.bevview" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gold transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
-          <a href="#" aria-label="Facebook" class="hover:text-gold transition-colors">
+          <a href="https://www.facebook.com/thebevview/" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-gold transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
           <a href="https://wa.me/96176348489" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-gold transition-colors">
@@ -510,6 +586,45 @@ const MENU_DATA = {
   }
 };
 
+/* ============ IMAGE MAPPING FOR MENU SECTIONS ============ */
+const MENU_IMAGES = {
+  // Lebanese
+  "Salads": "images/gallery-salad-plate.jpg.jpeg",
+  "Cold Mezza": "images/gallery-mezza-platter.jpg.jpeg",
+  "Hot Mezza": "images/gallery-mezza-platter.jpg.jpeg",
+  "Mix Mou3ajanet": "images/gallery-mezza-platter.jpg.jpeg",
+  "Mix Grill": "images/gallery-burger.jpg.jpeg",
+  "Desserts": "images/gallery-dessert.jpg.jpeg",
+  "Open Bar Packages": "images/gallery-cocktail-bar.jpg.jpeg",
+  
+  // Western
+  "Appetizers": "images/gallery-salad-plate.jpg.jpeg",
+  "Platters": "images/gallery-burger.jpg.jpeg",
+  "Burgers": "images/gallery-burger.jpg.jpeg",
+  "Sandwiches": "images/gallery-burger.jpg.jpeg",
+  "Pizza": "images/gallery-burger.jpg.jpeg",
+  "Saj": "images/gallery-salad-plate.jpg.jpeg",
+  "Pasta": "images/gallery-salad-plate.jpg.jpeg",
+  
+  // Bar
+  "Wine": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Vodka": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Whisky": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Martini": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Cognac": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Gin": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Champagne & Others": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Alcoholic Cocktails": "images/gallery-cocktail-bar.jpg.jpeg",
+  "Non-Alcoholic & Beers": "images/gallery-cocktail-bar.jpg.jpeg",
+  
+  // Cafe
+  "Hot Drinks": "images/gallery-dessert.jpg.jpeg",
+  "Cold Drinks": "images/gallery-dessert.jpg.jpeg",
+  "Milkshakes": "images/gallery-dessert.jpg.jpeg",
+  "Desserts": "images/gallery-dessert.jpg.jpeg",
+  "Hookah / Shisha": "images/gallery-shisha-lounge.jpg.jpeg"
+};
+
 /* ============ RENDER MENU ============ */
 const subTabsWrap = document.getElementById('subTabsWrap');
 const menuPanels = document.getElementById('menuPanels');
@@ -518,7 +633,6 @@ const mainTabs = document.querySelectorAll('#mainTabs .tab-btn');
 function renderCategory(catKey) {
   const cat = MENU_DATA[catKey];
 
-  // Sub tabs (group titles act as filter chips)
   subTabsWrap.innerHTML = `
     <div class="flex overflow-x-auto no-scrollbar gap-2 justify-start md:justify-center reveal visible">
       <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold transition-colors">All</button>
@@ -526,30 +640,34 @@ function renderCategory(catKey) {
     </div>
   `;
 
-  // Panels: one block per group
   menuPanels.innerHTML = `
     <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
-      ${cat.groups.map(g => `
-        <div class="group-block menu-card glass rounded-sm p-6 reveal visible" data-group="${g.title}">
-          <div class="flex items-baseline justify-between mb-1">
-            <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
-            ${g.sub ? `<span class="text-[10px] uppercase letter-space text-champagne/40">${g.sub}</span>` : ''}
+      ${cat.groups.map(g => {
+        const bgImage = MENU_IMAGES[g.title] || 'images/gallery-salad-plate.jpg.jpeg';
+        return `
+          <div class="group-block menu-card glass rounded-sm p-6 reveal visible" data-group="${g.title}">
+            <div class="menu-card-bg" style="background-image:url('${bgImage}');"></div>
+            <div class="menu-card-content">
+              <div class="flex items-baseline justify-between mb-1">
+                <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
+                ${g.sub ? `<span class="text-[10px] uppercase letter-space text-champagne/40">${g.sub}</span>` : ''}
+              </div>
+              ${g.note ? `<p class="text-xs text-champagne/45 italic mb-3">${g.note}</p>` : '<div class="mb-3"></div>'}
+              <ul class="space-y-2">
+                ${g.items.map(it => `
+                  <li class="flex items-baseline text-sm ${it.muted ? 'text-champagne/50 italic' : 'text-champagne/85'}">
+                    <span>${it.name}</span>
+                    ${it.price ? `<span class="price-dots"></span><span class="text-gold/90 whitespace-nowrap">${it.price}</span>` : ''}
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
           </div>
-          ${g.note ? `<p class="text-xs text-champagne/45 italic mb-3">${g.note}</p>` : '<div class="mb-3"></div>'}
-          <ul class="space-y-2">
-            ${g.items.map(it => `
-              <li class="flex items-baseline text-sm ${it.muted ? 'text-champagne/50 italic' : 'text-champagne/85'}">
-                <span>${it.name}</span>
-                ${it.price ? `<span class="price-dots"></span><span class="text-gold/90 whitespace-nowrap">${it.price}</span>` : ''}
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-      `).join('')}
+        `;
+      }).join('')}
     </div>
   `;
 
-  // sub-tab filter behavior
   const subBtns = subTabsWrap.querySelectorAll('.sub-btn');
   subBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -563,7 +681,6 @@ function renderCategory(catKey) {
       });
     });
   });
-  // set initial "All" styling
   subTabsWrap.querySelector('.sub-btn[data-sub="all"]').classList.add('bg-gold','text-charcoal','border-gold');
 }
 
@@ -575,7 +692,6 @@ mainTabs.forEach(btn => {
   });
 });
 
-// initial render
 renderCategory('lebanese');
 
 /* ============ MOBILE NAV ============ */
