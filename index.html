@@ -150,13 +150,17 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
-  .tab-btn { position: relative; }
-  .tab-btn[data-active="true"] { color: #E9D9AE; }
-  .tab-btn[data-active="true"]::after {
-    content: '';
-    position: absolute;
-    left: 8%; right: 8%; bottom: -8px; height: 2px;
-    background: linear-gradient(90deg, #B8892F, #D4AF37, #E9D9AE);
+  /* ---- Category tabs: grid on mobile (all 4 visible), row on larger screens ---- */
+  .cat-btn {
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 2px;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  .cat-btn:hover { border-color: rgba(212,175,55,0.6); }
+  .cat-btn[data-active="true"] {
+    background: rgba(212,175,55,0.14);
+    border-color: rgba(212,175,55,0.8);
+    color: #E9D9AE;
   }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -387,15 +391,19 @@
         <div class="hairline w-24 mx-auto mt-6"></div>
       </div>
 
-      <div id="mainTabs" class="flex overflow-x-auto no-scrollbar gap-3 md:gap-6 justify-start md:justify-center mb-10 pb-2 reveal">
-        <button data-cat="lebanese" data-active="true" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Lebanese Formula</button>
-        <button data-cat="western" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Western / International</button>
-        <button data-cat="bar" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Bar &amp; Drinks</button>
-        <button data-cat="cafe" class="tab-btn whitespace-nowrap font-serif text-lg md:text-xl text-champagne/60 hover:text-champagne px-3 pb-2 transition-colors">Cafe &amp; Shisha</button>
+      <!-- Category tabs: 2x2 grid on mobile so all 4 are visible without scrolling; row on larger screens -->
+      <div id="mainTabs" class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-4 mb-10 reveal">
+        <button data-cat="lebanese" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl text-champagne/70 px-3 py-3 sm:px-5 sm:py-2 text-center">Lebanese Formula</button>
+        <button data-cat="western" class="cat-btn font-serif text-sm sm:text-lg md:text-xl text-champagne/70 px-3 py-3 sm:px-5 sm:py-2 text-center">Western / International</button>
+        <button data-cat="bar" class="cat-btn font-serif text-sm sm:text-lg md:text-xl text-champagne/70 px-3 py-3 sm:px-5 sm:py-2 text-center">Bar &amp; Drinks</button>
+        <button data-cat="cafe" class="cat-btn font-serif text-sm sm:text-lg md:text-xl text-champagne/70 px-3 py-3 sm:px-5 sm:py-2 text-center">Cafe &amp; Shisha</button>
       </div>
 
       <div id="catBanner" class="mb-10"></div>
+
+      <!-- Sub filters now wrap onto multiple lines instead of scrolling off-screen -->
       <div id="subTabsWrap" class="mb-10"></div>
+
       <div id="menuPanels"></div>
     </div>
   </section>
@@ -835,7 +843,7 @@ function iconSvg(key) {
 const catBanner = document.getElementById('catBanner');
 const subTabsWrap = document.getElementById('subTabsWrap');
 const menuPanels = document.getElementById('menuPanels');
-const mainTabs = document.querySelectorAll('#mainTabs .tab-btn');
+const mainTabs = document.querySelectorAll('#mainTabs .cat-btn');
 
 function renderBanner(catKey) {
   const b = CATEGORY_BANNERS[catKey];
@@ -870,7 +878,7 @@ function renderCategory(catKey) {
   renderBanner(catKey);
 
   subTabsWrap.innerHTML = `
-    <div class="flex overflow-x-auto no-scrollbar gap-2 justify-start md:justify-center reveal visible">
+    <div class="flex flex-wrap justify-center gap-2 reveal visible">
       <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold transition-colors">All</button>
       ${cat.groups.map(g => `<button data-sub="${g.title}" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 border border-gold/30 text-champagne/70 hover:border-gold transition-colors">${g.title}</button>`).join('')}
     </div>
@@ -941,13 +949,13 @@ mainTabs.forEach(btn => {
 
 renderCategory('lebanese');
 
-/* ============ VIEW-IN-MENU DEEP LINKING (fix for the broken buttons) ============ */
+/* ============ VIEW-IN-MENU DEEP LINKING ============ */
 function goToMenuItem(catKey, groupTitle) {
   const menuSection = document.getElementById('menu');
   menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   setTimeout(() => {
-    const tabBtn = document.querySelector(`#mainTabs .tab-btn[data-cat="${catKey}"]`);
+    const tabBtn = document.querySelector(`#mainTabs .cat-btn[data-cat="${catKey}"]`);
     if (tabBtn && tabBtn.dataset.active !== 'true') tabBtn.click();
 
     setTimeout(() => {
