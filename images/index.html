@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bevview · High-Altitude Mountain Retreat · Baskinta, Lebanon</title>
+  <meta name="description" content="The Bevview: high-altitude lounge & restaurant above Baskinta, Lebanon. Lebanese & international dining, curated bar, shisha lounge, panoramic sunset views." />
+  <meta name="theme-color" content="#0F110E" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            alpine: '#0F110E',
+            slatepine: '#181C17',
+            chestnut: '#1A1410',
+            ember: '#E0A96D',
+            terracotta: '#C86D51',
+            moss: '#4A5B47',
+            cream: '#F5EFE6',
+            gold: '#D4AF37',
+            champagne: '#EAD9AE',
+            bronze: '#8B6F3E',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Jost', 'sans-serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow': 'glow 3s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            glow: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(212,175,55,0.1)' },
+              '50%': { boxShadow: '0 0 40px rgba(212,175,55,0.3)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0F110E;
+      color: #F5EFE6;
+      font-family: 'Jost', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0F110E; }
+    ::-webkit-scrollbar-thumb { background: #E0A96D; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    .glass {
+      background: rgba(24, 28, 23, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(224, 169, 109, 0.15);
+    }
+    .glass-light {
+      background: rgba(24, 28, 23, 0.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(224, 169, 109, 0.1);
+    }
+    .glass-strong {
+      background: rgba(15, 17, 14, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(224, 169, 109, 0.2);
+    }
+    .glass-glow {
+      background: rgba(24, 28, 23, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(224, 169, 109, 0.25);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .gold-text {
+      background: linear-gradient(120deg, #B8892F 0%, #E9D9AE 30%, #D4AF37 50%, #E9D9AE 70%, #B8892F 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    .gold-border {
+      border-image: linear-gradient(135deg, #B8892F, #D4AF37, #E9D9AE, #D4AF37, #B8892F) 1;
+      border-image-slice: 1;
+    }
+    .letter-space { letter-spacing: 0.18em; }
+    .letter-space-wide { letter-spacing: 0.3em; }
+    .hairline {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 169, 109, 0.5), transparent);
+    }
+    .hairline-gold {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    }
+    .text-shadow-glow {
+      text-shadow: 0 0 30px rgba(212,175,55,0.2);
+    }
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 1.5px;
+      background: linear-gradient(90deg, #D4AF37, #E9D9AE);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active::after { width: 100%; }
+    .btn-primary {
+      background: linear-gradient(135deg, #D4AF37, #B8892F);
+      color: #0F110E;
+      padding: 12px 32px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #E9D9AE, #D4AF37);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.3); }
+    .btn-outline {
+      border: 1px solid rgba(224, 169, 109, 0.4);
+      color: #F5EFE6;
+      padding: 12px 32px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: #D4AF37;
+      color: #D4AF37;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212,175,55,0.15);
+    }
+    .menu-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(224, 169, 109, 0.08);
+      background: rgba(24, 28, 23, 0.3);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(224,169,109,0.05), transparent);
+      transition: left 0.6s ease;
+    }
+    .menu-card:hover::before { left: 100%; }
+    .menu-card:hover {
+      border-color: rgba(224, 169, 109, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .cat-btn {
+      border: 1px solid rgba(224, 169, 109, 0.15);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+      color: rgba(245, 239, 230, 0.5);
+      position: relative;
+    }
+    .cat-btn:hover {
+      border-color: rgba(224, 169, 109, 0.4);
+      color: rgba(245, 239, 230, 0.8);
+    }
+    .cat-btn[data-active="true"] {
+      background: linear-gradient(135deg, rgba(224,169,109,0.15), rgba(212,175,55,0.08));
+      border-color: rgba(224, 169, 109, 0.6);
+      color: #F5EFE6;
+      box-shadow: 0 0 30px rgba(212,175,55,0.05);
+    }
+    .cat-btn[data-active="true"]::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 20%;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    }
+    .sub-btn {
+      border: 1px solid rgba(224, 169, 109, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+      color: rgba(245, 239, 230, 0.4);
+    }
+    .sub-btn:hover {
+      border-color: rgba(224, 169, 109, 0.3);
+      color: rgba(245, 239, 230, 0.7);
+    }
+    .sub-btn[data-active="true"] {
+      background: linear-gradient(135deg, #E0A96D, #D4AF37);
+      color: #0F110E;
+      border-color: #D4AF37;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.2);
+    }
+    .price-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(224, 169, 109, 0.2);
+      margin: 0 0.5rem;
+      transform: translateY(-4px);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+    .cloud-field {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cloud {
+      position: absolute;
+      left: -55%;
+      mix-blend-mode: screen;
+      animation: cloudDrift linear infinite;
+      will-change: transform;
+    }
+    @keyframes cloudDrift {
+      0% { transform: translate(0, 0) scale(1); }
+      20% { transform: translate(35vw, -12px) scale(1.02); }
+      45% { transform: translate(80vw, 8px) scale(1.04); }
+      70% { transform: translate(125vw, -6px) scale(1.01); }
+      100% { transform: translate(180vw, 0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) { .cloud { animation: none; } }
+    .parallax-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    @media (max-width: 768px) {
+      .parallax-section { background-attachment: scroll; }
+    }
+    .hero-bg {
+      background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(200, 109, 81, 0.12), transparent 60%),
+                  radial-gradient(ellipse 60% 40% at 30% 80%, rgba(74, 91, 71, 0.08), transparent 50%),
+                  linear-gradient(180deg, #0B0D0A 0%, #181C17 50%, #0F110E 100%),
+                  url('images/hero-mountain-sunset.jpg.jpeg');
+      background-position: center 30%;
+      background-blend-mode: overlay, overlay, normal, normal;
+      background-size: cover;
+    }
+    .magnetic {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #4A5B47, #E0A96D, #D4AF37, #C86D51);
+      z-index: 70;
+      transition: width 0.1s linear;
+    }
+    #cursorGlow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 40;
+      background: radial-gradient(circle, rgba(224,169,109,0.08), transparent 70%);
+      transform: translate(-50%, -50%);
+      left: -999px;
+      top: -999px;
+    }
+    .js-view-menu { cursor: pointer; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    #skySvg { display: block; width: 100%; height: auto; }
+    input[type="range"] { 
+      accent-color: #E0A96D;
+      height: 4px;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #E9D9AE, #D4AF37);
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(212,175,55,0.3);
+    }
+    .about-img {
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(224, 169, 109, 0.1);
+    }
+    .gradient-border {
+      position: relative;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.3), transparent, rgba(212,175,55,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .card-highlight {
+      animation: cardPulse 1.8s ease-out;
+      border-color: rgba(212,175,55,0.6) !important;
+      box-shadow: 0 0 40px rgba(212,175,55,0.1) !important;
+    }
+    @keyframes cardPulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.3); }
+      70% { box-shadow: 0 0 0 20px rgba(212,175,55,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+    }
+    @media (max-width: 640px) {
+      .hero-title { font-size: 3rem; }
+      .container-padding { padding-left: 1rem; padding-right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="scrollProgress"></div>
+  <div id="cursorGlow" class="hidden md:block"></div>
+
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="glass-strong">
+      <nav class="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-4" role="navigation" aria-label="Main navigation">
+        <a href="#home" class="flex items-center gap-3 group" aria-label="The Bevview Home">
+          <svg width="32" height="32" viewBox="0 0 100 100" class="text-gold transition-transform duration-300 group-hover:scale-110">
+            <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+              <line x1="50" y1="4" x2="50" y2="28" />
+              <line x1="26" y1="14" x2="38" y2="32" />
+              <line x1="74" y1="14" x2="62" y2="32" />
+              <line x1="12" y1="30" x2="30" y2="40" />
+              <line x1="88" y1="30" x2="70" y2="40" />
+              <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+              <line x1="4" y1="62" x2="96" y2="62" stroke-width="1.5" />
+              <circle cx="50" cy="50" r="46" stroke-width="1" opacity="0.3" />
+            </g>
+          </svg>
+          <span class="font-serif text-xl md:text-2xl tracking-wide gold-text">THE BEVVIEW</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-10 font-sans text-sm letter-space uppercase text-cream/80">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#gallery" class="nav-link">Gallery</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+
+        <a href="#contact" class="magnetic hidden md:inline-block btn-primary px-6 py-2.5 text-xs">
+          <span>Book a Table</span>
+        </a>
+
+        <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-gold p-2 hover:bg-gold/10 rounded transition-colors">
+          <svg id="iconBurger" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <div id="mobilePanel" class="md:hidden glass-strong max-h-0 overflow-hidden transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+      <div class="flex flex-col px-6 py-4 font-sans text-sm letter-space uppercase text-cream/90">
+        <a href="#home" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Home</a>
+        <a href="#about" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">About</a>
+        <a href="#menu" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Menu</a>
+        <a href="#gallery" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Gallery</a>
+        <a href="#contact" class="py-4 text-gold mobile-link hover:text-champagne transition-colors font-semibold">Book a Table →</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero-bg relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <div class="absolute inset-0 bg-alpine/20 z-0"></div>
+    <div class="cloud-field" data-tone="warm" data-count="6"></div>
+    <canvas id="emberCanvas" class="absolute inset-0 z-[1] pointer-events-none"></canvas>
+
+    <div class="relative z-10 max-w-4xl text-center mt-16">
+      <div class="inline-block px-6 py-2 border border-gold/20 rounded-full mb-6 reveal">
+        <p class="letter-space uppercase text-gold/80 text-xs">Baskinta · Qanat Bakish · Lebanon</p>
+      </div>
+      <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.05] gold-text mb-6 reveal">
+        A Mountain<br class="hidden sm:block"> Breeze
+      </h1>
+      <p class="text-cream/70 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light reveal">
+        High above the valley, where the pines thin and the sky turns amber — a mountain refuge 
+        for long dinners, slow sunsets, and a bar built for lingering.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+        <a href="#menu" class="magnetic btn-primary w-56 sm:w-auto text-center">
+          <span>View Menu</span>
+        </a>
+        <a href="#contact" class="magnetic btn-outline w-56 sm:w-auto text-center">
+          Reserve a Table
+        </a>
+      </div>
+      <div class="mt-12 flex items-center justify-center gap-6 text-cream/30 text-xs letter-space uppercase reveal">
+        <span>✦ Lebanese Cuisine</span>
+        <span class="w-px h-4 bg-cream/20"></span>
+        <span>✦ International</span>
+        <span class="w-px h-4 bg-cream/20"></span>
+        <span>✦ Bar & Shisha</span>
+      </div>
+    </div>
+
+    <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gold/60 hover:text-gold transition-colors animate-bounce z-10" aria-label="Scroll to About">
+      <svg width="24" height="36" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="1" y="1" width="18" height="28" rx="9"/>
+        <line x1="10" y1="7" x2="10" y2="14"/>
+        <circle cx="10" cy="20" r="1.5" fill="currentColor"/>
+      </svg>
+    </a>
+  </section>
+
+  <section id="goldenhour" class="relative overflow-hidden bg-alpine py-24 md:py-32 px-6 border-t border-b border-gold/10">
+    <div class="cloud-field" data-tone="warm" data-count="5"></div>
+    <div class="relative z-10 max-w-5xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Interactive Experience</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream mb-4">Chase the Golden Hour</h2>
+        <p class="text-cream/40 font-light max-w-xl mx-auto">Drag the sun across the Baskinta sky and watch the terrace light change, hour by hour.</p>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+      </div>
+
+      <div class="glass-glow rounded-xl p-6 md:p-10 reveal">
+        <svg id="skySvg" viewBox="0 0 600 240" class="w-full h-auto rounded-lg mb-6" style="max-height:280px;">
+          <defs>
+            <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop id="skyStopTop" offset="0%" stop-color="#8ec9e6" />
+              <stop id="skyStopBottom" offset="100%" stop-color="#f3d8a6" />
+            </linearGradient>
+            <filter id="sunGlow">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect x="0" y="0" width="600" height="240" fill="url(#skyGradient)" />
+          <path d="M0 190 L60 130 L120 170 L180 110 L240 160 L300 105 L360 150 L420 115 L480 165 L540 125 L600 175 L600 240 L0 240 Z" fill="#0F110E" opacity="0.85"/>
+          <path d="M0 210 L80 165 L140 195 L200 155 L260 185 L340 150 L400 180 L480 160 L540 190 L600 170 L600 240 L0 240 Z" fill="#181C17" opacity="0.7"/>
+          <path d="M0 220 L20 190 L25 210 L40 180 L45 205 L60 175 L65 200 L80 170 L85 195 L100 165 L105 190 L120 160 L125 185 L140 155 L145 180 L160 150 L165 175 L180 145 L185 170 L200 140 L205 165 L220 135 L225 160 L240 130 L245 155 L260 125 L265 150 L280 120 L285 145 L300 115 L305 140 L320 110 L325 135 L340 105 L345 130 L360 100 L365 125 L380 95 L385 120 L400 90 L405 115 L420 85 L425 110 L440 80 L445 105 L460 75 L465 100 L480 70 L485 95 L500 65 L505 90 L520 60 L525 85 L540 55 L545 80 L560 50 L565 75 L580 45 L585 70 L600 40 L600 240 L0 240 Z" fill="#1A1410" opacity="0.5"/>
+          <circle id="sunDot" cx="60" cy="60" r="16" fill="#D4AF37" filter="url(#sunGlow)"/>
+        </svg>
+        <input id="timeSlider" type="range" min="960" max="1290" step="5" value="1080" class="w-full" />
+        <div class="flex justify-between text-[10px] letter-space uppercase text-cream/30 mt-2">
+          <span>4:00 PM</span>
+          <span>5:00</span>
+          <span>6:00</span>
+          <span>7:00</span>
+          <span>8:00</span>
+          <span>9:30 PM</span>
+        </div>
+        <p id="timeCaption" class="font-serif text-2xl text-gold mt-6 text-center">6:00 PM — Golden hour begins</p>
+        <div class="flex items-center justify-center gap-3 mt-4 text-xs text-cream/30">
+          <span class="w-2 h-2 rounded-full bg-gold inline-block"></span>
+          <span>Drag the sun to experience the shift</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="relative overflow-hidden bg-slatepine py-24 md:py-32 px-6">
+    <div class="cloud-field" data-tone="cool" data-count="6"></div>
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3">The Vibe</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream">Altitude changes everything</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">Perched 1,800 meters above sea level, where the air is crisp and the views stretch forever.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="reveal-left">
+          <div class="about-img rounded-xl h-80 md:h-[28rem] shadow-2xl" style="background-image:url('images/about-terrace-sunset.jpg.jpeg');"></div>
+        </div>
+        <div class="reveal-right">
+          <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4">The Experience</span>
+          <h3 class="font-serif text-3xl text-gold mb-5">Panoramic sunsets, unhurried evenings</h3>
+          <p class="text-cream/70 leading-relaxed mb-5 font-light">
+            The golden hour is treated like a scheduled event here — low lighting, 
+            warm textiles, and a menu built to move slowly from mezza to embers to 
+            dessert. Nothing about the evening feels rushed.
+          </p>
+          <p class="text-cream/70 leading-relaxed font-light">
+            Whether it's a family Sunday lunch on the Lebanese formula or a late-night 
+            shisha session with the full bar list, the mountain sets the pace.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Fire Pit Evenings</span>
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Live Music</span>
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Stargazing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative bg-chestnut py-16 border-y border-gold/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="reveal-scale">
+          <span class="block font-serif text-4xl text-gold counter" data-target="1800">0</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Meters Altitude</span>
+        </div>
+        <div class="reveal-scale" style="transition-delay: 0.1s;">
+          <span class="block font-serif text-4xl text-gold counter" data-target="360">0</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Degree Views</span>
+        </div>
+        <div class="reveal-scale" style="transition-delay: 0.2s;">
+          <span class="block font-serif text-4xl text-gold counter" data-target="75">0</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Menu Items</span>
+        </div>
+        <div class="reveal-scale" style="transition-delay: 0.3s;">
+          <span class="block font-serif text-4xl text-gold counter" data-target="14">0</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Years of Excellence</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="relative overflow-hidden bg-chestnut py-24 md:py-32 px-4 md:px-6">
+    <div class="cloud-field" data-tone="cool" data-count="6"></div>
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Taste the Mountain</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream">The Menu</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">Lebanese tradition meets international flair — every dish crafted with mountain-fresh ingredients.</p>
+      </div>
+
+      <div id="mainTabs" class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 mb-10 reveal">
+     <button data-cat="food" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Food Menu
+        </button>
+        <button data-cat="formula" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Lebanese Formula
+        </button>
+        <button data-cat="bar" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Bar &amp; Drinks
+        </button>
+        <button data-cat="cafe" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Cafe &amp; Shisha
+        </button>
+      </div>
+
+      <div id="catBanner" class="mb-10"></div>
+      <div id="subTabsWrap" class="mb-10"></div>
+      <div id="menuPanels"></div>
+    </div>
+  </section>
+
+  <section id="gallery" class="relative overflow-hidden bg-chestnut py-24 md:py-32 px-6">
+    <div class="cloud-field" data-tone="warm" data-count="4"></div>
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Visual Journey</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream">The Ambience</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">A glimpse into the mountain retreat — where every corner tells a story.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="reveal-scale rounded-xl overflow-hidden h-64 md:h-80 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="background-image:url('images/about-terrace-sunset.jpg.jpeg');"></div>
+        <div class="reveal-scale rounded-xl overflow-hidden h-64 md:h-80 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.1s; background-image:url('images/gallery-mezza-platter.jpg.jpeg');"></div>
+        <div class="reveal-scale rounded-xl overflow-hidden h-64 md:h-80 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.2s; background-image:url('images/gallery-burger.jpg.jpeg');"></div>
+        <div class="reveal-scale rounded-xl overflow-hidden h-64 md:h-80 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.3s; background-image:url('images/gallery-cocktail-bar.jpg.jpeg');"></div>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mt-4">
+        <div class="reveal-scale rounded-xl overflow-hidden h-48 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.4s; background-image:url('images/about-valley-view.jpg.jpeg');"></div>
+        <div class="reveal-scale rounded-xl overflow-hidden h-48 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.5s; background-image:url('images/gallery-shisha-lounge.jpg.jpeg');"></div>
+        <div class="reveal-scale rounded-xl overflow-hidden h-48 bg-cover bg-center hover:scale-105 transition-transform duration-500" style="transition-delay: 0.6s; background-image:url('images/gallery-dessert.jpg.jpeg');"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-slatepine py-24 px-6 border-y border-gold/10">
+    <div class="cloud-field" data-tone="cool" data-count="4"></div>
+    <div class="relative z-10 max-w-6xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Guest Stories</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream">What Our Guests Say</h2>
+        <div class="hairline w-24 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+        <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center">
+          <div class="text-gold text-2xl mb-2">“</div>
+          <p class="text-cream/70 leading-snug text-xs">The sunset from the terrace is breathtaking. The food, service, ambiance — everything was perfect.</p>
+          <div class="mt-3">
+            <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Sarah K., Beirut</p>
+          </div>
+        </div>
+
+        <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.1s;">
+          <div class="text-gold text-2xl mb-2">“</div>
+          <p class="text-cream/70 leading-snug text-xs">Our go-to for special occasions. The mix grill is incredible, and the shisha lounge caps the night.</p>
+          <div class="mt-3">
+            <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Tony M., Jounieh</p>
+          </div>
+        </div>
+
+        <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.2s;">
+          <div class="text-gold text-2xl mb-2">“</div>
+          <p class="text-cream/70 leading-snug text-xs">Unforgettable. Staff made us feel like family, views were spectacular, food outstanding.</p>
+          <div class="mt-3">
+            <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Nadia R., Paris</p>
+          </div>
+        </div>
+
+        <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.3s;">
+          <div class="text-gold text-2xl mb-2">“</div>
+          <p class="text-cream/70 leading-snug text-xs">The drive up is worth it every time. Cozy fire pit, great cocktails, stunning valley view.</p>
+          <div class="mt-3">
+            <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Karim D., Zahle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="relative overflow-hidden py-24 md:py-32 px-6 hero-bg">
+    <div class="absolute inset-0 bg-alpine/70"></div>
+    <div class="cloud-field" data-tone="warm" data-count="5"></div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center reveal">
+      <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4">Reserve Your Evening</span>
+      <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Secure Your Table</h2>
+      <p class="text-cream/70 mb-8 font-light">
+        Tables are limited at sunset. Call ahead or send a message and our host will 
+        confirm your spot on the mountain.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="tel:+96103623976" class="magnetic btn-primary w-56 sm:w-auto text-center">
+          <span>Call +961 03 623 976</span>
+        </a>
+        <a href="tel:+96176348489" class="magnetic btn-primary w-56 sm:w-auto text-center">
+          <span>Call +961 76 348 489</span>
+        </a>
+      </div>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-cream/40 text-sm">
+        <span>✉️ thebevview@gmail.com</span>
+        <span class="hidden sm:inline">|</span>
+        <span>📍 Qanat Bakish, Baskinta</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="relative overflow-hidden bg-black/95 border-t border-gold/10 pt-16 pb-8 px-6">
+    <div class="cloud-field" data-tone="cool" data-count="5"></div>
+    <div class="relative z-10">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <svg width="24" height="24" viewBox="0 0 100 100" class="text-gold">
+              <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round">
+                <line x1="50" y1="4" x2="50" y2="28" />
+                <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+                <circle cx="50" cy="50" r="44" stroke-width="1" opacity="0.3" />
+              </g>
+            </svg>
+            <span class="font-serif text-xl gold-text">THE BEVVIEW</span>
+          </div>
+          <p class="text-cream/40 text-sm font-light leading-relaxed">
+            A Mountain Breeze — Lebanese and international dining, curated bar and 
+            shisha lounge above Baskinta, Lebanon.
+          </p>
+          <div class="flex gap-4 mt-4 text-cream/30">
+            <a href="https://instagram.com/the.bevview" target="_blank" rel="noopener" class="hover:text-gold transition-colors" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/thebevview/" target="_blank" rel="noopener" class="hover:text-gold transition-colors" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/96176348489" target="_blank" rel="noopener" class="hover:text-gold transition-colors" aria-label="WhatsApp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 11.5 12 12l1-9"/></svg>
+            </a>
+            <a href="#" class="hover:text-gold transition-colors" aria-label="TripAdvisor">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/><path d="M8 14c1 2 3 3 4 3s3-1 4-3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#home" class="text-cream/40 hover:text-gold transition-colors">Home</a></li>
+            <li><a href="#about" class="text-cream/40 hover:text-gold transition-colors">About Us</a></li>
+            <li><a href="#menu" class="text-cream/40 hover:text-gold transition-colors">Menu</a></li>
+            <li><a href="#gallery" class="text-cream/40 hover:text-gold transition-colors">Gallery</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Location</h4>
+          <p class="text-cream/40 text-sm font-light leading-relaxed">
+            Qanat Bakish Road<br>
+            Baskinta, Metn District<br>
+            Lebanon
+          </p>
+          <p class="text-cream/40 text-sm font-light mt-2">
+            📍 <a href="https://maps.google.com" target="_blank" class="hover:text-gold transition-colors">View on Maps</a>
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4">Hours</h4>
+          <ul class="text-cream/40 text-sm font-light space-y-1">
+            <li>Monday – Sunday</li>
+            <li class="text-cream/60 font-medium">11:00 AM – 1:00 AM</li>
+            <li class="mt-2 text-xs text-cream/30">Kitchen closes at 11:30 PM</li>
+            <li class="text-xs text-cream/30">Bar open until 1:00 AM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hairline max-w-7xl mx-auto mb-6"></div>
+
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-cream/30 text-xs font-light">
+        <p>© 2026 The Bevview. All rights reserved.</p>
+        <p>Website by <a href="https://wa.me/96178914570" target="_blank" rel="noopener" class="text-gold/50 hover:text-gold transition-colors">Hamdancs.online</a></p>
+        <p class="flex gap-4">
+          <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gold transition-colors">Terms of Service</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const FORMULA_DATA = {
+      price: "$40",
+      unit: "per person",
+      intro: "Not à la carte — this is a full shared-table experience for the whole group, one price per person, everything included.",
+      includes: [
+        { title: "Salads", items: ["Fattouch", "Tabbouleh", "Rocca Beetroot"] },
+        { title: "Cold Mezza", items: ["Hommos", "Mtabal", "Labne Mtawame", "Wara2 3enab", "Labnet Me3ze", "Jebne Baladiye"] },
+        { title: "Hot Mezza", items: ["Soujouk", "Makanek", "Batata 7arra", "Fries", "Shrimps Provencial"] },
+        { title: "Mix Mou3ajanet", items: ["Rakakt Jebne", "Sambousik", "Kebeh Kras"] },
+        { title: "Mix Grill", items: ["Tawouk", "Lahmeh", "Kafta"] },
+        { title: "Dessert", items: ["Mix Fruits", "Ariche w 3asal"] }
+      ],
+      addon: {
+        title: "Add-On: Open Bar Packages",
+        note: "Per person",
+        items: [
+          { name: "Open Arak", price: "$30" },
+          { name: "Open Regular Bar", price: "$35" },
+          { name: "Open Premium Bar", price: "$40" }
+        ]
+      }
+    };
+
+    const MENU_DATA = {
+      food: {
+        label: "Food Menu",
+        groups: [
+          { title: "Salads", icon: "leaf", items: [
+            { name: "Fattouch", price: "$12" }, { name: "Tabbouleh", price: "$12" },
+            { name: "Rocca Beetroot", price: "$12" }, { name: "Halloumi Salad", price: "$13" },
+            { name: "Chicken Caesar Salad", price: "$16" }, { name: "Bevview Salad", price: "$17" }
+          ]},
+          { title: "Appetizers", icon: "plate", items: [
+            { name: "Nuts", price: "$4" }, { name: "Edamame", price: "$8" },
+            { name: "Nachos", price: "$12" }, { name: "S. BBQ Potato", price: "$11" },
+            { name: "Bevview Fries", price: "$8" }, { name: "Mozarella Sticks", price: "$10" },
+            { name: "Chicken Strips", price: "$12" }, { name: "Smoked Wings", price: "$12" },
+            { name: "Grilled Halloum", price: "$11" }
+          ]},
+          { title: "Platters", icon: "flame", items: [
+            { name: "Taouk Platter", price: "$17" }, { name: "Smoked Ribs", price: "$24" },
+            { name: "Grilled Chicken", price: "$21" }, { name: "Mushroom Steak", price: "$24" },
+            { name: "Brisket", price: "$24" }, { name: "Confit de Canard", price: "$25" },
+            { name: "Magret de Canard", price: "$25" }, { name: "Steak", price: "$24" },
+            { name: "Grilled Smoked Salmon", price: "$32" }
+          ]},
+          { title: "Burgers", icon: "flame", note: "Served with french fries", items: [
+            { name: "Classic Burger", price: "$11" }, { name: "Chicken Burger", price: "$11" },
+            { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" }
+          ]},
+          { title: "Sandwiches", icon: "flame", note: "Served with french fries", items: [
+            { name: "Philadelphia", price: "$18" }, { name: "BBQ Beef", price: "$17" },
+            { name: "Chicken Sub", price: "$16" }, { name: "Chicken Mexican", price: "$16" },
+            { name: "Boneless Chicken", price: "$16" }, { name: "Fajita", price: "$17" }
+          ]},
+          { title: "Pizza", icon: "dough", items: [
+            { name: "Margarita", price: "$14" }, { name: "Pepperoni", price: "$18" },
+            { name: "Vegetarian", price: "$16" }, { name: "Add Chicken", price: "$4", muted: true },
+            { name: "Jarret Lahem bel Fakharah", price: "$28" }, { name: "Jarret Djej be Fakharah", price: "$23" }
+          ]},
+          { title: "Saj", icon: "dough", items: [
+            { name: "Zaatar", price: "$4" }, { name: "Cheese", price: "$6" },
+            { name: "Keshek", price: "$5" }, { name: "Add Ham or Turkey", price: "$2", muted: true }
+          ]},
+          { title: "Pasta", icon: "dough", items: [
+            { name: "Pesto Penne", price: "$12" }, { name: "Fettuccine Chicken", price: "$18" },
+            { name: "Spaghetti Bolognese", price: "$16" }
+          ]},
+          { title: "Desserts", icon: "star", items: [
+            { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" },
+            { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" }
+          ]}
+        ]
+      },
+      bar: {
+        label: "Bar & Drinks",
+        groups: [
+          { title: "Wine", icon: "glass", sub: "Glass / Bottle", items: [
+            { name: "Reserve (Ksara)", price: "$8 / $40" }, { name: "Breteche (Kefraya)", price: "$8 / $40" },
+            { name: "Chateau Ksara", price: "$8 / $40" }, { name: "Chateau Kefraya", price: "$8 / $40" },
+            { name: "Blanc (Ksara)", price: "$8 / $40" }, { name: "Blanc (Kefraya)", price: "$8 / $40" },
+            { name: "Sunset (Ksara)", price: "$8 / $40" }, { name: "Imported Wine", price: "$30" },
+            { name: "Imported Wine Rose", price: "$30" }
+          ]},
+          { title: "Vodka", icon: "glass", sub: "Shot / Bottle", items: [
+            { name: "Absolut", price: "$10 / $70" }, { name: "Smirnoff Red", price: "$10 / $80" },
+            { name: "Stolichnaya", price: "$10 / $80" }, { name: "Belvedere", price: "$20 / $170" },
+            { name: "Grey Goose", price: "$20 / $150" }
+          ]},
+          { title: "Whisky", icon: "glass", sub: "Shot / Bottle", items: [
+            { name: "Red Label", price: "$8 / $70" }, { name: "Dewars", price: "$8 / $70" },
+            { name: "J&B", price: "$8 / $70" }, { name: "Black Label", price: "$11 / $120" },
+            { name: "Chivas 12", price: "$12 / $120" }, { name: "Golden Reserve", price: "$20 / $220" }
+          ]},
+          { title: "Martini", icon: "glass", items: [
+            { name: "Bianco", price: "$12" }, { name: "Rosso", price: "$12" }, { name: "Rosatto", price: "$12" }
+          ]},
+          { title: "Cognac", icon: "glass", items: [{ name: "Hennessy", price: "$240" }] },
+          { title: "Gin", icon: "glass", sub: "Shot / Bottle", items: [
+            { name: "Gordon's", price: "$8 / $70" }, { name: "Bombay", price: "$10 / $100" },
+            { name: "Hendricks", price: "$15 / $120" }
+          ]},
+          { title: "Champagne & Others", icon: "glass", items: [
+            { name: "Moet & Chandon", price: "$280" }, { name: "Vin Mousseux", price: "$40" },
+            { name: "Prosecco", price: "$60" }, { name: "Arak Bottle", price: "$35" }
+          ]},
+          { title: "Alcoholic Cocktails", icon: "glass", items: [
+            { name: "Pina Colada", price: "$11" }, { name: "Strawberry Colada", price: "$11" },
+            { name: "Blue Hawaii", price: "$11" }, { name: "Gin Basil", price: "$11" },
+            { name: "Bevview Signature", price: "$11" }, { name: "Long Island", price: "$11" },
+            { name: "Margarita", price: "$11" }, { name: "Blue Lagoon", price: "$11" },
+            { name: "Take Me Home", price: "$11" }, { name: "Mojito", price: "$11" },
+            { name: "Jamaica", price: "$11" }, { name: "Perfect Sunset", price: "$12" }
+          ]},
+          { title: "Non-Alcoholic & Beers", icon: "drop", items: [
+            { name: "Jamaica (Non-Alcoholic)", price: "$10" }, { name: "Mojito (Non-Alcoholic)", price: "$10" },
+            { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" },
+            { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
+            { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" }
+          ]}
+        ]
+      },
+      cafe: {
+        label: "Cafe & Shisha",
+        groups: [
+          { title: "Hot Drinks", icon: "cup", items: [
+            { name: "Lipton Tea", price: "$2" }, { name: "Tea Box", price: "$3.5" },
+            { name: "Nescafe", price: "$4" }, { name: "Cappuccino", price: "$5.5" },
+            { name: "Espresso", price: "$4" }, { name: "Hot Chocolate", price: "$4.5" },
+            { name: "Turkish Coffee", price: "$3" }
+          ]},
+          { title: "Cold Drinks", icon: "drop", items: [
+            { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" },
+            { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
+            { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" }
+          ]},
+          { title: "Milkshakes", icon: "cup", items: [
+            { name: "Chocolate", price: "$8" }, { name: "Strawberry", price: "$8" },
+            { name: "Vanilla", price: "$8" }, { name: "Oreo", price: "$8" },
+            { name: "The Bevview Shake", price: "$9" }
+          ]},
+          { title: "Desserts", icon: "star", items: [
+            { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" },
+            { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" }
+          ]},
+          { title: "Hookah / Shisha", icon: "smoke", items: [
+            { name: "Regular", price: "$12" }, { name: "Deluxe", price: "$18" },
+            { name: "Super Deluxe", price: "$24" }, { name: "New Shisha Head", price: "$6" }
+          ]}
+        ]
+      }
+    };
+
+    const CATEGORY_BANNERS = {
+      formula: { type: "single", images: ["images/gallery-mezza-platter.jpg.jpeg"], caption: "One price, the whole table, everything included" },
+      food:    { type: "split", images: ["images/gallery-salad-plate.jpg.jpeg", "images/gallery-burger.jpg.jpeg"], caption: "From garden to grill" },
+      bar:     { type: "single", images: ["images/gallery-cocktail-bar.jpg.jpeg"], caption: "Curated pours, mountain-side" },
+      cafe:    { type: "split", images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"], caption: "Sweet endings, slow smoke" }
+    };
+
+    const ICON_SVGS = {
+      leaf: '<path d="M4 20c0-9 6-15 16-16-1 10-7 16-16 16Z"/><path d="M6 18C10 13 13 10 19 5"/>',
+      plate: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.2"/>',
+      flame: '<path d="M12 3c1 3-3 4-3 8a3 3 0 0 0 6 0c0-1.5-1-2-1-3.5 2 1 3 3.5 3 5.5a5 5 0 0 1-10 0c0-4 3-6 5-10Z"/>',
+      dough: '<circle cx="12" cy="12" r="8.5"/><path d="M7.5 9.5c1 1 2 1 2.5 0M14 9.5c1 1 2 1 2.5 0M8 14.5c1.5 1.5 6.5 1.5 8 0"/>',
+      star: '<path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l4 4M14 14l4 4M18 6l-4 4M10 14l-4 4"/>',
+      glass: '<path d="M6 4h12l-5 8v6h3M13 18H8M8.5 12 6 4"/>',
+      drop: '<path d="M12 3c4 5 6.5 8.5 6.5 12A6.5 6.5 0 0 1 5.5 15C5.5 11.5 8 8 12 3Z"/>',
+      cup: '<path d="M5 6h11v7a5.5 5.5 0 0 1-11 0Z"/><path d="M16 8h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3.5v2M12 3.5v2"/>',
+      smoke: '<path d="M7 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/><path d="M12 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/><path d="M17 20c2-2 2-3.5 0-5.5s-2-3.5 0-5.5"/>'
+    };
+
+    function iconSvg(key) {
+      const p = ICON_SVGS[key] || ICON_SVGS.plate;
+      return `<svg class="group-icon w-7 h-7 flex-shrink-0 text-gold opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+    }
+
+    const catBanner = document.getElementById('catBanner');
+    const subTabsWrap = document.getElementById('subTabsWrap');
+    const menuPanels = document.getElementById('menuPanels');
+    const mainTabs = document.querySelectorAll('#mainTabs .cat-btn');
+
+    function renderBanner(catKey) {
+      const b = CATEGORY_BANNERS[catKey];
+      if (b.type === "single") {
+        catBanner.innerHTML = `
+          <div class="relative rounded-xl overflow-hidden h-64 md:h-72 border border-gold/10">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('${b.images[0]}');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-chestnut via-chestnut/40 to-transparent"></div>
+            <div class="absolute bottom-6 left-8">
+              <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-chestnut/80 px-3 py-1 rounded mb-2">Featured</span>
+              <p class="text-cream/70 text-sm md:text-base letter-space uppercase font-light">${b.caption}</p>
+            </div>
+          </div>
+        `;
+      } else {
+        catBanner.innerHTML = `
+          <div class="grid grid-cols-2 gap-4">
+            <div class="relative rounded-xl overflow-hidden h-48 md:h-64 border border-gold/10">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('${b.images[0]}');"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-chestnut/70 to-transparent"></div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden h-48 md:h-64 border border-gold/10">
+              <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('${b.images[1]}');"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-chestnut/70 to-transparent"></div>
+            </div>
+          </div>
+          <p class="text-center text-cream/40 text-xs md:text-sm letter-space uppercase font-light mt-4">${b.caption}</p>
+        `;
+      }
+    }
+
+    function renderCategory(catKey) {
+      renderBanner(catKey);
+
+      if (catKey === 'formula') {
+        subTabsWrap.innerHTML = '';
+        const f = FORMULA_DATA;
+        menuPanels.innerHTML = `
+          <div class="menu-card rounded-xl p-6 md:p-10 reveal visible">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-4">
+              <h3 class="font-serif text-3xl text-gold">Lebanese Formula</h3>
+              <div class="text-right">
+                <span class="font-serif text-3xl text-gold">${f.price}</span>
+                <span class="text-xs text-cream/40 uppercase letter-space ml-1">${f.unit}</span>
+              </div>
+            </div>
+            <p class="text-cream/60 text-sm italic mb-6">${f.intro}</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              ${f.includes.map(sec => `
+                <div>
+                  <h4 class="text-gold/80 text-sm letter-space uppercase mb-2">${sec.title}</h4>
+                  <p class="text-cream/70 text-sm leading-relaxed">${sec.items.join(' · ')}</p>
+                </div>
+              `).join('')}
+            </div>
+            <div class="hairline mb-6"></div>
+            <h4 class="font-serif text-xl text-gold mb-1">${f.addon.title}</h4>
+            <p class="text-[10px] text-cream/30 uppercase letter-space mb-3">${f.addon.note}</p>
+            <ul class="space-y-2">
+              ${f.addon.items.map(it => `
+                <li class="flex items-baseline text-sm text-cream/80">
+                  <span>${it.name}</span>
+                  <span class="price-dots"></span>
+                  <span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+        return;
+      }
+
+      const cat = MENU_DATA[catKey];
+
+      subTabsWrap.innerHTML = `
+        <div class="flex flex-wrap justify-center gap-2 reveal visible">
+          <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">All</button>
+          ${cat.groups.map(g => `<button data-sub="${g.title}" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">${g.title}</button>`).join('')}
+        </div>
+      `;
+
+      menuPanels.innerHTML = `
+        <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
+          ${cat.groups.map(g => `
+            <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title}">
+              <div class="flex items-start gap-4 mb-2">
+                ${iconSvg(g.icon)}
+                <div class="flex-1">
+                  <div class="flex items-baseline justify-between">
+                    <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
+                    ${g.sub ? `<span class="text-[10px] uppercase letter-space text-cream/30">${g.sub}</span>` : ''}
+                  </div>
+                  ${g.note ? `<p class="text-xs text-cream/30 italic mt-1">${g.note}</p>` : ''}
+                </div>
+              </div>
+              <ul class="space-y-2 mt-4">
+                ${g.items.map(it => `
+                  <li class="flex items-baseline text-sm ${it.muted ? 'text-cream/40 italic' : 'text-cream/80'}">
+                    <span>${it.name}</span>
+                    ${it.price ? `<span class="price-dots"></span><span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>` : ''}
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      const subBtns = subTabsWrap.querySelectorAll('.sub-btn');
+      subBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          subBtns.forEach(b => { b.dataset.active = 'false'; b.classList.remove('bg-gold','text-alpine','border-gold'); });
+          btn.dataset.active = 'true';
+          btn.classList.add('bg-gold','text-alpine','border-gold');
+          const target = btn.dataset.sub;
+          document.querySelectorAll('.group-block').forEach(block => {
+            block.style.display = (target === 'all' || block.dataset.group === target) ? '' : 'none';
+          });
+        });
+      });
+      subTabsWrap.querySelector('.sub-btn[data-sub="all"]').classList.add('bg-gold','text-alpine','border-gold');
+
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.menu-card').forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const rx = (e.clientX - rect.left) / rect.width - 0.5;
+            const ry = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(800px) rotateY(${rx*8}deg) rotateX(${-ry*8}deg) translateY(-6px)`;
+          });
+          card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        });
+      }
+    }
+
+    mainTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mainTabs.forEach(b => b.dataset.active = 'false');
+        btn.dataset.active = 'true';
+        renderCategory(btn.dataset.cat);
+      });
+    });
+    renderCategory('food');
+
+    const CLOUD_TEMPLATE = [
+      { x: 16, y: 62, rx: 24, ry: 28, light: 0.5 },
+      { x: 32, y: 40, rx: 32, ry: 36, light: 0.8 },
+      { x: 52, y: 24, rx: 38, ry: 40, light: 1.0 },
+      { x: 71, y: 34, rx: 32, ry: 34, light: 0.82 },
+      { x: 86, y: 58, rx: 24, ry: 26, light: 0.45 },
+      { x: 50, y: 70, rx: 64, ry: 32, light: 0.32 }
+    ];
+    const CLOUD_TONES = { warm: '255,238,210', cool: '206,215,221' };
+    const CLOUD_DEPTHS = {
+      far: { scaleMin: 0.5, scaleMax: 0.78, opMin: 0.16, opMax: 0.26, durMin: 105, durMax: 175, blur: 15, topMin: 2, topMax: 28 },
+      mid: { scaleMin: 0.8, scaleMax: 1.15, opMin: 0.26, opMax: 0.36, durMin: 68, durMax: 108, blur: 10, topMin: 14, topMax: 48 },
+      near: { scaleMin: 1.15, scaleMax: 1.65, opMin: 0.34, opMax: 0.46, durMin: 40, durMax: 66, blur: 6, topMin: 28, topMax: 72 }
+    };
+    const DEPTH_KEYS = ['far', 'mid', 'near'];
+
+    document.querySelectorAll('.cloud-field').forEach(field => {
+      const tone = CLOUD_TONES[field.dataset.tone] || CLOUD_TONES.cool;
+      const count = parseInt(field.dataset.count || '4', 10);
+      for (let i = 0; i < count; i++) {
+        const d = CLOUD_DEPTHS[DEPTH_KEYS[Math.floor(Math.random() * 3)]];
+        const scale = d.scaleMin + Math.random() * (d.scaleMax - d.scaleMin);
+        const w = 620 * scale, h = w * 0.42;
+        const top = d.topMin + Math.random() * (d.topMax - d.topMin);
+        const op = d.opMin + Math.random() * (d.opMax - d.opMin);
+        const dur = d.durMin + Math.random() * (d.durMax - d.durMin);
+        const delay = -Math.random() * dur;
+        const cloud = document.createElement('div');
+        cloud.className = 'cloud';
+        Object.assign(cloud.style, {
+          width: w + 'px', height: h + 'px', top: top + '%', opacity: op,
+          filter: `blur(${d.blur}px)`,
+          background: CLOUD_TEMPLATE.map(p =>
+            `radial-gradient(ellipse ${p.rx}% ${p.ry}% at ${p.x}% ${p.y}%, rgba(${tone},${(0.95 * p.light).toFixed(3)}), transparent 70%)`
+          ).join(','),
+          animationDuration: dur + 's',
+          animationDelay: delay + 's'
+        });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) cloud.style.animation = 'none';
+        field.appendChild(cloud);
+      }
+    });
+
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      scrollProgress.style.width = pct + '%';
+    });
+
+    const glow = document.getElementById('cursorGlow');
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && glow) {
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      (function anim() {
+        cx += (mx - cx) * 0.12;
+        cy += (my - cy) * 0.12;
+        glow.style.left = cx + 'px';
+        glow.style.top = cy + 'px';
+        requestAnimationFrame(anim);
+      })();
+    } else if (glow) glow.style.display = 'none';
+
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const r = btn.getBoundingClientRect();
+          btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.2}px, ${(e.clientY - r.top - r.height/2) * 0.3}px)`;
+        });
+        btn.addEventListener('mouseleave', () => btn.style.transform = '');
+      });
+    }
+
+    const emberCanvas = document.getElementById('emberCanvas');
+    if (emberCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const ctx = emberCanvas.getContext('2d');
+      let particles = [];
+      function resize() { emberCanvas.width = emberCanvas.offsetWidth; emberCanvas.height = emberCanvas.offsetHeight; }
+      function spawn() { return { x: Math.random() * emberCanvas.width, y: emberCanvas.height + 10, r: Math.random() * 2.5 + 1, speed: Math.random() * 0.6 + 0.2, drift: (Math.random() - 0.5) * 0.4, alpha: Math.random() * 0.4 + 0.2 }; }
+      function init() { particles = Array.from({ length: 45 }, () => { const p = spawn(); p.y = Math.random() * emberCanvas.height; return p; }); }
+      function anim() {
+        ctx.clearRect(0, 0, emberCanvas.width, emberCanvas.height);
+        particles.forEach(p => {
+          p.y -= p.speed;
+          p.x += p.drift;
+          if (p.y < -10) Object.assign(p, spawn());
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212,175,55,${p.alpha})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(anim);
+      }
+      resize(); init(); anim();
+      window.addEventListener('resize', resize);
+    }
+
+    const slider = document.getElementById('timeSlider');
+    const sun = document.getElementById('sunDot');
+    const topStop = document.getElementById('skyStopTop');
+    const botStop = document.getElementById('skyStopBottom');
+    const caption = document.getElementById('timeCaption');
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function lerpColor(c1, c2, t) {
+      const p1 = c1.match(/\w\w/g).map(h => parseInt(h, 16));
+      const p2 = c2.match(/\w\w/g).map(h => parseInt(h, 16));
+      return '#' + [0, 1, 2].map(i => Math.round(lerp(p1[i], p2[i], t)).toString(16).padStart(2, '0')).join('');
+    }
+    const SKY_STOPS = [
+      { t: 0, top: '#8ec9e6', bottom: '#f3d8a6' },
+      { t: 0.45, top: '#e7a856', bottom: '#f6c68a' },
+      { t: 0.7, top: '#c9683f', bottom: '#8b4b3e' },
+      { t: 1, top: '#241c33', bottom: '#4a2e3d' }
+    ];
+    function skyAt(t) {
+      for (let i = 0; i < SKY_STOPS.length - 1; i++) {
+        const a = SKY_STOPS[i], b = SKY_STOPS[i + 1];
+        if (t >= a.t && t <= b.t) {
+          const f = (t - a.t) / (b.t - a.t);
+          return { top: lerpColor(a.top, b.top, f), bottom: lerpColor(a.bottom, b.bottom, f) };
+        }
+      }
+      return { top: SKY_STOPS[SKY_STOPS.length - 1].top, bottom: SKY_STOPS[SKY_STOPS.length - 1].bottom };
+    }
+
+    function updateSky() {
+      const val = parseInt(slider.value, 10);
+      const min = parseInt(slider.min, 10), max = parseInt(slider.max, 10);
+      const t = (val - min) / (max - min);
+      const x = lerp(50, 550, t);
+      const y = 50 + Math.pow(t, 1.4) * 130;
+      sun.setAttribute('cx', x);
+      sun.setAttribute('cy', y);
+      sun.setAttribute('r', t > 0.75 ? 12 : 16);
+      sun.setAttribute('fill', t > 0.6 ? '#C86D51' : '#D4AF37');
+      const colors = skyAt(t);
+      topStop.setAttribute('stop-color', colors.top);
+      botStop.setAttribute('stop-color', colors.bottom);
+      const hours = Math.floor(val / 60);
+      const minutes = val % 60;
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const dh = hours > 12 ? hours - 12 : hours;
+      const ts = `${dh}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+      let cap = t < 0.25 ? 'Daylight over the valley' :
+                t < 0.45 ? 'Golden hour begins' :
+                t < 0.65 ? 'Peak amber light — best photos' :
+                t < 0.85 ? 'Sun dips behind Sannine' :
+                'Fire pit glow, mountain hush';
+      caption.textContent = `${ts} — ${cap}`;
+    }
+    slider.addEventListener('input', updateSky);
+    updateSky();
+
+    const toggle = document.getElementById('menuToggle');
+    const panel = document.getElementById('mobilePanel');
+    let mobileOpen = false;
+    toggle.addEventListener('click', () => {
+      mobileOpen = !mobileOpen;
+      toggle.setAttribute('aria-expanded', String(mobileOpen));
+      panel.style.maxHeight = mobileOpen ? panel.scrollHeight + 'px' : '0px';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileOpen = false;
+        panel.style.maxHeight = '0px';
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('shadow-lg', window.scrollY > 40);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          let current = 0;
+          const increment = target / 60;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.round(current);
+            }
+          }, 25);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+  </script>
+</body>
+</html>
