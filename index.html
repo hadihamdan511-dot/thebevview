@@ -610,11 +610,11 @@
       </div>
 
       <div id="mainTabs" class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 mb-10 reveal">
-        <button data-cat="formula" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
-          Lebanese Formula
-        </button>
-        <button data-cat="food" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+     <button data-cat="food" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
           Food Menu
+        </button>
+        <button data-cat="formula" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Lebanese Formula
         </button>
         <button data-cat="bar" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
           Bar &amp; Drinks
@@ -1134,7 +1134,7 @@
         renderCategory(btn.dataset.cat);
       });
     });
-    renderCategory('formula');
+    renderCategory('food');
 
     const CLOUD_TEMPLATE = [
       { x: 16, y: 62, rx: 24, ry: 28, light: 0.5 },
