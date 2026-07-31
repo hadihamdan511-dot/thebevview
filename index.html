@@ -622,6 +622,9 @@
        <button data-cat="cafe" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
           Café, Shisha &amp; Dessert
         </button>
+        <button data-cat="bangalos" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+          Bangalos
+        </button>
       </div>
 
       <div id="catBanner" class="mb-10"></div>
@@ -665,7 +668,7 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center">
-          <div class="text-gold text-2xl mb-2">“</div>
+          <div class="text-gold text-2xl mb-2">"</div>
           <p class="text-cream/70 leading-snug text-xs">The sunset from the terrace is breathtaking. The food, service, ambiance — everything was perfect.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
@@ -674,7 +677,7 @@
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.1s;">
-          <div class="text-gold text-2xl mb-2">“</div>
+          <div class="text-gold text-2xl mb-2">"</div>
           <p class="text-cream/70 leading-snug text-xs">Our go-to for special occasions. The mix grill is incredible, and the shisha lounge caps the night.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
@@ -683,7 +686,7 @@
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.2s;">
-          <div class="text-gold text-2xl mb-2">“</div>
+          <div class="text-gold text-2xl mb-2">"</div>
           <p class="text-cream/70 leading-snug text-xs">Unforgettable. Staff made us feel like family, views were spectacular, food outstanding.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
@@ -692,7 +695,7 @@
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.3s;">
-          <div class="text-gold text-2xl mb-2">“</div>
+          <div class="text-gold text-2xl mb-2">"</div>
           <p class="text-cream/70 leading-snug text-xs">The drive up is worth it every time. Cozy fire pit, great cocktails, stunning valley view.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
@@ -812,9 +815,13 @@
 
   <script>
     const FORMULA_DATA = {
-      price: "$40",
       unit: "per person",
-      intro: "Not à la carte — this is a full shared-table experience for the whole group, one price per person, everything included.",
+      intro: "Not à la carte — this is a full shared-table experience for the whole group, everything included. Price per person depends on the drink package you choose.",
+      tiers: [
+        { name: "With Open Arak", price: "$30" },
+        { name: "With Open Regular Bar", price: "$35" },
+        { name: "With Open Premium Bar", price: "$40" }
+      ],
       includes: [
         { title: "Salads", items: ["Fattouch", "Tabbouleh", "Rocca Beetroot"] },
         { title: "Cold Mezza", items: ["Hommos", "Mtabal", "Labne Mtawame", "Wara2 3enab", "Labnet Me3ze", "Jebne Baladiye"] },
@@ -822,16 +829,15 @@
         { title: "Mix Mou3ajanet", items: ["Rakakt Jebne", "Sambousik", "Kebeh Kras"] },
         { title: "Mix Grill", items: ["Tawouk", "Lahmeh", "Kafta"] },
         { title: "Dessert", items: ["Mix Fruits", "Ariche w 3asal"] }
-      ],
-      addon: {
-        title: "Add-On: Open Bar Packages",
-        note: "Per person",
-        items: [
-          { name: "Open Arak", price: "$30" },
-          { name: "Open Regular Bar", price: "$35" },
-          { name: "Open Premium Bar", price: "$40" }
-        ]
-      }
+      ]
+    };
+
+    const BANGALO_DATA = {
+      groups: [
+        { title: "Set Menu Breakfast", icon: "cup", items: [
+          { name: "Set Menu Breakfast (2 Saj, Sahen Bayd, Sahen Labneh, Sahen Foul, Tea)", price: "$25" }
+        ] }
+      ]
     };
 
     const MENU_DATA = {
@@ -847,19 +853,27 @@
             { name: "Nuts", price: "$4" }, { name: "Edamame", price: "$8" },
             { name: "Nachos", price: "$12" }, { name: "S. BBQ Potato", price: "$11" },
             { name: "Bevview Fries", price: "$8" }, { name: "Mozarella Sticks", price: "$10" },
-            { name: "Chicken Strips", price: "$12" }, { name: "Smoked Wings", price: "$12" },
-            { name: "Grilled Halloum", price: "$11" }
+            { name: "Chicken Strips", price: "$12" }, { name: "Grilled Halloum", price: "$11" },
+            { name: "Soujouk", price: "$7" }, { name: "Makanek", price: "$6" },
+            { name: "Mtabal", price: "$5" }, { name: "Warak Enab", price: "$6" },
+            { name: "Shanklish", price: "$4" }, { name: "Labne Mtawame", price: "$5" }
           ]},
           { title: "Platters", icon: "flame", items: [
-            { name: "Taouk Platter", price: "$17" }, { name: "Smoked Ribs", price: "$24" },
-            { name: "Grilled Chicken", price: "$21" }, { name: "Mushroom Steak", price: "$24" },
-            { name: "Brisket", price: "$24" }, { name: "Confit de Canard", price: "$25" },
-            { name: "Magret de Canard", price: "$25" }, { name: "Steak", price: "$24" },
-            { name: "Grilled Smoked Salmon", price: "$32" }
+            { name: "Taouk Platter", price: "$17" }, { name: "Grilled Chicken", price: "$21" },
+            { name: "Mushroom Steak", price: "$24" }, { name: "Steak", price: "$24" },
+            { name: "Fajita Platter", price: "$21" },
+            { name: "Jarret Lahem bel Fakharah", price: "$28" }, { name: "Jarret Djej be Fakharah", price: "$23" }
+          ]},
+          { title: "Smoked", icon: "flame", items: [
+            { name: "Smoked Wings", price: "$12" }, { name: "Smoked Ribs", price: "$24" },
+            { name: "Smoked Brisket", price: "$24" }, { name: "Smoked Steak", price: "$26" },
+            { name: "Grilled Smoked Salmon", price: "$32" }, { name: "Confit de Canard", price: "$25" },
+            { name: "Magret de Canard", price: "$25" }
           ]},
           { title: "Burgers", icon: "flame", note: "Served with french fries", items: [
             { name: "Classic Burger", price: "$11" }, { name: "Chicken Burger", price: "$11" },
-            { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" }
+            { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" },
+            { name: "Add Cheese", price: "$3", muted: true }
           ]},
           { title: "Sandwiches", icon: "flame", note: "Served with french fries", items: [
             { name: "Philadelphia", price: "$18" }, { name: "BBQ Beef", price: "$17" },
@@ -869,11 +883,12 @@
           { title: "Pizza", icon: "dough", items: [
             { name: "Margarita", price: "$14" }, { name: "Pepperoni", price: "$18" },
             { name: "Vegetarian", price: "$16" }, { name: "Add Chicken", price: "$4", muted: true },
-            { name: "Jarret Lahem bel Fakharah", price: "$28" }, { name: "Jarret Djej be Fakharah", price: "$23" }
+            { name: "Truffle", price: "$17" }
           ]},
           { title: "Saj", icon: "dough", items: [
             { name: "Zaatar", price: "$4" }, { name: "Cheese", price: "$6" },
-            { name: "Keshek", price: "$5" }, { name: "Add Ham or Turkey", price: "$2", muted: true }
+            { name: "Keshek", price: "$5" }, { name: "Halloum", price: "$6" },
+            { name: "Add Ham or Turkey", price: "$2", muted: true }
           ]},
        { title: "Pasta", icon: "dough", items: [
             { name: "Pesto Penne", price: "$12" }, { name: "Fettuccine Chicken", price: "$18" },
@@ -921,10 +936,14 @@
             { name: "Take Me Home", price: "$11" }, { name: "Mojito", price: "$11" },
             { name: "Jamaica", price: "$11" }, { name: "Perfect Sunset", price: "$12" }
           ]},
+          { title: "Fresh Juice", icon: "drop", items: [
+            { name: "Fresh Orange Juice", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
+            { name: "Lemonade", price: "$5" }, { name: "Strawberry & Banana Juice", price: "$8" },
+            { name: "Carrot & Orange", price: "$6" }, { name: "Passion Fruit", price: "$10" }
+          ]},
           { title: "Non-Alcoholic & Beers", icon: "drop", items: [
             { name: "Jamaica (Non-Alcoholic)", price: "$10" }, { name: "Mojito (Non-Alcoholic)", price: "$10" },
             { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" },
-            { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
             { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" }
           ]}
         ]
@@ -950,7 +969,9 @@
           ]},
           { title: "Desserts", icon: "star", items: [
             { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" },
-            { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" }
+            { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" },
+            { name: "Brownies Crepe", price: "$12" }, { name: "Fruit Plate (Medium)", price: "$10" },
+            { name: "Ice Cream Bowl", price: "$6" }
           ]},
           { title: "Hookah / Shisha", icon: "smoke", items: [
             { name: "Regular", price: "$12" }, { name: "Deluxe", price: "$18" },
@@ -964,7 +985,8 @@
       formula: { type: "single", images: ["images/gallery-mezza-platter.jpg.jpeg"], caption: "One price, the whole table, everything included" },
       food:    { type: "split", images: ["images/gallery-salad-plate1.jpg.jpeg", "images/gallery-burger.jpg.jpeg"], caption: "From garden to grill" },
       bar:     { type: "single", images: ["images/gallery-cocktail-bar.jpg.jpeg"], caption: "Curated pours, mountain-side" },
-      cafe:    { type: "split", images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"], caption: "Sweet endings, slow smoke" }
+      cafe:    { type: "split", images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"], caption: "Sweet endings, slow smoke" },
+      bangalos:{ type: "single", images: ["images/hero-mountain-sunset.jpg.jpeg"], caption: "Wake up to the mountain view" }
     };
 
     const ICON_SVGS = {
@@ -1027,15 +1049,19 @@
         const f = FORMULA_DATA;
         menuPanels.innerHTML = `
           <div class="menu-card rounded-xl p-6 md:p-10 reveal visible">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-4">
-              <h3 class="font-serif text-3xl text-gold">Lebanese Formula</h3>
-              <div class="text-right">
-                <span class="font-serif text-3xl text-gold">${f.price}</span>
-                <span class="text-xs text-cream/40 uppercase letter-space ml-1">${f.unit}</span>
-              </div>
-            </div>
+            <h3 class="font-serif text-3xl text-gold mb-2">Lebanese Formula</h3>
             <p class="text-cream/60 text-sm italic mb-6">${f.intro}</p>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="grid sm:grid-cols-3 gap-4 mb-8">
+              ${f.tiers.map(t => `
+                <div class="text-center rounded-lg border border-gold/15 py-5 px-3">
+                  <span class="block font-serif text-3xl text-gold">${t.price}</span>
+                  <span class="block text-[10px] text-cream/40 uppercase letter-space mt-2">${t.name}</span>
+                  <span class="block text-[10px] text-cream/30 uppercase letter-space mt-1">${f.unit}</span>
+                </div>
+              `).join('')}
+            </div>
+            <div class="hairline mb-6"></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               ${f.includes.map(sec => `
                 <div>
                   <h4 class="text-gold/80 text-sm letter-space uppercase mb-2">${sec.title}</h4>
@@ -1043,18 +1069,35 @@
                 </div>
               `).join('')}
             </div>
-            <div class="hairline mb-6"></div>
-            <h4 class="font-serif text-xl text-gold mb-1">${f.addon.title}</h4>
-            <p class="text-[10px] text-cream/30 uppercase letter-space mb-3">${f.addon.note}</p>
-            <ul class="space-y-2">
-              ${f.addon.items.map(it => `
-                <li class="flex items-baseline text-sm text-cream/80">
-                  <span>${it.name}</span>
-                  <span class="price-dots"></span>
-                  <span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>
-                </li>
-              `).join('')}
-            </ul>
+          </div>
+        `;
+        return;
+      }
+
+      if (catKey === 'bangalos') {
+        subTabsWrap.innerHTML = '';
+        const cat = BANGALO_DATA;
+        menuPanels.innerHTML = `
+          <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
+            ${cat.groups.map(g => `
+              <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title}">
+                <div class="flex items-start gap-4 mb-2">
+                  ${iconSvg(g.icon)}
+                  <div class="flex-1">
+                    <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
+                  </div>
+                </div>
+                <ul class="space-y-2 mt-4">
+                  ${g.items.map(it => `
+                    <li class="flex items-baseline text-sm text-cream/80">
+                      <span>${it.name}</span>
+                      <span class="price-dots"></span>
+                      <span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            `).join('')}
           </div>
         `;
         return;
