@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Bevview · High-Altitude Mountain Retreat · Baskinta, Lebanon</title>
   <meta name="description" content="The Bevview: high-altitude lounge & restaurant above Baskinta, Lebanon. Lebanese & international dining, curated bar, shisha lounge, panoramic sunset views." />
   <meta name="theme-color" content="#0F110E" />
-  
+
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@200;300;400;500;600;700&family=Amiri:wght@400;700&family=Cairo:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
@@ -52,7 +52,7 @@
       }
     }
   </script>
-  
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -63,6 +63,10 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
+    body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
+    body[dir="rtl"] .font-serif { font-family: 'Amiri', serif; }
+    body[dir="rtl"] .letter-space,
+    body[dir="rtl"] .letter-space-wide { letter-spacing: 0; }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0F110E; }
     ::-webkit-scrollbar-thumb { background: #E0A96D; border-radius: 4px; }
@@ -149,6 +153,8 @@
       position: relative;
       overflow: hidden;
     }
+    body[dir="rtl"] .btn-primary,
+    body[dir="rtl"] .btn-outline { letter-spacing: 0; text-transform: none; }
     .btn-primary::before {
       content: '';
       position: absolute;
@@ -251,28 +257,28 @@
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-left {
       opacity: 0;
       transform: translateX(-40px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-left.visible { opacity: 1; transform: translateX(0); }
     .reveal-right {
       opacity: 0;
       transform: translateX(40px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
     .reveal-scale {
       opacity: 0;
       transform: scale(0.9);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-scale.visible { opacity: 1; transform: scale(1); }
@@ -345,7 +351,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     #skySvg { display: block; width: 100%; height: auto; }
-    input[type="range"] { 
+    input[type="range"] {
       accent-color: #E0A96D;
       height: 4px;
       cursor: pointer;
@@ -394,9 +400,72 @@
       .hero-title { font-size: 3rem; }
       .container-padding { padding-left: 1rem; padding-right: 1rem; }
     }
+
+    /* ---------- Language gate & switcher ---------- */
+    #langGate {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(200,109,81,0.10), transparent 60%),
+                  linear-gradient(180deg, #0B0D0A 0%, #181C17 60%, #0F110E 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    #langGate.hidden { display: none; }
+    .lang-choice-btn {
+      transition: all 0.3s ease;
+      min-width: 220px;
+    }
+    .lang-switch-btn {
+      border: 1px solid rgba(224,169,109,0.3);
+      color: rgba(245,239,230,0.6);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 6px 12px;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+    .lang-switch-btn:hover, .lang-switch-btn[data-current="true"] {
+      border-color: #D4AF37;
+      color: #D4AF37;
+      background: rgba(212,175,55,0.08);
+    }
+    [data-i18n] { transition: opacity 0.2s ease; }
   </style>
 </head>
 <body>
+  <!-- ============ LANGUAGE GATE ============ -->
+  <div id="langGate">
+    <div class="text-center max-w-lg reveal-scale visible">
+      <svg width="46" height="46" viewBox="0 0 100 100" class="text-gold mx-auto mb-6">
+        <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+          <line x1="50" y1="4" x2="50" y2="28" />
+          <line x1="26" y1="14" x2="38" y2="32" />
+          <line x1="74" y1="14" x2="62" y2="32" />
+          <line x1="12" y1="30" x2="30" y2="40" />
+          <line x1="88" y1="30" x2="70" y2="40" />
+          <path d="M8 62 L34 34 L50 50 L64 38 L92 62" />
+          <line x1="4" y1="62" x2="96" y2="62" stroke-width="1.5" />
+          <circle cx="50" cy="50" r="46" stroke-width="1" opacity="0.3" />
+        </g>
+      </svg>
+      <p class="font-serif text-2xl md:text-3xl gold-text mb-1 letter-space">THE BEVVIEW</p>
+      <div class="hairline w-16 mx-auto my-5"></div>
+      <p class="text-cream/60 text-sm md:text-base mb-1">Please choose your language to continue</p>
+      <p class="text-cream/60 text-sm md:text-base mb-8" dir="rtl" style="font-family:'Cairo',sans-serif;">الرجاء اختيار لغتك للمتابعة</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button id="chooseEn" class="lang-choice-btn magnetic btn-primary text-center">
+          <span>Continue in English</span>
+        </button>
+        <button id="chooseAr" class="lang-choice-btn magnetic btn-outline text-center" style="font-family:'Cairo',sans-serif; letter-spacing:0;">
+          المتابعة بالعربية
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="scrollProgress"></div>
   <div id="cursorGlow" class="hidden md:block"></div>
 
@@ -420,16 +489,22 @@
         </a>
 
         <div class="hidden md:flex items-center gap-10 font-sans text-sm letter-space uppercase text-cream/80">
-          <a href="#home" class="nav-link">Home</a>
-          <a href="#about" class="nav-link">About</a>
-          <a href="#menu" class="nav-link">Menu</a>
-          <a href="#gallery" class="nav-link">Gallery</a>
-          <a href="#contact" class="nav-link">Contact</a>
+          <a href="#home" class="nav-link" data-i18n="nav_home">Home</a>
+          <a href="#about" class="nav-link" data-i18n="nav_about">About</a>
+          <a href="#menu" class="nav-link" data-i18n="nav_menu">Menu</a>
+          <a href="#gallery" class="nav-link" data-i18n="nav_gallery">Gallery</a>
+          <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a>
         </div>
 
-        <a href="#contact" class="magnetic hidden md:inline-block btn-primary px-6 py-2.5 text-xs">
-          <span>Book a Table</span>
-        </a>
+        <div class="hidden md:flex items-center gap-4">
+          <div class="flex items-center gap-1.5">
+            <button class="lang-switch-btn" data-set-lang="en">EN</button>
+            <button class="lang-switch-btn" data-set-lang="ar">AR</button>
+          </div>
+          <a href="#contact" class="magnetic btn-primary px-6 py-2.5 text-xs">
+            <span data-i18n="nav_book">Book a Table</span>
+          </a>
+        </div>
 
         <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-gold p-2 hover:bg-gold/10 rounded transition-colors">
           <svg id="iconBurger" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -443,11 +518,15 @@
 
     <div id="mobilePanel" class="md:hidden glass-strong max-h-0 overflow-hidden transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
       <div class="flex flex-col px-6 py-4 font-sans text-sm letter-space uppercase text-cream/90">
-        <a href="#home" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Home</a>
-        <a href="#about" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">About</a>
-        <a href="#menu" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Menu</a>
-        <a href="#gallery" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors">Gallery</a>
-        <a href="#contact" class="py-4 text-gold mobile-link hover:text-champagne transition-colors font-semibold">Book a Table →</a>
+        <a href="#home" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors" data-i18n="nav_home">Home</a>
+        <a href="#about" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors" data-i18n="nav_about">About</a>
+        <a href="#menu" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors" data-i18n="nav_menu">Menu</a>
+        <a href="#gallery" class="py-3 border-b border-gold/10 mobile-link hover:text-gold transition-colors" data-i18n="nav_gallery">Gallery</a>
+        <a href="#contact" class="py-4 text-gold mobile-link hover:text-champagne transition-colors font-semibold" data-i18n="nav_book">Book a Table →</a>
+        <div class="flex items-center gap-2 py-3 border-t border-gold/10 mt-1">
+          <button class="lang-switch-btn" data-set-lang="en">EN</button>
+          <button class="lang-switch-btn" data-set-lang="ar">AR</button>
+        </div>
       </div>
     </div>
   </header>
@@ -459,29 +538,25 @@
 
     <div class="relative z-10 max-w-4xl text-center mt-16">
       <div class="inline-block px-6 py-2 border border-gold/20 rounded-full mb-6 reveal">
-        <p class="letter-space uppercase text-gold/80 text-xs">Baskinta · Qanat Bakish · Lebanon</p>
+        <p class="letter-space uppercase text-gold/80 text-xs" data-i18n="hero_badge">Baskinta · Qanat Bakish · Lebanon</p>
       </div>
-      <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.05] gold-text mb-6 reveal">
+      <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl leading-[1.05] gold-text mb-6 reveal" data-i18n="hero_title">
         A Mountain<br class="hidden sm:block"> Breeze
       </h1>
-      <p class="text-cream/70 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light reveal">
-        High above the valley, where the pines thin and the sky turns amber — a mountain refuge 
-        for long dinners, slow sunsets, and a bar built for lingering.
-      </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
         <a href="#menu" class="magnetic btn-primary w-56 sm:w-auto text-center">
-          <span>View Menu</span>
+          <span data-i18n="hero_view_menu">View Menu</span>
         </a>
-        <a href="#contact" class="magnetic btn-outline w-56 sm:w-auto text-center">
+        <a href="#contact" class="magnetic btn-outline w-56 sm:w-auto text-center" data-i18n="hero_reserve">
           Reserve a Table
         </a>
       </div>
       <div class="mt-12 flex items-center justify-center gap-6 text-cream/30 text-xs letter-space uppercase reveal">
-        <span>✦ Lebanese Cuisine</span>
+        <span data-i18n="hero_tag1">✦ Lebanese Cuisine</span>
         <span class="w-px h-4 bg-cream/20"></span>
-        <span>✦ International</span>
+        <span data-i18n="hero_tag2">✦ International</span>
         <span class="w-px h-4 bg-cream/20"></span>
-        <span>✦ Bar & Shisha</span>
+        <span data-i18n="hero_tag3">✦ Bar & Shisha</span>
       </div>
     </div>
 
@@ -498,9 +573,9 @@
     <div class="cloud-field" data-tone="warm" data-count="5"></div>
     <div class="relative z-10 max-w-5xl mx-auto">
       <div class="text-center mb-12 reveal">
-        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Interactive Experience</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-cream mb-4">Chase the Golden Hour</h2>
-        <p class="text-cream/40 font-light max-w-xl mx-auto">Drag the sun across the Baskinta sky and watch the terrace light change, hour by hour.</p>
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3" data-i18n="golden_eyebrow">Interactive Experience</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream mb-4" data-i18n="golden_title">Chase the Golden Hour</h2>
+        <p class="text-cream/40 font-light max-w-xl mx-auto" data-i18n="golden_desc">Drag the sun across the Baskinta sky and watch the terrace light change, hour by hour.</p>
         <div class="hairline w-24 mx-auto mt-6"></div>
       </div>
 
@@ -523,7 +598,7 @@
           <circle id="sunDot" cx="60" cy="60" r="16" fill="#D4AF37" filter="url(#sunGlow)"/>
         </svg>
         <input id="timeSlider" type="range" min="960" max="1290" step="5" value="1080" class="w-full" />
-        <div class="flex justify-between text-[10px] letter-space uppercase text-cream/30 mt-2">
+        <div id="sliderLabels" class="flex justify-between text-[10px] letter-space uppercase text-cream/30 mt-2">
           <span>4:00 PM</span>
           <span>5:00</span>
           <span>6:00</span>
@@ -534,7 +609,7 @@
         <p id="timeCaption" class="font-serif text-2xl text-gold mt-6 text-center">6:00 PM — Golden hour begins</p>
         <div class="flex items-center justify-center gap-3 mt-4 text-xs text-cream/30">
           <span class="w-2 h-2 rounded-full bg-gold inline-block"></span>
-          <span>Drag the sun to experience the shift</span>
+          <span data-i18n="golden_hint">Drag the sun to experience the shift</span>
         </div>
       </div>
     </div>
@@ -544,10 +619,10 @@
     <div class="cloud-field" data-tone="cool" data-count="6"></div>
     <div class="relative z-10 max-w-7xl mx-auto">
       <div class="text-center mb-16 reveal">
-        <p class="letter-space uppercase text-gold/60 text-xs mb-3">The Vibe</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-cream">Altitude changes everything</h2>
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3" data-i18n="about_eyebrow">The Vibe</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream" data-i18n="about_title">Altitude changes everything</h2>
         <div class="hairline w-24 mx-auto mt-6"></div>
-        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">Perched 1,800 meters above sea level, where the air is crisp and the views stretch forever.</p>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4" data-i18n="about_sub">Perched 1,800 meters above sea level, where the air is crisp and the views stretch forever.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -555,21 +630,21 @@
           <div class="about-img rounded-xl h-80 md:h-[28rem] shadow-2xl" style="background-image:url('images/about-terrace-sunset.jpg.jpeg');"></div>
         </div>
         <div class="reveal-right">
-          <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4">The Experience</span>
-          <h3 class="font-serif text-3xl text-gold mb-5">Panoramic sunsets, unhurried evenings</h3>
-          <p class="text-cream/70 leading-relaxed mb-5 font-light">
-            The golden hour is treated like a scheduled event here — low lighting, 
-            warm textiles, and a menu built to move slowly from mezza to embers to 
+          <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4" data-i18n="about_badge">The Experience</span>
+          <h3 class="font-serif text-3xl text-gold mb-5" data-i18n="about_h3">Panoramic sunsets, unhurried evenings</h3>
+          <p class="text-cream/70 leading-relaxed mb-5 font-light" data-i18n="about_p1">
+            The golden hour is treated like a scheduled event here — low lighting,
+            warm textiles, and a menu built to move slowly from mezza to embers to
             dessert. Nothing about the evening feels rushed.
           </p>
-          <p class="text-cream/70 leading-relaxed font-light">
-            Whether it's a family Sunday lunch on the Lebanese formula or a late-night 
+          <p class="text-cream/70 leading-relaxed font-light" data-i18n="about_p2">
+            Whether it's a family Sunday lunch on the Lebanese formula or a late-night
             shisha session with the full bar list, the mountain sets the pace.
           </p>
           <div class="flex flex-wrap gap-3 mt-6">
-            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Fire Pit Evenings</span>
-            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Live Music</span>
-            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase">Stargazing</span>
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase" data-i18n="tag_fire">Fire Pit Evenings</span>
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase" data-i18n="tag_music">Live Music</span>
+            <span class="text-xs bg-gold/10 text-gold/70 px-4 py-1.5 rounded-full letter-space uppercase" data-i18n="tag_stars">Stargazing</span>
           </div>
         </div>
       </div>
@@ -581,19 +656,19 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div class="reveal-scale">
           <span class="block font-serif text-4xl text-gold counter" data-target="1800">0</span>
-          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Meters Altitude</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2" data-i18n="stats_alt">Meters Altitude</span>
         </div>
         <div class="reveal-scale" style="transition-delay: 0.1s;">
           <span class="block font-serif text-4xl text-gold counter" data-target="360">0</span>
-          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Degree Views</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2" data-i18n="stats_deg">Degree Views</span>
         </div>
         <div class="reveal-scale" style="transition-delay: 0.2s;">
           <span class="block font-serif text-4xl text-gold counter" data-target="75">0</span>
-          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Menu Items</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2" data-i18n="stats_menu">Menu Items</span>
         </div>
         <div class="reveal-scale" style="transition-delay: 0.3s;">
           <span class="block font-serif text-4xl text-gold counter" data-target="14">0</span>
-          <span class="text-xs letter-space uppercase text-cream/40 mt-2">Years of Excellence</span>
+          <span class="text-xs letter-space uppercase text-cream/40 mt-2" data-i18n="stats_years">Years of Excellence</span>
         </div>
       </div>
     </div>
@@ -603,28 +678,28 @@
     <div class="cloud-field" data-tone="cool" data-count="6"></div>
     <div class="relative z-10 max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">
-        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Taste the Mountain</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-cream">The Menu</h2>
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3" data-i18n="menu_eyebrow">Taste the Mountain</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream" data-i18n="menu_title">The Menu</h2>
         <div class="hairline w-24 mx-auto mt-6"></div>
-        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">Lebanese tradition meets international flair — every dish crafted with mountain-fresh ingredients.</p>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4" data-i18n="menu_desc">Lebanese tradition meets international flair — every dish crafted with mountain-fresh ingredients.</p>
       </div>
 
       <div id="mainTabs" class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 mb-10 reveal">
-     <button data-cat="food" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+        <button data-cat="food" data-active="true" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg" data-i18n="tab_food">
           Food Menu
         </button>
-        <button data-cat="formula" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+        <button data-cat="formula" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg" data-i18n="tab_formula">
           Lebanese Formula
         </button>
-        <button data-cat="bar" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+        <button data-cat="bar" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg" data-i18n="tab_bar">
           Bar &amp; Drinks
         </button>
-       <button data-cat="cafe" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg">
+        <button data-cat="cafe" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg" data-i18n="tab_cafe">
           Café, Shisha &amp; Dessert
         </button>
-       <button data-cat="bangalos" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg col-span-2 w-1/2 mx-auto sm:w-auto sm:col-span-1">
-  Bangalos
-</button>
+        <button data-cat="bangalos" class="cat-btn font-serif text-sm sm:text-lg md:text-xl px-4 py-3 sm:px-6 sm:py-2.5 text-center rounded-lg col-span-2 w-1/2 mx-auto sm:w-auto sm:col-span-1" data-i18n="tab_bangalos">
+          Bangalos
+        </button>
       </div>
 
       <div id="catBanner" class="mb-10"></div>
@@ -637,10 +712,10 @@
     <div class="cloud-field" data-tone="warm" data-count="4"></div>
     <div class="relative z-10 max-w-7xl mx-auto">
       <div class="text-center mb-14 reveal">
-        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Visual Journey</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-cream">The Ambience</h2>
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3" data-i18n="gallery_eyebrow">Visual Journey</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream" data-i18n="gallery_title">The Ambience</h2>
         <div class="hairline w-24 mx-auto mt-6"></div>
-        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4">A glimpse into the mountain retreat — where every corner tells a story.</p>
+        <p class="text-cream/40 text-sm max-w-xl mx-auto mt-4" data-i18n="gallery_desc">A glimpse into the mountain retreat — where every corner tells a story.</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -661,45 +736,45 @@
     <div class="cloud-field" data-tone="cool" data-count="4"></div>
     <div class="relative z-10 max-w-6xl mx-auto">
       <div class="text-center mb-14 reveal">
-        <p class="letter-space uppercase text-gold/60 text-xs mb-3">Guest Stories</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-cream">What Our Guests Say</h2>
+        <p class="letter-space uppercase text-gold/60 text-xs mb-3" data-i18n="guest_eyebrow">Guest Stories</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream" data-i18n="guest_title">What Our Guests Say</h2>
         <div class="hairline w-24 mx-auto mt-6"></div>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center">
           <div class="text-gold text-2xl mb-2">"</div>
-          <p class="text-cream/70 leading-snug text-xs">The sunset from the terrace is breathtaking. The food, service, ambiance — everything was perfect.</p>
+          <p class="text-cream/70 leading-snug text-xs" data-i18n="review1">The sunset from the terrace is breathtaking. The food, service, ambiance — everything was perfect.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
-            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Sarah K., Beirut</p>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase" data-i18n="reviewer1">— Sarah K., Beirut</p>
           </div>
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.1s;">
           <div class="text-gold text-2xl mb-2">"</div>
-          <p class="text-cream/70 leading-snug text-xs">Our go-to for special occasions. The mix grill is incredible, and the shisha lounge caps the night.</p>
+          <p class="text-cream/70 leading-snug text-xs" data-i18n="review2">Our go-to for special occasions. The mix grill is incredible, and the shisha lounge caps the night.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
-            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Tony M., Jounieh</p>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase" data-i18n="reviewer2">— Tony M., Jounieh</p>
           </div>
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.2s;">
           <div class="text-gold text-2xl mb-2">"</div>
-          <p class="text-cream/70 leading-snug text-xs">Unforgettable. Staff made us feel like family, views were spectacular, food outstanding.</p>
+          <p class="text-cream/70 leading-snug text-xs" data-i18n="review3">Unforgettable. Staff made us feel like family, views were spectacular, food outstanding.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
-            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Nadia R., Paris</p>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase" data-i18n="reviewer3">— Nadia R., Paris</p>
           </div>
         </div>
 
         <div class="glass-glow rounded-xl p-4 md:p-5 reveal-scale text-center" style="transition-delay: 0.3s;">
           <div class="text-gold text-2xl mb-2">"</div>
-          <p class="text-cream/70 leading-snug text-xs">The drive up is worth it every time. Cozy fire pit, great cocktails, stunning valley view.</p>
+          <p class="text-cream/70 leading-snug text-xs" data-i18n="review4">The drive up is worth it every time. Cozy fire pit, great cocktails, stunning valley view.</p>
           <div class="mt-3">
             <div class="flex justify-center gap-0.5 text-gold text-xs">★★★★★</div>
-            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase">— Karim D., Zahle</p>
+            <p class="text-cream/50 text-[10px] mt-1 letter-space uppercase" data-i18n="reviewer4">— Karim D., Zahle</p>
           </div>
         </div>
       </div>
@@ -710,24 +785,24 @@
     <div class="absolute inset-0 bg-alpine/70"></div>
     <div class="cloud-field" data-tone="warm" data-count="5"></div>
     <div class="relative z-10 max-w-3xl mx-auto text-center reveal">
-      <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4">Reserve Your Evening</span>
-      <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5">Secure Your Table</h2>
-      <p class="text-cream/70 mb-8 font-light">
-        Tables are limited at sunset. Call ahead or send a message and our host will 
+      <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-gold/10 px-4 py-1.5 rounded mb-4" data-i18n="contact_badge">Reserve Your Evening</span>
+      <h2 class="font-serif text-4xl md:text-5xl gold-text mb-5" data-i18n="contact_title">Secure Your Table</h2>
+      <p class="text-cream/70 mb-8 font-light" data-i18n="contact_desc">
+        Tables are limited at sunset. Call ahead or send a message and our host will
         confirm your spot on the mountain.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="tel:+96103623976" class="magnetic btn-primary w-56 sm:w-auto text-center">
-          <span>Call +961 03 623 976</span>
+          <span><span data-i18n="call_label">Call</span> +961 03 623 976</span>
         </a>
         <a href="tel:+96176348489" class="magnetic btn-primary w-56 sm:w-auto text-center">
-          <span>Call +961 76 348 489</span>
+          <span><span data-i18n="call_label">Call</span> +961 76 348 489</span>
         </a>
       </div>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-cream/40 text-sm">
         <span>✉️ thebevview@gmail.com</span>
         <span class="hidden sm:inline">|</span>
-        <span>📍 Qanat Bakish, Baskinta</span>
+        <span>📍 <span data-i18n="location_text">Qanat Bakish, Baskinta</span></span>
       </div>
     </div>
   </section>
@@ -747,8 +822,8 @@
             </svg>
             <span class="font-serif text-xl gold-text">THE BEVVIEW</span>
           </div>
-          <p class="text-cream/40 text-sm font-light leading-relaxed">
-            A Mountain Breeze — Lebanese and international dining, curated bar and 
+          <p class="text-cream/40 text-sm font-light leading-relaxed" data-i18n="footer_tagline">
+            A Mountain Breeze — Lebanese and international dining, curated bar and
             shisha lounge above Baskinta, Lebanon.
           </p>
           <div class="flex gap-4 mt-4 text-cream/30">
@@ -768,34 +843,34 @@
         </div>
 
         <div>
-          <h4 class="text-gold letter-space uppercase text-xs mb-4">Quick Links</h4>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4" data-i18n="footer_quicklinks">Quick Links</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#home" class="text-cream/40 hover:text-gold transition-colors">Home</a></li>
-            <li><a href="#about" class="text-cream/40 hover:text-gold transition-colors">About Us</a></li>
-            <li><a href="#menu" class="text-cream/40 hover:text-gold transition-colors">Menu</a></li>
-            <li><a href="#gallery" class="text-cream/40 hover:text-gold transition-colors">Gallery</a></li>
+            <li><a href="#home" class="text-cream/40 hover:text-gold transition-colors" data-i18n="nav_home">Home</a></li>
+            <li><a href="#about" class="text-cream/40 hover:text-gold transition-colors" data-i18n="footer_about">About Us</a></li>
+            <li><a href="#menu" class="text-cream/40 hover:text-gold transition-colors" data-i18n="nav_menu">Menu</a></li>
+            <li><a href="#gallery" class="text-cream/40 hover:text-gold transition-colors" data-i18n="nav_gallery">Gallery</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-gold letter-space uppercase text-xs mb-4">Location</h4>
-          <p class="text-cream/40 text-sm font-light leading-relaxed">
+          <h4 class="text-gold letter-space uppercase text-xs mb-4" data-i18n="footer_location_title">Location</h4>
+          <p class="text-cream/40 text-sm font-light leading-relaxed" data-i18n="footer_address">
             Qanat Bakish Road<br>
             Baskinta, Metn District<br>
             Lebanon
           </p>
           <p class="text-cream/40 text-sm font-light mt-2">
-            📍 <a href="https://maps.google.com" target="_blank" class="hover:text-gold transition-colors">View on Maps</a>
+            📍 <a href="https://maps.google.com" target="_blank" class="hover:text-gold transition-colors" data-i18n="footer_viewmaps">View on Maps</a>
           </p>
         </div>
 
         <div>
-          <h4 class="text-gold letter-space uppercase text-xs mb-4">Hours</h4>
+          <h4 class="text-gold letter-space uppercase text-xs mb-4" data-i18n="footer_hours_title">Hours</h4>
           <ul class="text-cream/40 text-sm font-light space-y-1">
-            <li>Monday – Sunday</li>
+            <li data-i18n="footer_days">Monday – Sunday</li>
             <li class="text-cream/60 font-medium">11:00 AM – 1:00 AM</li>
-            <li class="mt-2 text-xs text-cream/30">Kitchen closes at 11:30 PM</li>
-            <li class="text-xs text-cream/30">Bar open until 1:00 AM</li>
+            <li class="mt-2 text-xs text-cream/30" data-i18n="footer_kitchen">Kitchen closes at 11:30 PM</li>
+            <li class="text-xs text-cream/30" data-i18n="footer_barhours">Bar open until 1:00 AM</li>
           </ul>
         </div>
       </div>
@@ -803,190 +878,361 @@
       <div class="hairline max-w-7xl mx-auto mb-6"></div>
 
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-cream/30 text-xs font-light">
-        <p>© 2026 The Bevview. All rights reserved.</p>
-        <p>Website by <a href="https://wa.me/96178914570" target="_blank" rel="noopener" class="text-gold/50 hover:text-gold transition-colors">Hamdancs.online</a></p>
+        <p data-i18n="footer_copyright">© 2026 The Bevview. All rights reserved.</p>
+        <p><span data-i18n="footer_by">Website by</span> <a href="https://wa.me/96178914570" target="_blank" rel="noopener" class="text-gold/50 hover:text-gold transition-colors">Hamdancs.online</a></p>
         <p class="flex gap-4">
-          <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-gold transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gold transition-colors" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="#" class="hover:text-gold transition-colors" data-i18n="footer_terms">Terms of Service</a>
         </p>
       </div>
     </div>
   </footer>
 
   <script>
+    /* ================= I18N ================= */
+    const I18N = {
+      en: {
+        nav_home: "Home", nav_about: "About", nav_menu: "Menu", nav_gallery: "Gallery", nav_contact: "Contact", nav_book: "Book a Table",
+        hero_badge: "Baskinta · Qanat Bakish · Lebanon",
+        hero_title: "A Mountain<br class=\"hidden sm:block\"> Breeze",
+        hero_desc: "",
+        hero_view_menu: "View Menu", hero_reserve: "Reserve a Table",
+        hero_tag1: "✦ Lebanese Cuisine", hero_tag2: "✦ International", hero_tag3: "✦ Bar & Shisha",
+        golden_eyebrow: "Interactive Experience", golden_title: "Chase the Golden Hour",
+        golden_desc: "Drag the sun across the Baskinta sky and watch the terrace light change, hour by hour.",
+        golden_hint: "Drag the sun to experience the shift",
+        about_eyebrow: "The Vibe", about_title: "Altitude changes everything",
+        about_sub: "Perched 1,800 meters above sea level, where the air is crisp and the views stretch forever.",
+        about_badge: "The Experience", about_h3: "Panoramic sunsets, unhurried evenings",
+        about_p1: "The golden hour is treated like a scheduled event here — low lighting, warm textiles, and a menu built to move slowly from mezza to embers to dessert. Nothing about the evening feels rushed.",
+        about_p2: "Whether it's a family Sunday lunch on the Lebanese formula or a late-night shisha session with the full bar list, the mountain sets the pace.",
+        tag_fire: "Fire Pit Evenings", tag_music: "Live Music", tag_stars: "Stargazing",
+        stats_alt: "Meters Altitude", stats_deg: "Degree Views", stats_menu: "Menu Items", stats_years: "Years of Excellence",
+        menu_eyebrow: "Taste the Mountain", menu_title: "The Menu",
+        menu_desc: "Lebanese tradition meets international flair — every dish crafted with mountain-fresh ingredients.",
+        tab_food: "Food Menu", tab_formula: "Lebanese Formula", tab_bar: "Bar &amp; Drinks", tab_cafe: "Café, Shisha &amp; Dessert", tab_bangalos: "Bangalos",
+        gallery_eyebrow: "Visual Journey", gallery_title: "The Ambience",
+        gallery_desc: "A glimpse into the mountain retreat — where every corner tells a story.",
+        guest_eyebrow: "Guest Stories", guest_title: "What Our Guests Say",
+        review1: "The sunset from the terrace is breathtaking. The food, service, ambiance — everything was perfect.",
+        reviewer1: "— Sarah K., Beirut",
+        review2: "Our go-to for special occasions. The mix grill is incredible, and the shisha lounge caps the night.",
+        reviewer2: "— Tony M., Jounieh",
+        review3: "Unforgettable. Staff made us feel like family, views were spectacular, food outstanding.",
+        reviewer3: "— Nadia R., Paris",
+        review4: "The drive up is worth it every time. Cozy fire pit, great cocktails, stunning valley view.",
+        reviewer4: "— Karim D., Zahle",
+        contact_badge: "Reserve Your Evening", contact_title: "Secure Your Table",
+        contact_desc: "Tables are limited at sunset. Call ahead or send a message and our host will confirm your spot on the mountain.",
+        call_label: "Call", location_text: "Qanat Bakish, Baskinta",
+        footer_tagline: "A Mountain Breeze — Lebanese and international dining, curated bar and shisha lounge above Baskinta, Lebanon.",
+        footer_quicklinks: "Quick Links", footer_about: "About Us",
+        footer_location_title: "Location", footer_address: "Qanat Bakish Road<br>Baskinta, Metn District<br>Lebanon",
+        footer_viewmaps: "View on Maps", footer_hours_title: "Hours", footer_days: "Monday – Sunday",
+        footer_kitchen: "Kitchen closes at 11:30 PM", footer_barhours: "Bar open until 1:00 AM",
+        footer_copyright: "© 2026 The Bevview. All rights reserved.", footer_by: "Website by",
+        footer_privacy: "Privacy Policy", footer_terms: "Terms of Service",
+        sub_all: "All", banner_featured: "Featured",
+        cat_captions: {
+          formula: "One price, the whole table, everything included",
+          food: "From garden to grill",
+          bar: "Curated pours, mountain-side",
+          cafe: "Sweet endings, slow smoke",
+          bangalos: "Wake up to the mountain view"
+        },
+        slider_times: ["4:00 PM", "5:00", "6:00", "7:00", "8:00", "9:30 PM"],
+        golden_captions: [
+          "Daylight over the valley",
+          "Golden hour begins",
+          "Peak amber light — best photos",
+          "Sun dips behind Sannine",
+          "Fire pit glow, mountain hush"
+        ]
+      },
+      ar: {
+        nav_home: "الرئيسية", nav_about: "من نحن", nav_menu: "القائمة", nav_gallery: "معرض الصور", nav_contact: "اتصل بنا", nav_book: "احجز طاولة",
+        hero_badge: "بسكنتا · قناة بكيش · لبنان",
+        hero_title: "نسيم<br class=\"hidden sm:block\"> الجبل",
+        hero_desc: "",
+        hero_view_menu: "عرض القائمة", hero_reserve: "احجز طاولة",
+        hero_tag1: "✦ مطبخ لبناني", hero_tag2: "✦ عالمي", hero_tag3: "✦ بار وأرجيلة",
+        golden_eyebrow: "تجربة تفاعلية", golden_title: "طارِد الساعة الذهبية",
+        golden_desc: "حرّك الشمس عبر سماء بسكنتا وشاهد إضاءة التراس تتغيّر ساعة بعد ساعة.",
+        golden_hint: "حرّك الشمس لتعيش التحوّل",
+        about_eyebrow: "الأجواء", about_title: "الارتفاع يغيّر كل شيء",
+        about_sub: "على ارتفاع 1800 متر فوق سطح البحر، حيث الهواء نقي والإطلالة تمتد إلى ما لا نهاية.",
+        about_badge: "التجربة", about_h3: "غروب بانورامي، أمسيات هادئة",
+        about_p1: "الساعة الذهبية هنا أشبه بموعد مُقدّس — إضاءة خافتة، أقمشة دافئة، وقائمة طعام صُمّمت لتنتقل ببطء من المقبلات إلى المشاوي فالحلويات. لا شيء في الأمسية يشعرك بالاستعجال.",
+        about_p2: "سواء كان غداء عائلي يوم الأحد على الفورمولا اللبنانية، أو جلسة أرجيلة في وقت متأخر مع لائحة البار الكاملة، الجبل هو من يحدد الإيقاع.",
+        tag_fire: "أمسيات حول النار", tag_music: "موسيقى حية", tag_stars: "مراقبة النجوم",
+        stats_alt: "متر ارتفاع", stats_deg: "درجة إطلالة", stats_menu: "عنصر في القائمة", stats_years: "سنوات من التميز",
+        menu_eyebrow: "تذوّق الجبل", menu_title: "القائمة",
+        menu_desc: "التقاليد اللبنانية تلتقي بلمسة عالمية — كل طبق يُحضّر بمكوّنات طازجة من الجبل.",
+        tab_food: "قائمة الطعام", tab_formula: "الفورمولا اللبنانية", tab_bar: "بار ومشروبات", tab_cafe: "كافيه، أرجيلة وحلويات", tab_bangalos: "بنغالوز",
+        gallery_eyebrow: "رحلة بصرية", gallery_title: "الأجواء",
+        gallery_desc: "لمحة عن الملاذ الجبلي — حيث كل زاوية تروي حكاية.",
+        guest_eyebrow: "قصص الضيوف", guest_title: "ماذا يقول ضيوفنا",
+        review1: "غروب الشمس من التراس أخّاذ. الطعام والخدمة والأجواء — كل شيء كان مثاليًا.",
+        reviewer1: "— سارة ك.، بيروت",
+        review2: "وجهتنا المفضّلة للمناسبات الخاصة. المشاوي المشكّلة رائعة، وجلسة الأرجيلة تختم السهرة بأجمل طريقة.",
+        reviewer2: "— طوني م.، جونية",
+        review3: "لا تُنسى. الطاقم جعلنا نشعر وكأننا عائلة، الإطلالة مذهلة، والطعام استثنائي.",
+        reviewer3: "— نادية ر.، باريس",
+        review4: "الطريق إلى فوق يستحق العناء في كل مرة. نار دافئة، كوكتيلات رائعة، وإطلالة خلابة على الوادي.",
+        reviewer4: "— كريم د.، زحلة",
+        contact_badge: "احجز أمسيتك", contact_title: "احجز طاولتك",
+        contact_desc: "عدد الطاولات محدود عند الغروب. اتصل مسبقًا أو أرسل رسالة وسيؤكد مضيفنا مكانك على الجبل.",
+        call_label: "اتصل", location_text: "قناة بكيش، بسكنتا",
+        footer_tagline: "نسيم الجبل — مطبخ لبناني وعالمي، بار مختار بعناية، وصالة أرجيلة فوق بسكنتا، لبنان.",
+        footer_quicklinks: "روابط سريعة", footer_about: "من نحن",
+        footer_location_title: "الموقع", footer_address: "طريق قناة بكيش<br>بسكنتا، قضاء المتن<br>لبنان",
+        footer_viewmaps: "عرض على الخريطة", footer_hours_title: "ساعات العمل", footer_days: "الإثنين – الأحد",
+        footer_kitchen: "يُغلق المطبخ الساعة 11:30 مساءً", footer_barhours: "البار مفتوح حتى الساعة 1:00 صباحًا",
+        footer_copyright: "© 2026 ذا بيڤيو. جميع الحقوق محفوظة.", footer_by: "تصميم الموقع بواسطة",
+        footer_privacy: "سياسة الخصوصية", footer_terms: "شروط الخدمة",
+        sub_all: "الكل", banner_featured: "مميز",
+        cat_captions: {
+          formula: "سعر واحد، للطاولة بأكملها، كل شيء مشمول",
+          food: "من الحديقة إلى الشواية",
+          bar: "مشروبات مختارة بعناية، على الجبل",
+          cafe: "نهايات حلوة، دخان هادئ",
+          bangalos: "استيقظ على إطلالة الجبل"
+        },
+        slider_times: ["4:00 م", "5:00", "6:00", "7:00", "8:00", "9:30 م"],
+        golden_captions: [
+          "ضوء النهار فوق الوادي",
+          "بداية الساعة الذهبية",
+          "أوج الضوء الكهرماني — أفضل وقت للصور",
+          "الشمس تغيب خلف صنين",
+          "توهّج النار، وسكون الجبل"
+        ]
+      }
+    };
+
+    let currentLang = localStorage.getItem('bevview_lang') || null;
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('bevview_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      const dict = I18N[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      document.querySelectorAll('.lang-switch-btn').forEach(btn => {
+        btn.dataset.current = (btn.dataset.setLang === lang) ? 'true' : 'false';
+      });
+
+      const sliderLabels = document.getElementById('sliderLabels');
+      if (sliderLabels) {
+        sliderLabels.querySelectorAll('span').forEach((span, i) => {
+          if (dict.slider_times[i]) span.textContent = dict.slider_times[i];
+        });
+      }
+
+      renderCategory(document.querySelector('#mainTabs .cat-btn[data-active="true"]')?.dataset.cat || 'food');
+      updateSky();
+    }
+
+    document.getElementById('chooseEn').addEventListener('click', () => {
+      document.getElementById('langGate').classList.add('hidden');
+      applyLanguage('en');
+    });
+    document.getElementById('chooseAr').addEventListener('click', () => {
+      document.getElementById('langGate').classList.add('hidden');
+      applyLanguage('ar');
+    });
+    document.querySelectorAll('.lang-switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.dataset.setLang));
+    });
+
+    if (currentLang) {
+      document.getElementById('langGate').classList.add('hidden');
+    }
+
+    /* ================= MENU DATA (bilingual) ================= */
+    function T(en, ar) { return { en, ar }; }
+
     const FORMULA_DATA = {
-      unit: "per person",
-      intro: "Not à la carte — this is a full shared-table experience for the whole group, everything included. Price per person depends on the drink package you choose.",
+      unit: T("per person", "للشخص الواحد"),
+      intro: T(
+        "Not à la carte — this is a full shared-table experience for the whole group, everything included. Price per person depends on the drink package you choose.",
+        "ليست قائمة فردية — هذه تجربة طاولة مشتركة كاملة للمجموعة بأسرها، وكل شيء مشمول. السعر للشخص الواحد يعتمد على باقة المشروبات التي تختارها."
+      ),
       tiers: [
-        { name: "With Open Arak", price: "$30" },
-        { name: "With Open Regular Bar", price: "$35" },
-        { name: "With Open Premium Bar", price: "$40" }
+        { name: T("With Open Arak", "مع عرق مفتوح"), price: "$30" },
+        { name: T("With Open Regular Bar", "مع بار عادي مفتوح"), price: "$35" },
+        { name: T("With Open Premium Bar", "مع بار بريميوم مفتوح"), price: "$40" }
       ],
       includes: [
-        { title: "Salads", items: ["Fattouch", "Tabbouleh", "Rocca Beetroot"] },
-        { title: "Cold Mezza", items: ["Hommos", "Mtabal", "Labne Mtawame", "Wara2 3enab", "Labnet Me3ze", "Jebne Baladiye"] },
-        { title: "Hot Mezza", items: ["Soujouk", "Makanek", "Batata 7arra", "Fries", "Shrimps Provencial"] },
-        { title: "Mix Mou3ajanet", items: ["Rakakt Jebne", "Sambousik", "Kebeh Kras"] },
-        { title: "Mix Grill", items: ["Tawouk", "Lahmeh", "Kafta"] },
-        { title: "Dessert", items: ["Mix Fruits", "Ariche w 3asal"] }
+        { title: T("Salads", "سلطات"), items: [T("Fattouch","فتوش"), T("Tabbouleh","تبولة"), T("Rocca Beetroot","روكا بالشمندر")] },
+        { title: T("Cold Mezza", "مقبلات باردة"), items: [T("Hommos","حمص"), T("Mtabal","متبل"), T("Labne Mtawame","لبنة متومة"), T("Wara2 3enab","ورق عنب"), T("Labnet Me3ze","لبنة معزة"), T("Jebne Baladiye","جبنة بلدية")] },
+        { title: T("Hot Mezza", "مقبلات ساخنة"), items: [T("Soujouk","سجق"), T("Makanek","مقانق"), T("Batata 7arra","بطاطا حرة"), T("Fries","بطاطا مقلية"), T("Shrimps Provencial","جمبري بروفنسال")] },
+        { title: T("Mix Mou3ajanat", "تشكيلة معجنات"), items: [T("Rakakt Jebne","رقاقات جبنة"), T("Sambousik","سمبوسك"), T("Kebeh Kras","كبة قرص")] },
+        { title: T("Mix Grill", "مشاوي مشكّلة"), items: [T("Tawouk","طاووق"), T("Lahmeh","لحمة"), T("Kafta","كفتة")] },
+        { title: T("Dessert", "حلويات"), items: [T("Mix Fruits","فواكه مشكّلة"), T("Ariche w 3asal","عريشة وعسل")] }
       ]
     };
 
     const BANGALO_DATA = {
       groups: [
-        { title: "Set Menu Breakfast", icon: "cup", items: [
-          { name: "Set Menu Breakfast (2 Saj, Sahen Bayd, Sahen Labneh, Sahen Foul, Tea)", price: "$25" }
+        { title: T("Set Menu Breakfast", "إفطار مجموعة"), icon: "cup", items: [
+          { name: T("Set Menu Breakfast (2 Saj, Sahen Bayd, Sahen Labneh, Sahen Foul, Tea)", "إفطار مجموعة (٢ صاج، صحن بيض، صحن لبنة، صحن فول، شاي)"), price: "$25" }
         ] }
       ]
     };
 
     const MENU_DATA = {
       food: {
-        label: "Food Menu",
         groups: [
-          { title: "Salads", icon: "leaf", items: [
-            { name: "Fattouch", price: "$12" }, { name: "Tabbouleh", price: "$12" },
-            { name: "Rocca Beetroot", price: "$12" }, { name: "Halloumi Salad", price: "$13" },
-            { name: "Chicken Caesar Salad", price: "$16" }, { name: "Bevview Salad", price: "$17" }
+          { title: T("Salads","سلطات"), icon: "leaf", items: [
+            { name: T("Fattouch","فتوش"), price: "$12" }, { name: T("Tabbouleh","تبولة"), price: "$12" },
+            { name: T("Rocca Beetroot","روكا بالشمندر"), price: "$12" }, { name: T("Halloumi Salad","سلطة حلوم"), price: "$13" },
+            { name: T("Chicken Caesar Salad","سلطة سيزر بالدجاج"), price: "$16" }, { name: T("Bevview Salad","سلطة بيفيو"), price: "$17" }
           ]},
-          { title: "Appetizers", icon: "plate", items: [
-            { name: "Nuts", price: "$4" }, { name: "Edamame", price: "$8" },
-            { name: "Nachos", price: "$12" }, { name: "S. BBQ Potato", price: "$11" },
-            { name: "Bevview Fries", price: "$8" }, { name: "Mozarella Sticks", price: "$10" },
-            { name: "Chicken Strips", price: "$12" }, { name: "Grilled Halloum", price: "$11" },
-            { name: "Soujouk", price: "$7" }, { name: "Makanek", price: "$6" },
-            { name: "Mtabal", price: "$5" }, { name: "Warak Enab", price: "$6" },
-            { name: "Shanklish", price: "$4" }, { name: "Labne Mtawame", price: "$5" }
+          { title: T("Appetizers","مقبلات"), icon: "plate", items: [
+            { name: T("Nuts","مكسرات"), price: "$4" }, { name: T("Edamame","إيدامامي"), price: "$8" },
+            { name: T("Nachos","ناتشوز"), price: "$12" }, { name: T("S. BBQ Potato","بطاطا بصلصة الباربكيو الحارة"), price: "$11" },
+            { name: T("Bevview Fries","بطاطا بيفيو"), price: "$8" }, { name: T("Mozarella Sticks","أصابع موزاريلا"), price: "$10" },
+            { name: T("Chicken Strips","أصابع دجاج"), price: "$12" }, { name: T("Grilled Halloum","حلوم مشوي"), price: "$11" },
+            { name: T("Soujouk","سجق"), price: "$7" }, { name: T("Makanek","مقانق"), price: "$6" },
+            { name: T("Mtabal","متبل"), price: "$5" }, { name: T("Warak Enab","ورق عنب"), price: "$6" },
+            { name: T("Shanklish","شنكليش"), price: "$4" }, { name: T("Labne Mtawame","لبنة متومة"), price: "$5" }
           ]},
-          { title: "Platters", icon: "flame", items: [
-            { name: "Taouk Platter", price: "$17" }, { name: "Grilled Chicken", price: "$21" },
-            { name: "Mushroom Steak", price: "$24" }, { name: "Steak", price: "$24" },
-            { name: "Fajita Platter", price: "$21" },
-            { name: "Jarret Lahem bel Fakharah", price: "$28" }, { name: "Jarret Djej be Fakharah", price: "$23" }
+          { title: T("Platters","أطباق رئيسية"), icon: "flame", items: [
+            { name: T("Taouk Platter","طبق طاووق"), price: "$17" }, { name: T("Grilled Chicken","دجاج مشوي"), price: "$21" },
+            { name: T("Mushroom Steak","ستيك بالفطر"), price: "$24" }, { name: T("Steak","ستيك"), price: "$24" },
+            { name: T("Fajita Platter","طبق فاهيتا"), price: "$21" },
+            { name: T("Jarret Lahem bel Fakharah","جرة لحم بالفخارة"), price: "$28" }, { name: T("Jarret Djej be Fakharah","جرة دجاج بالفخارة"), price: "$23" }
           ]},
-          { title: "Smoked", icon: "flame", items: [
-            { name: "Smoked Wings", price: "$12" }, { name: "Smoked Ribs", price: "$24" },
-            { name: "Smoked Brisket", price: "$24" }, { name: "Smoked Steak", price: "$26" },
-            { name: "Grilled Smoked Salmon", price: "$32" }, { name: "Confit de Canard", price: "$25" },
-            { name: "Magret de Canard", price: "$25" }
+          { title: T("Smoked","مدخّن"), icon: "flame", items: [
+            { name: T("Smoked Wings","أجنحة مدخّنة"), price: "$12" }, { name: T("Smoked Ribs","ضلوع مدخّنة"), price: "$24" },
+            { name: T("Smoked Brisket","بريسكت مدخّن"), price: "$24" }, { name: T("Smoked Steak","ستيك مدخّن"), price: "$26" },
+            { name: T("Grilled Smoked Salmon","سلمون مشوي مدخّن"), price: "$32" }, { name: T("Confit de Canard","كونفي دو كنار"), price: "$25" },
+            { name: T("Magret de Canard","مقرط بط"), price: "$25" }
           ]},
-          { title: "Burgers", icon: "flame", note: "Served with french fries", items: [
-            { name: "Classic Burger", price: "$11" }, { name: "Chicken Burger", price: "$11" },
-            { name: "Bevview Burger", price: "$19" }, { name: "Swiss Mushroom", price: "$17" },
-            { name: "Add Cheese", price: "$3", muted: true }
+          { title: T("Burgers","برغر"), icon: "flame", note: T("Served with french fries","يُقدّم مع بطاطا مقلية"), items: [
+            { name: T("Classic Burger","برغر كلاسيك"), price: "$11" }, { name: T("Chicken Burger","برغر دجاج"), price: "$11" },
+            { name: T("Bevview Burger","برغر بيفيو"), price: "$19" }, { name: T("Swiss Mushroom","سويس بالفطر"), price: "$17" },
+            { name: T("Add Cheese","إضافة جبنة"), price: "$3", muted: true }
           ]},
-          { title: "Sandwiches", icon: "flame", note: "Served with french fries", items: [
-            { name: "Philadelphia", price: "$18" }, { name: "BBQ Beef", price: "$17" },
-            { name: "Chicken Sub", price: "$16" }, { name: "Chicken Mexican", price: "$16" },
-            { name: "Boneless Chicken", price: "$16" }, { name: "Fajita", price: "$17" }
+          { title: T("Sandwiches","ساندويشات"), icon: "flame", note: T("Served with french fries","يُقدّم مع بطاطا مقلية"), items: [
+            { name: T("Philadelphia","فيلادلفيا"), price: "$18" }, { name: T("BBQ Beef","لحم بصلصة الباربكيو"), price: "$17" },
+            { name: T("Chicken Sub","ساندويش دجاج"), price: "$16" }, { name: T("Chicken Mexican","دجاج مكسيكي"), price: "$16" },
+            { name: T("Boneless Chicken","دجاج بدون عظم"), price: "$16" }, { name: T("Fajita","فاهيتا"), price: "$17" }
           ]},
-          { title: "Pizza", icon: "dough", items: [
-            { name: "Margarita", price: "$14" }, { name: "Pepperoni", price: "$18" },
-            { name: "Vegetarian", price: "$16" }, { name: "Add Chicken", price: "$4", muted: true },
-            { name: "Truffle", price: "$17" }
+          { title: T("Pizza","بيتزا"), icon: "dough", items: [
+            { name: T("Margarita","مارغريتا"), price: "$14" }, { name: T("Pepperoni","بيبروني"), price: "$18" },
+            { name: T("Vegetarian","نباتية"), price: "$16" }, { name: T("Add Chicken","إضافة دجاج"), price: "$4", muted: true },
+            { name: T("Truffle","ترافل"), price: "$17" }
           ]},
-          { title: "Saj", icon: "dough", items: [
-            { name: "Zaatar", price: "$4" }, { name: "Cheese", price: "$6" },
-            { name: "Keshek", price: "$5" }, { name: "Halloum", price: "$6" },
-            { name: "Add Ham or Turkey", price: "$2", muted: true }
+          { title: T("Saj","صاج"), icon: "dough", items: [
+            { name: T("Zaatar","زعتر"), price: "$4" }, { name: T("Cheese","جبنة"), price: "$6" },
+            { name: T("Keshek","كشك"), price: "$5" }, { name: T("Halloum","حلوم"), price: "$6" },
+            { name: T("Add Ham or Turkey","إضافة هام أو ديك رومي"), price: "$2", muted: true }
           ]},
-       { title: "Pasta", icon: "dough", items: [
-            { name: "Pesto Penne", price: "$12" }, { name: "Fettuccine Chicken", price: "$18" },
-            { name: "Spaghetti Bolognese", price: "$16" }
+          { title: T("Pasta","معكرونة"), icon: "dough", items: [
+            { name: T("Pesto Penne","بيني بالبيستو"), price: "$12" }, { name: T("Fettuccine Chicken","فيتوتشيني بالدجاج"), price: "$18" },
+            { name: T("Spaghetti Bolognese","سباغيتي بولونيز"), price: "$16" }
           ]}
         ]
       },
       bar: {
-        label: "Bar & Drinks",
         groups: [
-          { title: "Wine", icon: "glass", sub: "Glass / Bottle", items: [
-            { name: "Reserve (Ksara)", price: "$8 / $40" }, { name: "Breteche (Kefraya)", price: "$8 / $40" },
-            { name: "Chateau Ksara", price: "$8 / $40" }, { name: "Chateau Kefraya", price: "$8 / $40" },
-            { name: "Blanc (Ksara)", price: "$8 / $40" }, { name: "Blanc (Kefraya)", price: "$8 / $40" },
-            { name: "Sunset (Ksara)", price: "$8 / $40" }, { name: "Imported Wine", price: "$30" },
-            { name: "Imported Wine Rose", price: "$30" }
+          { title: T("Wine","نبيذ"), icon: "glass", sub: T("Glass / Bottle","كأس / زجاجة"), items: [
+            { name: T("Reserve (Ksara)","ريزيرف (كسارة)"), price: "$8 / $40" }, { name: T("Breteche (Kefraya)","بريتاش (كفريا)"), price: "$8 / $40" },
+            { name: T("Chateau Ksara","شاتو كسارة"), price: "$8 / $40" }, { name: T("Chateau Kefraya","شاتو كفريا"), price: "$8 / $40" },
+            { name: T("Blanc (Ksara)","بلان (كسارة)"), price: "$8 / $40" }, { name: T("Blanc (Kefraya)","بلان (كفريا)"), price: "$8 / $40" },
+            { name: T("Sunset (Ksara)","صنسيت (كسارة)"), price: "$8 / $40" }, { name: T("Imported Wine","نبيذ مستورد"), price: "$30" },
+            { name: T("Imported Wine Rose","نبيذ روزيه مستورد"), price: "$30" }
           ]},
-          { title: "Vodka", icon: "glass", sub: "Shot / Bottle", items: [
-            { name: "Absolut", price: "$10 / $70" }, { name: "Smirnoff Red", price: "$10 / $80" },
-            { name: "Stolichnaya", price: "$10 / $80" }, { name: "Belvedere", price: "$20 / $170" },
-            { name: "Grey Goose", price: "$20 / $150" }
+          { title: T("Vodka","فودكا"), icon: "glass", sub: T("Shot / Bottle","شوت / زجاجة"), items: [
+            { name: T("Absolut","أبسولوت"), price: "$10 / $70" }, { name: T("Smirnoff Red","سميرنوف الأحمر"), price: "$10 / $80" },
+            { name: T("Stolichnaya","ستوليتشنايا"), price: "$10 / $80" }, { name: T("Belvedere","بلفيدير"), price: "$20 / $170" },
+            { name: T("Grey Goose","غراي غوس"), price: "$20 / $150" }
           ]},
-          { title: "Whisky", icon: "glass", sub: "Shot / Bottle", items: [
-            { name: "Red Label", price: "$8 / $70" }, { name: "Dewars", price: "$8 / $70" },
-            { name: "J&B", price: "$8 / $70" }, { name: "Black Label", price: "$11 / $120" },
-            { name: "Chivas 12", price: "$12 / $120" }, { name: "Golden Reserve", price: "$20 / $220" }
+          { title: T("Whisky","ويسكي"), icon: "glass", sub: T("Shot / Bottle","شوت / زجاجة"), items: [
+            { name: T("Red Label","ريد ليبل"), price: "$8 / $70" }, { name: T("Dewars","ديوارز"), price: "$8 / $70" },
+            { name: T("J&B","جي أند بي"), price: "$8 / $70" }, { name: T("Black Label","بلاك ليبل"), price: "$11 / $120" },
+            { name: T("Chivas 12","شيفاز 12"), price: "$12 / $120" }, { name: T("Golden Reserve","غولدن ريزيرف"), price: "$20 / $220" }
           ]},
-          { title: "Martini", icon: "glass", items: [
-            { name: "Bianco", price: "$12" }, { name: "Rosso", price: "$12" }, { name: "Rosatto", price: "$12" }
+          { title: T("Martini","مارتيني"), icon: "glass", items: [
+            { name: T("Bianco","بيانكو"), price: "$12" }, { name: T("Rosso","روسو"), price: "$12" }, { name: T("Rosatto","روزاتو"), price: "$12" }
           ]},
-          { title: "Cognac", icon: "glass", items: [{ name: "Hennessy", price: "$240" }] },
-          { title: "Gin", icon: "glass", sub: "Shot / Bottle", items: [
-            { name: "Gordon's", price: "$8 / $70" }, { name: "Bombay", price: "$10 / $100" },
-            { name: "Hendricks", price: "$15 / $120" }
+          { title: T("Cognac","كونياك"), icon: "glass", items: [{ name: T("Hennessy","هينسي"), price: "$240" }] },
+          { title: T("Gin","جن"), icon: "glass", sub: T("Shot / Bottle","شوت / زجاجة"), items: [
+            { name: T("Gordon's","غوردنز"), price: "$8 / $70" }, { name: T("Bombay","بومباي"), price: "$10 / $100" },
+            { name: T("Hendricks","هندريكس"), price: "$15 / $120" }
           ]},
-          { title: "Champagne & Others", icon: "glass", items: [
-            { name: "Moet & Chandon", price: "$280" }, { name: "Vin Mousseux", price: "$40" },
-            { name: "Prosecco", price: "$60" }, { name: "Arak Bottle", price: "$35" }
+          { title: T("Champagne & Others","شمبانيا وأخرى"), icon: "glass", items: [
+            { name: T("Moet & Chandon","موييه أند شاندون"), price: "$280" }, { name: T("Vin Mousseux","فان موسو"), price: "$40" },
+            { name: T("Prosecco","بروسيكو"), price: "$60" }, { name: T("Arak Bottle","زجاجة عرق"), price: "$35" }
           ]},
-          { title: "Alcoholic Cocktails", icon: "glass", items: [
-            { name: "Pina Colada", price: "$11" }, { name: "Strawberry Colada", price: "$11" },
-            { name: "Blue Hawaii", price: "$11" }, { name: "Gin Basil", price: "$11" },
-            { name: "Bevview Signature", price: "$11" }, { name: "Long Island", price: "$11" },
-            { name: "Margarita", price: "$11" }, { name: "Blue Lagoon", price: "$11" },
-            { name: "Take Me Home", price: "$11" }, { name: "Mojito", price: "$11" },
-            { name: "Jamaica", price: "$11" }, { name: "Perfect Sunset", price: "$12" }
+          { title: T("Alcoholic Cocktails","كوكتيلات كحولية"), icon: "glass", items: [
+            { name: T("Pina Colada","بينا كولادا"), price: "$11" }, { name: T("Strawberry Colada","ستروبيري كولادا"), price: "$11" },
+            { name: T("Blue Hawaii","بلو هاواي"), price: "$11" }, { name: T("Gin Basil","جين بالريحان"), price: "$11" },
+            { name: T("Bevview Signature","توقيع بيفيو"), price: "$11" }, { name: T("Long Island","لونغ آيلاند"), price: "$11" },
+            { name: T("Margarita","مارغريتا"), price: "$11" }, { name: T("Blue Lagoon","بحيرة زرقاء"), price: "$11" },
+            { name: T("Take Me Home","خدني للبيت"), price: "$11" }, { name: T("Mojito","موخيتو"), price: "$11" },
+            { name: T("Jamaica","جامايكا"), price: "$11" }, { name: T("Perfect Sunset","غروب مثالي"), price: "$12" }
           ]},
-          { title: "Fresh Juice", icon: "drop", items: [
-            { name: "Fresh Orange Juice", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
-            { name: "Lemonade", price: "$5" }, { name: "Strawberry & Banana Juice", price: "$8" },
-            { name: "Carrot & Orange", price: "$6" }, { name: "Passion Fruit", price: "$10" }
+          { title: T("Fresh Juice","عصير طازج"), icon: "drop", items: [
+            { name: T("Fresh Orange Juice","عصير برتقال طازج"), price: "$5" }, { name: T("Fresh Minted Lemonade","ليموناضة بالنعناع الطازج"), price: "$6" },
+            { name: T("Lemonade","ليموناضة"), price: "$5" }, { name: T("Strawberry & Banana Juice","عصير فراولة وموز"), price: "$8" },
+            { name: T("Carrot & Orange","جزر وبرتقال"), price: "$6" }, { name: T("Passion Fruit","فروت الباشن"), price: "$10" }
           ]},
-          { title: "Non-Alcoholic & Beers", icon: "drop", items: [
-            { name: "Jamaica (Non-Alcoholic)", price: "$10" }, { name: "Mojito (Non-Alcoholic)", price: "$10" },
-            { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" },
-            { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" }
+          { title: T("Non-Alcoholic & Beers","غير كحولية وبيرة"), icon: "drop", items: [
+            { name: T("Jamaica (Non-Alcoholic)","جامايكا (غير كحولية)"), price: "$10" }, { name: T("Mojito (Non-Alcoholic)","موخيتو (غير كحولية)"), price: "$10" },
+            { name: T("Soft Drinks","مشروبات غازية"), price: "$2" }, { name: T("Small Water","ماء صغير"), price: "$1" },
+            { name: T("Almaza Beer","بيرة المازة"), price: "$5" }, { name: T("Mexican Beer","بيرة مكسيكية"), price: "$6" }
           ]}
         ]
       },
       cafe: {
-        label: "Cafe & Shisha",
         groups: [
-          { title: "Hot Drinks", icon: "cup", items: [
-            { name: "Lipton Tea", price: "$2" }, { name: "Tea Box", price: "$3.5" },
-            { name: "Nescafe", price: "$4" }, { name: "Cappuccino", price: "$5.5" },
-            { name: "Espresso", price: "$4" }, { name: "Hot Chocolate", price: "$4.5" },
-            { name: "Turkish Coffee", price: "$3" }
+          { title: T("Hot Drinks","مشروبات ساخنة"), icon: "cup", items: [
+            { name: T("Lipton Tea","شاي ليبتون"), price: "$2" }, { name: T("Tea Box","صندوق شاي"), price: "$3.5" },
+            { name: T("Nescafe","نسكافيه"), price: "$4" }, { name: T("Cappuccino","كابتشينو"), price: "$5.5" },
+            { name: T("Espresso","إسبرسو"), price: "$4" }, { name: T("Hot Chocolate","شوكولاتة ساخنة"), price: "$4.5" },
+            { name: T("Turkish Coffee","قهوة تركية"), price: "$3" }
           ]},
-          { title: "Cold Drinks", icon: "drop", items: [
-            { name: "Soft Drinks", price: "$2" }, { name: "Small Water", price: "$1" },
-            { name: "Fresh Orange", price: "$5" }, { name: "Fresh Minted Lemonade", price: "$6" },
-            { name: "Almaza Beer", price: "$5" }, { name: "Mexican Beer", price: "$6" }
+          { title: T("Cold Drinks","مشروبات باردة"), icon: "drop", items: [
+            { name: T("Soft Drinks","مشروبات غازية"), price: "$2" }, { name: T("Small Water","ماء صغير"), price: "$1" },
+            { name: T("Fresh Orange","برتقال طازج"), price: "$5" }, { name: T("Fresh Minted Lemonade","ليموناضة بالنعناع الطازج"), price: "$6" },
+            { name: T("Almaza Beer","بيرة المازة"), price: "$5" }, { name: T("Mexican Beer","بيرة مكسيكية"), price: "$6" }
           ]},
-          { title: "Milkshakes", icon: "cup", items: [
-            { name: "Chocolate", price: "$8" }, { name: "Strawberry", price: "$8" },
-            { name: "Vanilla", price: "$8" }, { name: "Oreo", price: "$8" },
-            { name: "The Bevview Shake", price: "$9" }
+          { title: T("Milkshakes","ميلك شيك"), icon: "cup", items: [
+            { name: T("Chocolate","شوكولاتة"), price: "$8" }, { name: T("Strawberry","فراولة"), price: "$8" },
+            { name: T("Vanilla","فانيلا"), price: "$8" }, { name: T("Oreo","أوريو"), price: "$8" },
+            { name: T("The Bevview Shake","شيك بيڤيو"), price: "$9" }
           ]},
-          { title: "Desserts", icon: "star", items: [
-            { name: "Chocolate Crepe", price: "$6" }, { name: "Bevview Crepe", price: "$9" },
-            { name: "Brownies", price: "$7" }, { name: "Chocolate Fondant", price: "$9.5" },
-            { name: "Brownies Crepe", price: "$12" }, { name: "Fruit Plate (Medium)", price: "$10" },
-            { name: "Ice Cream Bowl", price: "$6" }
+          { title: T("Desserts","حلويات"), icon: "star", items: [
+            { name: T("Chocolate Crepe","كريب بالشوكولاتة"), price: "$6" }, { name: T("Bevview Crepe","كريب بيڤيو"), price: "$9" },
+            { name: T("Brownies","براونيز"), price: "$7" }, { name: T("Chocolate Fondant","فوندان بالشوكولاتة"), price: "$9.5" },
+            { name: T("Brownies Crepe","كريب بالبراونيز"), price: "$12" }, { name: T("Fruit Plate (Medium)","طبق فواكه (وسط)"), price: "$10" },
+            { name: T("Ice Cream Bowl","طبق بوظة"), price: "$6" }
           ]},
-          { title: "Hookah / Shisha", icon: "smoke", items: [
-            { name: "Regular", price: "$12" }, { name: "Deluxe", price: "$18" },
-            { name: "Super Deluxe", price: "$24" }, { name: "New Shisha Head", price: "$6" }
+          { title: T("Hookah / Shisha","أرجيلة / شيشة"), icon: "smoke", items: [
+            { name: T("Regular","عادية"), price: "$12" }, { name: T("Deluxe","ديلوكس"), price: "$18" },
+            { name: T("Super Deluxe","سوبر ديلوكس"), price: "$24" }, { name: T("New Shisha Head","رأس شيشة جديد"), price: "$6" }
           ]}
         ]
       }
     };
 
     const CATEGORY_BANNERS = {
-      formula: { type: "single", images: ["images/gallery-mezza-platter.jpg.jpeg"], caption: "One price, the whole table, everything included" },
-      food:    { type: "split", images: ["images/gallery-salad-plate1.jpg.jpeg", "images/gallery-burger.jpg.jpeg"], caption: "From garden to grill" },
-      bar:     { type: "single", images: ["images/gallery-cocktail-bar.jpg.jpeg"], caption: "Curated pours, mountain-side" },
-      cafe:    { type: "split", images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"], caption: "Sweet endings, slow smoke" },
-      bangalos:{ type: "single", images: ["images/hero-mountain-sunset.jpg.jpeg"], caption: "Wake up to the mountain view" }
+      formula: { type: "single", images: ["images/gallery-mezza-platter.jpg.jpeg"] },
+      food:    { type: "split", images: ["images/gallery-salad-plate1.jpg.jpeg", "images/gallery-burger.jpg.jpeg"] },
+      bar:     { type: "single", images: ["images/gallery-cocktail-bar.jpg.jpeg"] },
+      cafe:    { type: "split", images: ["images/gallery-dessert.jpg.jpeg", "images/gallery-shisha-lounge.jpg.jpeg"] },
+      bangalos:{ type: "single", images: ["images/hero-mountain-sunset.jpg.jpeg"] }
     };
 
     const ICON_SVGS = {
@@ -1006,21 +1252,31 @@
       return `<svg class="group-icon w-7 h-7 flex-shrink-0 text-gold opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
     }
 
+    function L(field) {
+      if (!field) return '';
+      const lang = currentLang || 'en';
+      return field[lang] !== undefined ? field[lang] : field.en;
+    }
+
     const catBanner = document.getElementById('catBanner');
     const subTabsWrap = document.getElementById('subTabsWrap');
     const menuPanels = document.getElementById('menuPanels');
     const mainTabs = document.querySelectorAll('#mainTabs .cat-btn');
 
+    function dict() { return I18N[currentLang || 'en']; }
+
     function renderBanner(catKey) {
       const b = CATEGORY_BANNERS[catKey];
+      const caption = dict().cat_captions[catKey] || '';
+      const featured = dict().banner_featured;
       if (b.type === "single") {
         catBanner.innerHTML = `
           <div class="relative rounded-xl overflow-hidden h-64 md:h-72 border border-gold/10">
             <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('${b.images[0]}');"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-chestnut via-chestnut/40 to-transparent"></div>
-            <div class="absolute bottom-6 left-8">
-              <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-chestnut/80 px-3 py-1 rounded mb-2">Featured</span>
-              <p class="text-cream/70 text-sm md:text-base letter-space uppercase font-light">${b.caption}</p>
+            <div class="absolute bottom-6 ${document.body.dir === 'rtl' ? 'right-8' : 'left-8'}">
+              <span class="inline-block text-[10px] letter-space uppercase text-gold/60 bg-chestnut/80 px-3 py-1 rounded mb-2">${featured}</span>
+              <p class="text-cream/70 text-sm md:text-base letter-space uppercase font-light">${caption}</p>
             </div>
           </div>
         `;
@@ -1036,7 +1292,7 @@
               <div class="absolute inset-0 bg-gradient-to-t from-chestnut/70 to-transparent"></div>
             </div>
           </div>
-          <p class="text-center text-cream/40 text-xs md:text-sm letter-space uppercase font-light mt-4">${b.caption}</p>
+          <p class="text-center text-cream/40 text-xs md:text-sm letter-space uppercase font-light mt-4">${caption}</p>
         `;
       }
     }
@@ -1049,14 +1305,14 @@
         const f = FORMULA_DATA;
         menuPanels.innerHTML = `
           <div class="menu-card rounded-xl p-6 md:p-10 reveal visible">
-            <h3 class="font-serif text-3xl text-gold mb-2">Lebanese Formula</h3>
-            <p class="text-cream/60 text-sm italic mb-6">${f.intro}</p>
+            <h3 class="font-serif text-3xl text-gold mb-2">${dict().tab_formula}</h3>
+            <p class="text-cream/60 text-sm italic mb-6">${L(f.intro)}</p>
             <div class="grid sm:grid-cols-3 gap-4 mb-8">
               ${f.tiers.map(t => `
                 <div class="text-center rounded-lg border border-gold/15 py-5 px-3">
                   <span class="block font-serif text-3xl text-gold">${t.price}</span>
-                  <span class="block text-[10px] text-cream/40 uppercase letter-space mt-2">${t.name}</span>
-                  <span class="block text-[10px] text-cream/30 uppercase letter-space mt-1">${f.unit}</span>
+                  <span class="block text-[10px] text-cream/40 uppercase letter-space mt-2">${L(t.name)}</span>
+                  <span class="block text-[10px] text-cream/30 uppercase letter-space mt-1">${L(f.unit)}</span>
                 </div>
               `).join('')}
             </div>
@@ -1064,8 +1320,8 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               ${f.includes.map(sec => `
                 <div>
-                  <h4 class="text-gold/80 text-sm letter-space uppercase mb-2">${sec.title}</h4>
-                  <p class="text-cream/70 text-sm leading-relaxed">${sec.items.join(' · ')}</p>
+                  <h4 class="text-gold/80 text-sm letter-space uppercase mb-2">${L(sec.title)}</h4>
+                  <p class="text-cream/70 text-sm leading-relaxed">${sec.items.map(it => L(it)).join(' · ')}</p>
                 </div>
               `).join('')}
             </div>
@@ -1080,17 +1336,17 @@
         menuPanels.innerHTML = `
           <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
             ${cat.groups.map(g => `
-              <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title}">
+              <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title.en}">
                 <div class="flex items-start gap-4 mb-2">
                   ${iconSvg(g.icon)}
                   <div class="flex-1">
-                    <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
+                    <h3 class="font-serif text-2xl text-gold">${L(g.title)}</h3>
                   </div>
                 </div>
                 <ul class="space-y-2 mt-4">
                   ${g.items.map(it => `
                     <li class="flex items-baseline text-sm text-cream/80">
-                      <span>${it.name}</span>
+                      <span>${L(it.name)}</span>
                       <span class="price-dots"></span>
                       <span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>
                     </li>
@@ -1107,29 +1363,29 @@
 
       subTabsWrap.innerHTML = `
         <div class="flex flex-wrap justify-center gap-2 reveal visible">
-          <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">All</button>
-          ${cat.groups.map(g => `<button data-sub="${g.title}" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">${g.title}</button>`).join('')}
+          <button data-sub="all" data-active="true" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">${dict().sub_all}</button>
+          ${cat.groups.map(g => `<button data-sub="${g.title.en}" class="sub-btn whitespace-nowrap text-xs letter-space uppercase px-4 py-2 rounded-lg">${L(g.title)}</button>`).join('')}
         </div>
       `;
 
       menuPanels.innerHTML = `
         <div class="grid md:grid-cols-2 gap-6" id="groupGrid">
           ${cat.groups.map(g => `
-            <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title}">
+            <div class="group-block menu-card rounded-xl p-6 reveal visible" data-group="${g.title.en}">
               <div class="flex items-start gap-4 mb-2">
                 ${iconSvg(g.icon)}
                 <div class="flex-1">
                   <div class="flex items-baseline justify-between">
-                    <h3 class="font-serif text-2xl text-gold">${g.title}</h3>
-                    ${g.sub ? `<span class="text-[10px] uppercase letter-space text-cream/30">${g.sub}</span>` : ''}
+                    <h3 class="font-serif text-2xl text-gold">${L(g.title)}</h3>
+                    ${g.sub ? `<span class="text-[10px] uppercase letter-space text-cream/30">${L(g.sub)}</span>` : ''}
                   </div>
-                  ${g.note ? `<p class="text-xs text-cream/30 italic mt-1">${g.note}</p>` : ''}
+                  ${g.note ? `<p class="text-xs text-cream/30 italic mt-1">${L(g.note)}</p>` : ''}
                 </div>
               </div>
               <ul class="space-y-2 mt-4">
                 ${g.items.map(it => `
                   <li class="flex items-baseline text-sm ${it.muted ? 'text-cream/40 italic' : 'text-cream/80'}">
-                    <span>${it.name}</span>
+                    <span>${L(it.name)}</span>
                     ${it.price ? `<span class="price-dots"></span><span class="text-gold/80 whitespace-nowrap font-medium">${it.price}</span>` : ''}
                   </li>
                 `).join('')}
@@ -1173,7 +1429,6 @@
         renderCategory(btn.dataset.cat);
       });
     });
-    renderCategory('food');
 
     const CLOUD_TEMPLATE = [
       { x: 16, y: 62, rx: 24, ry: 28, light: 0.5 },
@@ -1317,16 +1572,18 @@
       const minutes = val % 60;
       const ampm = hours >= 12 ? 'PM' : 'AM';
       const dh = hours > 12 ? hours - 12 : hours;
-      const ts = `${dh}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-      let cap = t < 0.25 ? 'Daylight over the valley' :
-                t < 0.45 ? 'Golden hour begins' :
-                t < 0.65 ? 'Peak amber light — best photos' :
-                t < 0.85 ? 'Sun dips behind Sannine' :
-                'Fire pit glow, mountain hush';
+      const ts = currentLang === 'ar'
+        ? `${dh}:${minutes.toString().padStart(2, '0')} ${ampm === 'PM' ? 'م' : 'ص'}`
+        : `${dh}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+      const capList = dict().golden_captions;
+      let cap = t < 0.25 ? capList[0] :
+                t < 0.45 ? capList[1] :
+                t < 0.65 ? capList[2] :
+                t < 0.85 ? capList[3] :
+                capList[4];
       caption.textContent = `${ts} — ${cap}`;
     }
     slider.addEventListener('input', updateSky);
-    updateSky();
 
     const toggle = document.getElementById('menuToggle');
     const panel = document.getElementById('mobilePanel');
@@ -1384,6 +1641,14 @@
     }, { threshold: 0.5 });
 
     document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* Initial render: if a language was already remembered, apply it now; otherwise render English underneath the gate so content isn't blank while the gate is up */
+    if (currentLang) {
+      applyLanguage(currentLang);
+    } else {
+      renderCategory('food');
+      updateSky();
+    }
   </script>
 </body>
 </html>
